@@ -10440,14 +10440,27 @@ section.shopify-section.shopify-section--mvod_video .media-with-text__content.se
     padding: 0px;
     border-radius: 10px 10px 0 0 / 10px 10px 0px 0px;
 }
+
+
 section.shopify-section.shopify-section--mvod_video .custom_player_button_outer {
     position: absolute;
     width: auto;
-    bottom: 10px;
+    bottom: 5em;
     right: 5%;
     max-width: 100%;
-  z-index: 1;
+  z-index: 3;
 }
+
+@media (max-width: 768px) {
+  section.shopify-section.shopify-section--mvod_video .custom_player_button_outer {
+
+    bottom: 5em;
+    right: 6em;
+    z-index: 999;
+  
+}
+}
+
 section.shopify-section.shopify-section--mvod_video .media-with-text__item {
     position: relative;
 }
@@ -10463,7 +10476,7 @@ section.shopify-section.shopify-section--mvod_video .custom_player_button_outer 
 ul.mvod_tag {
     list-style: none;
     display: block;
-  margin-top: 25px;
+
 }
 p.sub_free {
     font-size: var(--desk_fontSize);

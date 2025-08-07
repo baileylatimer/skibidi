@@ -1,0 +1,521 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  #shopify-section-{{ section.id }} .need-help-section {
+    padding: 6em 0;
+    background-color: var(--color-dark);
+  }
+
+  .need-help-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+  }
+
+  .need-help-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: start;
+  }
+
+  /* Content */
+  .need-help-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+  }
+
+  .need-help-content__title {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .need-help-content__title-row-1 {
+    color: var(--color-primary);
+    display: block;
+  }
+
+  .need-help-content__title-row-2 {
+    color: var(--color-light);
+    display: block;
+  }
+
+  .need-help-content__description {
+    font-family: var(--font-body) !important;
+    font-weight: 400 !important;
+    color: var(--color-light);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .need-help-content__support {
+    font-family: var(--font-body) !important;
+    font-weight: 400 !important;
+    color: #11A30E;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .need-help-content__secondary {
+    font-family: var(--font-body) !important;
+    font-weight: 400 !important;
+    color: var(--color-subtle);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Right Column - Accordions */
+  .need-help-accordions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .need-help-accordion {
+    border-bottom: 1px solid #333;
+    padding-bottom: var(--spacing-md);
+  }
+
+  .need-help-accordion__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: var(--spacing-sm) 0;
+  }
+
+  .need-help-accordion__title {
+    font-family: "Blender Pro", sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1rem;
+    color: var(--color-light);
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .need-help-accordion__icon {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: transform var(--transition-fast);
+  }
+
+  .need-help-accordion__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-medium);
+  }
+
+  .need-help-accordion__description {
+    font-family: var(--font-body) !important;
+    font-weight: 400 !important;
+    color: var(--color-light);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+    padding-top: var(--spacing-sm);
+  }
+
+  .need-help-accordion.active .need-help-accordion__icon {
+    transform: rotate(45deg);
+  }
+
+  .need-help-accordion.active .need-help-accordion__content {
+    max-height: 200px;
+  }
+
+  /* Mobile Layout */
+  @media screen and (max-width: 767px) {
+    .need-help-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-xl);
+    }
+
+    .need-help-content {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .need-help-accordions {
+      order: 1;
+    }
+  }
+</style>
+
+<div class="need-help-section">
+  <div class="need-help-container">
+    <div class="need-help-grid">
+      
+      <!-- Left Column - Accordions -->
+      <div class="need-help-accordions">
+        
+        {%- if section.settings.faq_1_question != blank -%}
+          <div class="need-help-accordion">
+            <div class="need-help-accordion__header" onclick="toggleHelpAccordion(this)">
+              <h3 class="need-help-accordion__title">{{ section.settings.faq_1_question }}</h3>
+              <span class="need-help-accordion__icon">+</span>
+            </div>
+            <div class="need-help-accordion__content">
+              <p class="need-help-accordion__description">
+                {%- if section.settings.faq_1_answer != blank -%}
+                  {{ section.settings.faq_1_answer }}
+                {%- else -%}
+                  You're purchasing access to exclusive Skibidi Toilet content including a 10-minute cinematic preview, behind-the-scenes footage, and a special Toilet Tower Defense unit code.
+                {%- endif -%}
+              </p>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.faq_2_question != blank -%}
+          <div class="need-help-accordion">
+            <div class="need-help-accordion__header" onclick="toggleHelpAccordion(this)">
+              <h3 class="need-help-accordion__title">{{ section.settings.faq_2_question }}</h3>
+              <span class="need-help-accordion__icon">+</span>
+            </div>
+            <div class="need-help-accordion__content">
+              <p class="need-help-accordion__description">
+                {%- if section.settings.faq_2_answer != blank -%}
+                  {{ section.settings.faq_2_answer }}
+                {%- else -%}
+                  After purchase, you'll receive an email with your unique access code and viewing instructions. The film can be watched on any device with internet access.
+                {%- endif -%}
+              </p>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.faq_3_question != blank -%}
+          <div class="need-help-accordion">
+            <div class="need-help-accordion__header" onclick="toggleHelpAccordion(this)">
+              <h3 class="need-help-accordion__title">{{ section.settings.faq_3_question }}</h3>
+              <span class="need-help-accordion__icon">+</span>
+            </div>
+            <div class="need-help-accordion__content">
+              <p class="need-help-accordion__description">
+                {%- if section.settings.faq_3_answer != blank -%}
+                  {{ section.settings.faq_3_answer }}
+                {%- else -%}
+                  The content is designed for fans of all ages, though it maintains the quirky, internet-native humor that Skibidi Toilet is known for.
+                {%- endif -%}
+              </p>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.faq_4_question != blank -%}
+          <div class="need-help-accordion">
+            <div class="need-help-accordion__header" onclick="toggleHelpAccordion(this)">
+              <h3 class="need-help-accordion__title">{{ section.settings.faq_4_question }}</h3>
+              <span class="need-help-accordion__icon">+</span>
+            </div>
+            <div class="need-help-accordion__content">
+              <p class="need-help-accordion__description">
+                {%- if section.settings.faq_4_answer != blank -%}
+                  {{ section.settings.faq_4_answer }}
+                {%- else -%}
+                  Not at all! Skibidi Toilet is a modern form of storytelling that resonates with digital natives. Think of it like any animated series your generation grew up with.
+                {%- endif -%}
+              </p>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.faq_5_question != blank -%}
+          <div class="need-help-accordion">
+            <div class="need-help-accordion__header" onclick="toggleHelpAccordion(this)">
+              <h3 class="need-help-accordion__title">{{ section.settings.faq_5_question }}</h3>
+              <span class="need-help-accordion__icon">+</span>
+            </div>
+            <div class="need-help-accordion__content">
+              <p class="need-help-accordion__description">
+                {%- if section.settings.faq_5_answer != blank -%}
+                  {{ section.settings.faq_5_answer }}
+                {%- else -%}
+                  Currently, the film content is only available as part of a merchandise bundle, but we're exploring standalone options for the future.
+                {%- endif -%}
+              </p>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.faq_6_question != blank -%}
+          <div class="need-help-accordion">
+            <div class="need-help-accordion__header" onclick="toggleHelpAccordion(this)">
+              <h3 class="need-help-accordion__title">{{ section.settings.faq_6_question }}</h3>
+              <span class="need-help-accordion__icon">+</span>
+            </div>
+            <div class="need-help-accordion__content">
+              <p class="need-help-accordion__description">
+                {%- if section.settings.faq_6_answer != blank -%}
+                  {{ section.settings.faq_6_answer }}
+                {%- else -%}
+                  On the contrary! This content represents the future of entertainment—a blend of digital creativity, fan engagement, and innovative storytelling.
+                {%- endif -%}
+              </p>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.faq_7_question != blank -%}
+          <div class="need-help-accordion">
+            <div class="need-help-accordion__header" onclick="toggleHelpAccordion(this)">
+              <h3 class="need-help-accordion__title">{{ section.settings.faq_7_question }}</h3>
+              <span class="need-help-accordion__icon">+</span>
+            </div>
+            <div class="need-help-accordion__content">
+              <p class="need-help-accordion__description">
+                {%- if section.settings.faq_7_answer != blank -%}
+                  {{ section.settings.faq_7_answer }}
+                {%- else -%}
+                  We understand concerns about digital content. Skibidi Toilet encourages creativity, humor, and community building among young people in positive ways.
+                {%- endif -%}
+              </p>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.faq_8_question != blank -%}
+          <div class="need-help-accordion">
+            <div class="need-help-accordion__header" onclick="toggleHelpAccordion(this)">
+              <h3 class="need-help-accordion__title">{{ section.settings.faq_8_question }}</h3>
+              <span class="need-help-accordion__icon">+</span>
+            </div>
+            <div class="need-help-accordion__content">
+              <p class="need-help-accordion__description">
+                {%- if section.settings.faq_8_answer != blank -%}
+                  {{ section.settings.faq_8_answer }}
+                {%- else -%}
+                  Please respect our content guidelines. Sharing clips or reactions is encouraged, but full redistribution of the exclusive content is not permitted.
+                {%- endif -%}
+              </p>
+            </div>
+          </div>
+        {%- endif -%}
+
+      </div>
+
+      <!-- Right Column - Content -->
+      <div class="need-help-content">
+        {%- if section.settings.title_row_1 != blank or section.settings.title_row_2 != blank -%}
+          <h1 class="need-help-content__title">
+            {%- if section.settings.title_row_1 != blank -%}
+              <span class="need-help-content__title-row-1">{{ section.settings.title_row_1 }}</span>
+            {%- endif -%}
+            {%- if section.settings.title_row_2 != blank -%}
+              <span class="need-help-content__title-row-2">{{ section.settings.title_row_2 }}</span>
+            {%- endif -%}
+          </h1>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <div class="need-help-content__description">{{ section.settings.description }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.support_text != blank -%}
+          <div class="need-help-content__support">{{ section.settings.support_text }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.secondary_description != blank -%}
+          <div class="need-help-content__secondary">{{ section.settings.secondary_description }}</div>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleHelpAccordion(header) {
+  const accordion = header.parentElement;
+  const content = accordion.querySelector('.need-help-accordion__content');
+  
+  // Close all other accordions
+  document.querySelectorAll('.need-help-accordion').forEach(item => {
+    if (item !== accordion) {
+      item.classList.remove('active');
+    }
+  });
+  
+  // Toggle current accordion
+  accordion.classList.toggle('active');
+}
+</script>
+
+{% schema %}
+{
+  "name": "Need Help?",
+  "class": "shopify-section--need-help",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Right Column Content"
+    },
+    {
+      "type": "text",
+      "id": "title_row_1",
+      "label": "Title - First Row (Red)",
+      "default": "NEED HELP?",
+      "info": "This will appear in red"
+    },
+    {
+      "type": "text",
+      "id": "title_row_2",
+      "label": "Title - Second Row (White)",
+      "default": "CALL IN THE ALLIANCE.",
+      "info": "This will appear in white"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description Text",
+      "default": "Check out the most common questions from humans, Toilets, and Cameramen alike. Still confused? Reach out to us directly — whether it's a merch issue, a playback glitch, or a missing Toilet Tower code, we're here to help."
+    },
+    {
+      "type": "textarea",
+      "id": "support_text",
+      "label": "Customer Support Text",
+      "default": "Customer Support is available 24/7"
+    },
+    {
+      "type": "textarea",
+      "id": "secondary_description",
+      "label": "Secondary Description",
+      "default": "Order & Fulfillment Support: orders@skibidi.tv\nTechnical & Streaming Support: technical@skibidi.tv"
+    },
+    {
+      "type": "header",
+      "content": "FAQ 1"
+    },
+    {
+      "type": "text",
+      "id": "faq_1_question",
+      "label": "FAQ 1 Question",
+      "default": "WHAT EXACTLY AM I BUYING?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_1_answer",
+      "label": "FAQ 1 Answer"
+    },
+    {
+      "type": "header",
+      "content": "FAQ 2"
+    },
+    {
+      "type": "text",
+      "id": "faq_2_question",
+      "label": "FAQ 2 Question",
+      "default": "WHERE DO I WATCH THE FILM?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_2_answer",
+      "label": "FAQ 2 Answer"
+    },
+    {
+      "type": "header",
+      "content": "FAQ 3"
+    },
+    {
+      "type": "text",
+      "id": "faq_3_question",
+      "label": "FAQ 3 Question",
+      "default": "IS THIS APPROPRIATE FOR KIDS?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_3_answer",
+      "label": "FAQ 3 Answer"
+    },
+    {
+      "type": "header",
+      "content": "FAQ 4"
+    },
+    {
+      "type": "text",
+      "id": "faq_4_question",
+      "label": "FAQ 4 Question",
+      "default": "I'M A PARENT. DO I NEED TO UNDERSTAND ANY OF THIS?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_4_answer",
+      "label": "FAQ 4 Answer"
+    },
+    {
+      "type": "header",
+      "content": "FAQ 5"
+    },
+    {
+      "type": "text",
+      "id": "faq_5_question",
+      "label": "FAQ 5 Question",
+      "default": "CAN I BUY JUST FOR THE FILM?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_5_answer",
+      "label": "FAQ 5 Answer"
+    },
+    {
+      "type": "header",
+      "content": "FAQ 6"
+    },
+    {
+      "type": "text",
+      "id": "faq_6_question",
+      "label": "FAQ 6 Question",
+      "default": "WILL THIS MELT MY BRAIN?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_6_answer",
+      "label": "FAQ 6 Answer"
+    },
+    {
+      "type": "header",
+      "content": "FAQ 7"
+    },
+    {
+      "type": "text",
+      "id": "faq_7_question",
+      "label": "FAQ 7 Question",
+      "default": "I AM CONCERNED ABOUT OUR YOUTH"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_7_answer",
+      "label": "FAQ 7 Answer"
+    },
+    {
+      "type": "header",
+      "content": "FAQ 8"
+    },
+    {
+      "type": "text",
+      "id": "faq_8_question",
+      "label": "FAQ 8 Question",
+      "default": "CAN I SHARE THIS ON YOUTUBE?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_8_answer",
+      "label": "FAQ 8 Answer"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Need Help?"
+    }
+  ]
+}
+{% endschema %}

@@ -173,6 +173,14 @@ h2 {
   font-weight: 700 !important;
 }
 
+/* Need Help accordion titles should use Blender Pro Bold, not Steelfish */
+.need-help-section .need-help-accordion__title,
+.need-help-section h3.need-help-accordion__title,
+#shopify-section * .need-help-accordion__title {
+  font-family: "Blender Pro", sans-serif !important;
+  font-weight: 700 !important;
+}
+
 /* ================================
    RESPONSIVE DESIGN
    ================================ */

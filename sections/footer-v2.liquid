@@ -177,12 +177,25 @@
     .footer-v2__logo {
       grid-column: 1;
       text-align: center;
+      display: flex;
+      justify-content: center;
     }
 
     .footer-v2__menu,
     .footer-v2__social,
     .footer-v2__newsletter {
       text-align: center;
+    }
+
+    .footer-v2__social {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .footer-v2__menu-list {
+      align-items: center;
     }
 
     .footer-v2__email-form {

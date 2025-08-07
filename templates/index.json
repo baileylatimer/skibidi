@@ -115,6 +115,17 @@
         "product_card_text_color": ""
       }
     },
+    "skibidi_universe_7Q4JQ9": {
+      "type": "skibidi-universe",
+      "name": "Skibidi Universe",
+      "settings": {
+        "title_row_1": "MICHAEL BAY'S",
+        "title_row_2": "SKIBIDI UNIVERSE",
+        "description": "Skibidi: Chapter One is a game-changing moment in entertainment. A YouTube-born series with billions of views, now directed by one of the most iconic filmmakers on Earth. Michael Bay takes the world, characters, and chaos of Skibidi and begins expanding it into something cinematic, massive, and real. This has never happened to a digital-native series before.",
+        "background_desktop": "shopify:\/\/shop_images\/skibidi-universe-bg.jpg",
+        "background_mobile": "shopify:\/\/shop_images\/skibidi-universe-bg--mobile.jpg"
+      }
+    },
     "media_with_text_VdL3Ja": {
       "type": "media-with-text",
       "blocks": {
@@ -516,6 +527,7 @@
   "order": [
     "vod_video_4dR3eN",
     "featured_collection_8MMTQp",
+    "skibidi_universe_7Q4JQ9",
     "media_with_text_VdL3Ja",
     "media_with_text_TxKkiz",
     "collection_list_9ttGnn",

@@ -15,13 +15,14 @@
   --font-body: "Blender Pro", sans-serif;
 
   /* COLORS */
-  --color-primary: #ff6b00;
+  --color-primary: #DC0000;
   --color-secondary: #00ff88;
   --color-accent: #ff0066;
   --color-dark: #000000;
   --color-light: #ffffff;
   --color-gray: #666666;
   --color-bg: #0a0a0a;
+  --color-subtle: #DFDFDF;
   
   /* SPACING */
   --spacing-xs: 0.5rem;   /* 8px */
@@ -56,50 +57,60 @@
    TYPOGRAPHY
    ================================ */
 
-/* Font Face Declarations */
-@font-face {
-  font-family: "Steelfish";
-  src: url("{{ 'Steelfish Eb.otf' | asset_url }}") format("opentype");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
+/* Font Face Declarations moved to theme.liquid for proper Liquid processing */
 
-@font-face {
-  font-family: "Blender Pro";
-  src: url("{{ 'BlenderPro-Book.otf' | asset_url }}") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Blender Pro";
-  src: url("{{ 'BlenderPro-Medium.otf' | asset_url }}") format("opentype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Global Typography Rules */
-h1, h2, h3 {
-  font-family: var(--font-header) !important;
+/* Global Typography Rules - Maximum Specificity Override */
+* h1, * h2, * h3,
+html h1, html h2, html h3,
+body h1, body h2, body h3,
+.skibidi-universe__title,
+.section-header h1, .section-header h2, .section-header h3,
+h1.section-title, h2.section-title, h3.section-title,
+.section-title, .heading, .banner-title,
+[class*="title"], [class*="heading"], [class*="header"] h1,
+[class*="title"], [class*="heading"], [class*="header"] h2,
+[class*="title"], [class*="heading"], [class*="header"] h3 {
+  font-family: "Steelfish", sans-serif !important;
   font-weight: 800 !important;
 }
 
-h4, h5, h6 {
-  font-family: var(--font-bold) !important;
+* h4, * h5, * h6,
+html h4, html h5, html h6,
+body h4, body h5, body h6 {
+  font-family: "Blender Pro", sans-serif !important;
   font-weight: 700 !important;
 }
 
-p, span, div, li, td, th, label, input, textarea {
-  font-family: var(--font-body) !important;
+* p, * span, * div, * li, * td, * th, * label, * input, * textarea,
+html p, html span, html div, html li, html td, html th, html label, html input, html textarea,
+body p, body span, body div, body li, body td, body th, body label, body input, body textarea {
+  font-family: "Blender Pro", sans-serif !important;
   font-weight: 400 !important;
 }
 
-a, button {
-  font-family: var(--font-bold) !important;
+* a, * button,
+html a, html button,
+body a, body button {
+  font-family: "Blender Pro", sans-serif !important;
   font-weight: 700 !important;
+}
+
+/* Nuclear option for headers - catch everything */
+h1, h2, h3 {
+  font-family: "Steelfish", sans-serif !important;
+  font-weight: 800 !important;
+}
+
+/* Global H1 Font Sizes */
+h1 {
+  font-size: 64px !important;
+  line-height: 0.9 !important;
+}
+
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 130px !important;
+  }
 }
 
 

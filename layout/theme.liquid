@@ -45,6 +45,30 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       src: url("{{ 'OTNeueMontreal-SemiBoldSemiSqueezed.ttf' | asset_url }}") format("truetype");
     }
 
+    @font-face {
+      font-family: "Steelfish";
+      src: url("{{ 'Steelfish Eb.otf' | asset_url }}") format("opentype");
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Blender Pro";
+      src: url("{{ 'BlenderPro-Book.otf' | asset_url }}") format("opentype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Blender Pro";
+      src: url("{{ 'BlenderPro-Medium.otf' | asset_url }}") format("opentype");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
     </style>
 
     {%- if settings.favicon -%}

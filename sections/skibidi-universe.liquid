@@ -1,0 +1,131 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  #shopify-section-{{ section.id }} .skibidi-universe {
+    background-image: url('{{ section.settings.background_mobile | image_url }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 748px;
+    max-height: 748px;
+    display: flex;
+    align-items: flex-start;
+    padding: var(--spacing-xl) var(--spacing-xl);
+  }
+
+  @media screen and (min-width: 768px) {
+    #shopify-section-{{ section.id }} .skibidi-universe {
+      background-image: url('{{ section.settings.background_desktop | image_url }}');
+    }
+  }
+
+  .skibidi-universe__content {
+    max-width: var(--container-max-width);
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .skibidi-universe__title {
+    font-family: var(--font-header) !important;
+    font-weight: 800 !important;
+    line-height: 0.9;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .skibidi-universe__title-row-1 {
+    color: var(--color-light);
+    display: block;
+  }
+
+  .skibidi-universe__title-row-2 {
+    color: var(--color-primary);
+    display: block;
+  }
+
+  .skibidi-universe__description {
+    font-family: var(--font-body) !important;
+    font-weight: 400 !important;
+    color: var(--color-subtle);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    max-width: 600px;
+  }
+</style>
+
+<div class="skibidi-universe">
+  <div class="skibidi-universe__content">
+    {%- if section.settings.title_row_1 != blank or section.settings.title_row_2 != blank -%}
+      <h1 class="skibidi-universe__title">
+        {%- if section.settings.title_row_1 != blank -%}
+          <span class="skibidi-universe__title-row-1">{{ section.settings.title_row_1 }}</span>
+        {%- endif -%}
+        {%- if section.settings.title_row_2 != blank -%}
+          <span class="skibidi-universe__title-row-2">{{ section.settings.title_row_2 }}</span>
+        {%- endif -%}
+      </h1>
+    {%- endif -%}
+
+    {%- if section.settings.description != blank -%}
+      <div class="skibidi-universe__description">
+        {{ section.settings.description | newline_to_br }}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Skibidi Universe",
+  "class": "shopify-section--skibidi-universe",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Title Settings"
+    },
+    {
+      "type": "text",
+      "id": "title_row_1",
+      "label": "Title - First Row",
+      "default": "MICHAEL BAY'S",
+      "info": "This will appear in white"
+    },
+    {
+      "type": "text",
+      "id": "title_row_2", 
+      "label": "Title - Second Row",
+      "default": "SKIBIDI UNIVERSE",
+      "info": "This will appear in red"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Skibidi: Chapter One is a game-changing moment in entertainment. A YouTube-born series with billions of views, now directed by one of the most iconic filmmakers on Earth. Michael Bay takes the world, characters, and chaos of Skibidi and begins expanding it into something cinematic, massive, and real. This has never happened to a digital-native series before."
+    },
+    {
+      "type": "header",
+      "content": "Background Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_desktop",
+      "label": "Desktop Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_mobile",
+      "label": "Mobile Background Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Skibidi Universe"
+    }
+  ]
+}
+{% endschema %}

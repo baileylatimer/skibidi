@@ -144,12 +144,33 @@
         "title_row_1": "NOW WITNESS",
         "title_row_2": "THE EVOLUTION."
       }
+    },
+    "how_to_watch_YPQwaE": {
+      "type": "how-to-watch",
+      "name": "How to Watch",
+      "settings": {
+        "background_image": "shopify:\/\/shop_images\/how-to-watch-bg_6c417dc7-874d-4142-be03-b1e315d46d9b.jpg",
+        "title": "HOW TO WATCH",
+        "step_1_image": "shopify:\/\/shop_images\/image1-2_3dc9a7d3-3e34-439b-b178-5d1e0386d6a2.png",
+        "step_1_title_row_1": "PURCHASE",
+        "step_1_title_row_2": "ANY PRODUCT",
+        "step_1_description": "Buy anything from the official drop and SKIBIDI: CHAPTER ONE will be automatically added to your cart — free. No codes, no extras. Just pick your product, and the film comes with it.",
+        "step_2_image": "shopify:\/\/shop_images\/image1-2_3dc9a7d3-3e34-439b-b178-5d1e0386d6a2.png",
+        "step_2_title_row_1": "CHECK OUT",
+        "step_2_title_row_2": "SUCCESSFULLY",
+        "step_2_description": "Use any major payment method: credit card, PayPal, Apple Pay, Shop Pay, or Google Pay.\u2028Make sure your billing address matches your region, and avoid VPNs — they can trigger fraud checks. You’ll also attach your order to an account via email or phone to unlock viewing access.",
+        "step_3_image": "shopify:\/\/shop_images\/image1-2_3dc9a7d3-3e34-439b-b178-5d1e0386d6a2.png",
+        "step_3_title_row_1": "WATCH",
+        "step_3_title_row_2": "NOW OR LATER",
+        "step_3_description": "Once your order is confirmed, your private stream unlocks instantly.\u2028This isn’t a rental — you can watch SKIBIDI: CHAPTER ONE as many times as you want during the premiere window.\u2028You’ll also receive an email with access instructions, so you can watch anytime."
+      }
     }
   },
   "order": [
     "vod_video_4dR3eN",
     "featured_collection_8MMTQp",
     "skibidi_universe_7Q4JQ9",
-    "the_evolution_4kektM"
+    "the_evolution_4kektM",
+    "how_to_watch_YPQwaE"
   ]
 }

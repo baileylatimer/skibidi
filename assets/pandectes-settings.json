@@ -16,9 +16,7 @@
     "languageMode": "Single",
     "fallbackLanguage": "en",
     "languageDetection": "browser",
-    "languagesSupported": [
-
-    ]
+    "languagesSupported": []
   },
   "texts": {
     "managed": {
@@ -1625,56 +1623,26 @@
     "gpcIsActive": false,
     "defaultBlocked": 7,
     "patterns": {
-      "whiteList": [
-
-      ],
+      "whiteList": [],
       "blackList": {
-        "1": [
-
-        ],
-        "2": [
-
-        ],
-        "4": [
-
-        ],
-        "8": [
-
-        ]
+        "1": [],
+        "2": [],
+        "4": [],
+        "8": []
       },
-      "iframesWhiteList": [
-
-      ],
+      "iframesWhiteList": [],
       "iframesBlackList": {
-        "1": [
-
-        ],
-        "2": [
-
-        ],
-        "4": [
-
-        ],
-        "8": [
-
-        ]
+        "1": [],
+        "2": [],
+        "4": [],
+        "8": []
       },
-      "beaconsWhiteList": [
-
-      ],
+      "beaconsWhiteList": [],
       "beaconsBlackList": {
-        "1": [
-
-        ],
-        "2": [
-
-        ],
-        "4": [
-
-        ],
-        "8": [
-
-        ]
+        "1": [],
+        "2": [],
+        "4": [],
+        "8": []
       }
     }
   }

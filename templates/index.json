@@ -180,6 +180,25 @@
         "column_3_title": "UNIQUE TOWER UNIT FOR TOILET TOWER DEFENSE",
         "column_3_description": "Along with your order confirmation, you'll receive a code via email that unlocks an exclusive unit in Toilet Tower Defense."
       }
+    },
+    "the_team_zKMbwy": {
+      "type": "the-team",
+      "name": "The Team",
+      "settings": {
+        "title_row_1": "THE TEAM",
+        "title_row_2": "BEHIND SKIBIDI",
+        "description": "This isn’t just a team — it’s a collision of worlds. On one side: BOOM, the singular creator behind Skibidi Toilet, whose chaotic vision reshaped internet animation and built a global phenomenon with nothing but imagination and a Source Filmmaker timeline. On the other: Michael Bay, one of the top five highest-grossing filmmakers of all time — a visionary who defined what modern action and franchise storytelling looks like.\n\n<br><br>\u2028\u2028Alongside them, a crew of legendary department heads and a new-wave digital studio are doing what Hollywood hasn’t figured out yet: blending internet-born IP with cinematic firepower. This is where the next evolution of storytelling lives — not in a boardroom, but at the intersection of viral chaos and big-screen scale.",
+        "member_1_name": "BOOM",
+        "member_1_description": "",
+        "member_2_name": "MICHAEL BAY",
+        "member_2_description": "",
+        "member_3_name": "INVISIBLE NARRATIVES",
+        "member_3_description": "",
+        "member_4_name": "JEFFREY BEECROFT",
+        "member_4_description": "",
+        "member_5_name": "ROBERT LEGATO",
+        "member_5_description": ""
+      }
     }
   },
   "order": [
@@ -188,6 +207,7 @@
     "skibidi_universe_7Q4JQ9",
     "the_evolution_4kektM",
     "how_to_watch_YPQwaE",
-    "what_you_unlock_iBac6p"
+    "what_you_unlock_iBac6p",
+    "the_team_zKMbwy"
   ]
 }

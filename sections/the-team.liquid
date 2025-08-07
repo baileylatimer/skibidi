@@ -1,0 +1,389 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  #shopify-section-{{ section.id }} .team-section {
+    padding: 6em 0;
+    background-color: var(--color-dark);
+  }
+
+  .team-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: start;
+  }
+
+  /* Left Column - Accordions */
+  .team-accordions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .team-accordion {
+    border-bottom: 1px solid #333;
+    padding-bottom: var(--spacing-md);
+  }
+
+  .team-accordion__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: var(--spacing-sm) 0;
+  }
+
+  .team-accordion__title {
+    font-family: var(--font-bold) !important;
+    font-weight: 700 !important;
+    font-size: 1rem;
+    color: var(--color-light);
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .team-accordion__icon {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: transform var(--transition-fast);
+  }
+
+  .team-accordion__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-medium);
+  }
+
+  .team-accordion__description {
+    font-family: var(--font-body) !important;
+    font-weight: 400 !important;
+    color: var(--color-light);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+    padding-top: var(--spacing-sm);
+  }
+
+  .team-accordion.active .team-accordion__icon {
+    transform: rotate(45deg);
+  }
+
+  .team-accordion.active .team-accordion__content {
+    max-height: 200px;
+  }
+
+  /* Right Column - Content */
+  .team-content {
+    padding-left: var(--spacing-lg);
+  }
+
+  .team-content__title {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .team-content__title-row-1 {
+    color: var(--color-primary);
+    display: block;
+  }
+
+  .team-content__title-row-2 {
+    color: var(--color-light);
+    display: block;
+  }
+
+  .team-content__description {
+    font-family: var(--font-body) !important;
+    font-weight: 400 !important;
+    color: var(--color-subtle);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Mobile Layout */
+  @media screen and (max-width: 767px) {
+    .team-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-xl);
+    }
+
+    .team-content {
+      order: -1; /* Move content to top on mobile */
+      padding-left: 0;
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .team-accordions {
+      order: 1;
+    }
+  }
+</style>
+
+<div class="team-section">
+  <div class="team-container">
+    <div class="team-grid">
+      
+      <!-- Left Column - Accordions -->
+      <div class="team-accordions">
+        
+        {%- if section.settings.member_1_name != blank -%}
+          <div class="team-accordion">
+            <div class="team-accordion__header" onclick="toggleAccordion(this)">
+              <h3 class="team-accordion__title">{{ section.settings.member_1_name }}</h3>
+              <span class="team-accordion__icon">+</span>
+            </div>
+            <div class="team-accordion__content">
+              <p class="team-accordion__description">
+                {%- if section.settings.member_1_description != blank -%}
+                  {{ section.settings.member_1_description }}
+                {%- else -%}
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                {%- endif -%}
+              </p>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.member_2_name != blank -%}
+          <div class="team-accordion">
+            <div class="team-accordion__header" onclick="toggleAccordion(this)">
+              <h3 class="team-accordion__title">{{ section.settings.member_2_name }}</h3>
+              <span class="team-accordion__icon">+</span>
+            </div>
+            <div class="team-accordion__content">
+              <p class="team-accordion__description">
+                {%- if section.settings.member_2_description != blank -%}
+                  {{ section.settings.member_2_description }}
+                {%- else -%}
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                {%- endif -%}
+              </p>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.member_3_name != blank -%}
+          <div class="team-accordion">
+            <div class="team-accordion__header" onclick="toggleAccordion(this)">
+              <h3 class="team-accordion__title">{{ section.settings.member_3_name }}</h3>
+              <span class="team-accordion__icon">+</span>
+            </div>
+            <div class="team-accordion__content">
+              <p class="team-accordion__description">
+                {%- if section.settings.member_3_description != blank -%}
+                  {{ section.settings.member_3_description }}
+                {%- else -%}
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                {%- endif -%}
+              </p>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.member_4_name != blank -%}
+          <div class="team-accordion">
+            <div class="team-accordion__header" onclick="toggleAccordion(this)">
+              <h3 class="team-accordion__title">{{ section.settings.member_4_name }}</h3>
+              <span class="team-accordion__icon">+</span>
+            </div>
+            <div class="team-accordion__content">
+              <p class="team-accordion__description">
+                {%- if section.settings.member_4_description != blank -%}
+                  {{ section.settings.member_4_description }}
+                {%- else -%}
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                {%- endif -%}
+              </p>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.member_5_name != blank -%}
+          <div class="team-accordion">
+            <div class="team-accordion__header" onclick="toggleAccordion(this)">
+              <h3 class="team-accordion__title">{{ section.settings.member_5_name }}</h3>
+              <span class="team-accordion__icon">+</span>
+            </div>
+            <div class="team-accordion__content">
+              <p class="team-accordion__description">
+                {%- if section.settings.member_5_description != blank -%}
+                  {{ section.settings.member_5_description }}
+                {%- else -%}
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                {%- endif -%}
+              </p>
+            </div>
+          </div>
+        {%- endif -%}
+
+      </div>
+
+      <!-- Right Column - Content -->
+      <div class="team-content">
+        {%- if section.settings.title_row_1 != blank or section.settings.title_row_2 != blank -%}
+          <h1 class="team-content__title">
+            {%- if section.settings.title_row_1 != blank -%}
+              <span class="team-content__title-row-1">{{ section.settings.title_row_1 }}</span>
+            {%- endif -%}
+            {%- if section.settings.title_row_2 != blank -%}
+              <span class="team-content__title-row-2">{{ section.settings.title_row_2 }}</span>
+            {%- endif -%}
+          </h1>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <p class="team-content__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleAccordion(header) {
+  const accordion = header.parentElement;
+  const content = accordion.querySelector('.team-accordion__content');
+  
+  // Close all other accordions
+  document.querySelectorAll('.team-accordion').forEach(item => {
+    if (item !== accordion) {
+      item.classList.remove('active');
+    }
+  });
+  
+  // Toggle current accordion
+  accordion.classList.toggle('active');
+}
+</script>
+
+{% schema %}
+{
+  "name": "The Team",
+  "class": "shopify-section--the-team",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Title"
+    },
+    {
+      "type": "text",
+      "id": "title_row_1",
+      "label": "Title - First Row",
+      "default": "THE TEAM",
+      "info": "This will appear in red"
+    },
+    {
+      "type": "text",
+      "id": "title_row_2",
+      "label": "Title - Second Row",
+      "default": "BEHIND SKIBIDI",
+      "info": "This will appear in white"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "This isn't just a team — it's a collision of worlds. On one side: BOOM, the singular creator behind Skibidi Toilet, whose chaotic vision reshaped internet animation and built a global phenomenon with nothing but imagination and a Source Filmmaker timeline. On the other: Michael Bay, one of the top five highest-grossing filmmakers of all time — a visionary who defined what modern action and franchise storytelling looks like."
+    },
+    {
+      "type": "header",
+      "content": "Team Member 1"
+    },
+    {
+      "type": "text",
+      "id": "member_1_name",
+      "label": "Member 1 Name",
+      "default": "BOOM"
+    },
+    {
+      "type": "textarea",
+      "id": "member_1_description",
+      "label": "Member 1 Description",
+      "placeholder": "Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+    },
+    {
+      "type": "header",
+      "content": "Team Member 2"
+    },
+    {
+      "type": "text",
+      "id": "member_2_name",
+      "label": "Member 2 Name",
+      "default": "MICHAEL BAY"
+    },
+    {
+      "type": "textarea",
+      "id": "member_2_description",
+      "label": "Member 2 Description",
+      "placeholder": "Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+    },
+    {
+      "type": "header",
+      "content": "Team Member 3"
+    },
+    {
+      "type": "text",
+      "id": "member_3_name",
+      "label": "Member 3 Name",
+      "default": "INVISIBLE NARRATIVES"
+    },
+    {
+      "type": "textarea",
+      "id": "member_3_description",
+      "label": "Member 3 Description",
+      "placeholder": "Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+    },
+    {
+      "type": "header",
+      "content": "Team Member 4"
+    },
+    {
+      "type": "text",
+      "id": "member_4_name",
+      "label": "Member 4 Name",
+      "default": "JEFFREY BEECROFT"
+    },
+    {
+      "type": "textarea",
+      "id": "member_4_description",
+      "label": "Member 4 Description",
+      "placeholder": "Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+    },
+    {
+      "type": "header",
+      "content": "Team Member 5"
+    },
+    {
+      "type": "text",
+      "id": "member_5_name",
+      "label": "Member 5 Name",
+      "default": "ROBERT LEGATO"
+    },
+    {
+      "type": "textarea",
+      "id": "member_5_description",
+      "label": "Member 5 Description",
+      "placeholder": "Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+    }
+  ],
+  "presets": [
+    {
+      "name": "The Team"
+    }
+  ]
+}
+{% endschema %}

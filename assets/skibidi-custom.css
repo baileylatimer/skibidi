@@ -162,5 +162,17 @@ h2 {
   display: none
 }
 /* ================================
+   SECTION-SPECIFIC OVERRIDES
+   ================================ */
+
+/* Team accordion titles should use Blender Pro Bold, not Steelfish */
+.team-section .team-accordion__title,
+.team-section h3.team-accordion__title,
+#shopify-section * .team-accordion__title {
+  font-family: "Blender Pro", sans-serif !important;
+  font-weight: 700 !important;
+}
+
+/* ================================
    RESPONSIVE DESIGN
    ================================ */

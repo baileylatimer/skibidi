@@ -371,6 +371,42 @@
               color: white;
             }
             
+            /* Custom player button styling - only stroke and specific fills */
+            .custom_player_button_outer .player_button_inner button svg {
+              stroke: white !important;
+            }
+            
+            .custom_player_button_outer .player_button_inner button svg path {
+              fill: white !important;
+            }
+            
+            .custom_player_button_outer .player_button_inner button svg circle {
+              fill: none !important;
+              stroke: white !important;
+            }
+            
+            /* Mute button icon states - show unmuted by default, muted when class added */
+            .mute_button_mvod svg:first-child {
+              display: block;
+            }
+            
+            .mute_button_mvod svg:last-child {
+              display: none;
+            }
+            
+            .mute_button_mvod.muted svg:first-child {
+              display: none;
+            }
+            
+            .mute_button_mvod.muted svg:last-child {
+              display: block;
+            }
+            
+            /* Ensure consistent stroke width for fullscreen button */
+            .full_screen_mvod svg {
+              stroke-width: 2 !important;
+            }
+            
             @media screen and (max-width: 767px) {
               .purchase-line,
               .unlock-line {
@@ -459,12 +495,14 @@
           playback: {
               muted: autoplayValue,
               autoplay: autoplayValue,
-              controls: true
+              controls: false
           },
+          ui: false,
           isBackgroundPlaybackEnabled: true,
           isPictureInPictureEnabled: false,
           style: {
-              ux: false
+              ux: false,
+              controls: false
           },
           cast: {
             enable: true
@@ -495,7 +533,11 @@
               player.subtitles.add(enSubtitle);
               player.subtitles.enable(enSubtitle.id);
           }
-         var pauseButton = document.querySelector('.video-pause-button_mvod');
+        var pauseButton = document.querySelector('.video-pause-button_mvod');
+        var muteButton = document.querySelector('.mute_button_mvod');
+        var fullscreenButton = document.querySelector('.full_screen_mvod');
+        
+        // Update button states based on player events
         player.on('paused', function() {
             pauseButton.classList.add('play');
         });
@@ -504,8 +546,72 @@
         });
         player.on('playbackfinished', function() {
           this.play();
-            //pauseButton.classList.add('play');
         });
+        
+        // Initialize mute button state
+        if (muteButton) {
+          if (player.isMuted()) {
+            muteButton.classList.add('muted');
+          } else {
+            muteButton.classList.remove('muted');
+          }
+        }
+        
+        // Add player event listeners for mute state changes
+        player.on('muted', function() {
+          if (muteButton) muteButton.classList.add('muted');
+        });
+        
+        player.on('unmuted', function() {
+          if (muteButton) muteButton.classList.remove('muted');
+        });
+        
+        // Add click handlers for custom buttons
+        if (pauseButton) {
+          pauseButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Play/pause button clicked, player paused:', player.isPaused());
+            try {
+              if (player.isPaused()) {
+                player.play();
+              } else {
+                player.pause();
+              }
+            } catch (error) {
+              console.error('Error controlling playback:', error);
+            }
+          });
+        }
+        
+        if (muteButton) {
+          muteButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Mute button clicked, player muted:', player.isMuted());
+            try {
+              if (player.isMuted()) {
+                player.unmute();
+              } else {
+                player.mute();
+              }
+            } catch (error) {
+              console.error('Error controlling mute:', error);
+            }
+          });
+        }
+        
+        if (fullscreenButton) {
+          fullscreenButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (player.getViewMode() === 'fullscreen') {
+              player.setViewMode('inline');
+            } else {
+              player.setViewMode('fullscreen');
+            }
+          });
+        }
       }).catch(function() {
           console.log('Error while loading source'); // Error!
       });

@@ -259,6 +259,13 @@
                   {{ block.settings.subheading | escape }}
                 </p>
               {%- endif -%}
+              {%- if block.settings.sub_image_after != blank -%}
+                {{-
+                  block.settings.sub_image_after
+                  | image_url: width: block.settings.sub_img_after_size
+                  | image_tag: class: 'sub_mvod_img_after'
+                -}}
+              {%- endif -%}
             </div>
             {%- if block.settings.head_image != blank -%}
               {{ block.settings.head_image | image_url: width: block.settings.head_img_size | image_tag }}
@@ -270,6 +277,8 @@
                 {%- render 'styled-text', content: block.settings.title, gradient: block.settings.text_gradient -%}
               </p>
             {%- endif -%}
+            {% if block.settings.media_position == 'top' %}</div>{% endif %}
+            {% if block.settings.media_position == 'top' %}<div class="middle_con">{% endif %}
             {%- if block.settings.tags != blank -%}
               <ul class="mvod_tag">
                 {% assign tags = block.settings.tags | split: ', ' %}
@@ -282,191 +291,93 @@
                 {% endfor %}
               </ul>
             {%- endif -%}
+            <div class="content-with-readmore">
+              {{- block.settings.content -}}
+              {%- if block.settings.show_readMore -%}<button id="readMoreBtn">Read More</button>{%- endif -%}
+            </div>
             {% if block.settings.media_position == 'top' %}</div>{% endif %}
-            {% if block.settings.media_position == 'top' %}<div class="middle_con">{% endif %}
-            {{- block.settings.content -}}
-            {% if block.settings.media_position == 'top' %}</div>{% endif %}
-            {%- if block.settings.show_readMore -%}<button id="readMoreBtn">Read More</button>{%- endif -%}
           </div>
-          {% if block.settings.show_before %}
-          {% if block.settings.show_product %}
-          {% if block.settings.show_one %}
-            <div class="non_scrollable_product" style="--desk_padding: {{ block.settings.product_padding }}px; --mob_padding: {{ block.settings.product_padding }}px;">
-              {%- assign products = block.settings.products | default: block.settings.collection.products -%}
-              {%- for product in products limit: block.settings.products_count -%}
-                {%- render 'product-card_new', product: product, stacked: section.settings.stack_products, background: section.settings.product_card_background, text_color: block.settings.text_color, show_badges: true -%}
-              {%- endfor -%}
-            </div>
-            {% else %}
-            <div class="scrollable_product" style="--desk_padding: {{ block.settings.product_padding }}px; --mob_padding: {{ block.settings.product_padding }}px;">
-            {%- assign scroll_area_id = 'scroll-area-' | append: block.id -%}      
-            <scroll-carousel selector="product-card" id="{{ scroll_area_id }}" class="scroll-area bleed {% if block.settings.products_count > block.settings.products_per_row_desktop %}is-scrollable{% endif %}">
-                <product-list class="VOD_product-list" data-slick='{"slidesToShow": {{ block.settings.products_per_row_desktop }}, "slidesToScroll": 1}'>
-                  {%- assign products = block.settings.products | default: block.settings.collection.products -%}
-                  {%- for product in products limit: block.settings.products_count -%}
-                    {%- render 'product-card', product: product, stacked: section.settings.stack_products, background: section.settings.product_card_background, text_color: block.settings.text_color, show_badges: true -%}
-                  {%- endfor -%}
-                </product-list>
-            </scroll-carousel>
-            </div>
-          {% endif %}
-          {% endif %}
-          <div class="price_sec_outer{% unless block.settings.no_seperator %} no_seperator{% endunless %}">
-            <div class="price_title_sec{%- if block.settings.sub_price != blank or block.settings.link_text != blank or block.settings.link_text2 != blank -%}{% else %} full{%- endif -%}">
-              {%- if block.settings.sub_heading != blank -%}
-                <h4
-                  class="sub_heading"
-                  style="--sub_txt_color:{{ block.settings.sub_txt_color }};--sub_bg_color:{{ block.settings.sub_bg_color }};--desk_fontSize: {{ block.settings.sub_heading_desk_fontsize }}px;--mob_fontSize: {{ block.settings.sub_heading_mob_fontsize }}px;"
-                >
-                  {{ block.settings.sub_heading }}
-                </h4>
-              {%- endif -%}
-              {%- if block.settings.rich_text != blank -%}
-                <h4 style="--desk_fontSize: {{ block.settings.subhead_desk_fontsize }}px;--mob_fontSize: {{ block.settings.subhead_mob_fontsize }}px;">
-                  {{ block.settings.rich_text }}
-                </h4>
-              {%- endif -%}
-            </div>
-            {%- if block.settings.sub_price != blank
-              or block.settings.link_text != blank
-              or block.settings.link_text2 != blank
-            -%}
-              <div class="price_sec">
-                {%- if block.settings.sub_price != blank -%}
-                  <div class="subscription_sec">
-                    {%- if block.settings.sub_price != blank -%}
-                      <p
-                        class="price big"
-                        style="--desk_fontSize: {{ block.settings.sub_price_desk_fontsize }}px;--mob_fontSize: {{ block.settings.sub_price_mob_fontsize }}px;"
-                      >
-                        {{ block.settings.sub_price }}
-                      </p>
-                    {%- endif -%}
-                    {%- if block.settings.sub_cycle != blank -%}
-                      <p
-                        class="sub_last"
-                        style="--desk_fontSize: {{ block.settings.sub_cycle_desk_fontsize }}px;--mob_fontSize: {{ block.settings.sub_cycle_mob_fontsize }}px;"
-                      >
-                        {{ block.settings.sub_cycle }}
-                      </p>
-                    {%- endif -%}
-                  </div>
-                {%- endif -%}
-                <div class="link_sec">
-                  {%- if block.settings.link_text != blank -%}
-                    {%- render 'button',
-                      href: block.settings.link_url,
-                      content: block.settings.link_text,
-                      size: block.settings.button_size,
-                      style: block.settings.button_style,
-                      background: block.settings.button_background,
-                      text_color: block.settings.button_text_color
-                    -%}
-                  {%- endif -%}
-                  {%- if block.settings.link_text2 != blank -%}
-                    {%- render 'button',
-                      href: block.settings.link_url2,
-                      content: block.settings.link_text2,
-                      size: block.settings.button_size,
-                      style: block.settings.button_style,
-                      background: block.settings.button_background,
-                      text_color: block.settings.button_text_color
-                    -%}
-                  {%- endif -%}
-                </div>
+          <!-- Custom Hardcoded Right Column -->
+          <div class="custom-vod-section">
+            <div class="how-to-watch-pill">HOW TO WATCH</div>
+            <div class="purchase-unlock-text">
+              <div class="purchase-line">
+                <span class="bold">PURCHASE</span> <span class="regular">ANY PRODUCT.</span>
               </div>
-            {% endif %}
-          </div>  
-          {% else %}
-          <div class="price_sec_outer{% unless block.settings.no_seperator %} no_seperator{% endunless %}">
-            <div class="price_title_sec{%- if block.settings.sub_price != blank or block.settings.link_text != blank or block.settings.link_text2 != blank -%}{% else %} full{%- endif -%}">
-              {%- if block.settings.sub_heading != blank -%}
-                <h4
-                  class="sub_heading"
-                  style="--sub_txt_color:{{ block.settings.sub_txt_color }};--sub_bg_color:{{ block.settings.sub_bg_color }};--desk_fontSize: {{ block.settings.sub_heading_desk_fontsize }}px;--mob_fontSize: {{ block.settings.sub_heading_mob_fontsize }}px;"
-                >
-                  {{ block.settings.sub_heading }}
-                </h4>
-              {%- endif -%}
-              {%- if block.settings.rich_text != blank -%}
-                <h4 style="--desk_fontSize: {{ block.settings.subhead_desk_fontsize }}px;--mob_fontSize: {{ block.settings.subhead_mob_fontsize }}px;">
-                  {{ block.settings.rich_text }}
-                </h4>
-              {%- endif -%}
-            </div>
-            {%- if block.settings.sub_price != blank
-              or block.settings.link_text != blank
-              or block.settings.link_text2 != blank
-            -%}
-              <div class="price_sec">
-                {%- if block.settings.sub_price != blank -%}
-                  <div class="subscription_sec">
-                    {%- if block.settings.sub_price != blank -%}
-                      <p
-                        class="price big"
-                        style="--desk_fontSize: {{ block.settings.sub_price_desk_fontsize }}px;--mob_fontSize: {{ block.settings.sub_price_mob_fontsize }}px;"
-                      >
-                        {{ block.settings.sub_price }}
-                      </p>
-                    {%- endif -%}
-                    {%- if block.settings.sub_cycle != blank -%}
-                      <p
-                        class="sub_last"
-                        style="--desk_fontSize: {{ block.settings.sub_cycle_desk_fontsize }}px;--mob_fontSize: {{ block.settings.sub_cycle_mob_fontsize }}px;"
-                      >
-                        {{ block.settings.sub_cycle }}
-                      </p>
-                    {%- endif -%}
-                  </div>
-                {%- endif -%}
-                <div class="link_sec">
-                  {%- if block.settings.link_text != blank -%}
-                    {%- render 'button',
-                      href: block.settings.link_url,
-                      content: block.settings.link_text,
-                      size: block.settings.button_size,
-                      style: block.settings.button_style,
-                      background: block.settings.button_background,
-                      text_color: block.settings.button_text_color
-                    -%}
-                  {%- endif -%}
-                  {%- if block.settings.link_text2 != blank -%}
-                    {%- render 'button',
-                      href: block.settings.link_url2,
-                      content: block.settings.link_text2,
-                      size: block.settings.button_size,
-                      style: block.settings.button_style,
-                      background: block.settings.button_background,
-                      text_color: block.settings.button_text_color
-                    -%}
-                  {%- endif -%}
-                </div>
+              <div class="unlock-line">
+                <span class="bold">UNLOCK</span> <span class="regular">THE FILM.</span>
               </div>
-            {% endif %}
+            </div>
           </div>
-          {% if block.settings.show_product %}
-          {% if block.settings.show_one %}
-            <div class="non_scrollable_product" style="--desk_padding: {{ block.settings.product_padding }}px; --mob_padding: {{ block.settings.product_padding }}px;">
-              {%- assign products = block.settings.products | default: block.settings.collection.products -%}
-              {%- for product in products limit: block.settings.products_count -%}
-                {%- render 'product-card_new', product: product, stacked: section.settings.stack_products, background: section.settings.product_card_background, text_color: block.settings.text_color, show_badges: true -%}
-              {%- endfor -%}
-            </div>
-            {% else %}
-            <div class="scrollable_product" style="--desk_padding: {{ block.settings.product_padding }}px; --mob_padding: {{ block.settings.product_padding }}px;">
-            {%- assign scroll_area_id = 'scroll-area-' | append: block.id -%}      
-            <scroll-carousel selector="product-card" id="{{ scroll_area_id }}" class="scroll-area bleed {% if block.settings.products_count > block.settings.products_per_row_desktop %}is-scrollable{% endif %}">
-                <product-list class="VOD_product-list" data-slick='{"slidesToShow": {{ block.settings.products_per_row_desktop }}, "slidesToScroll": 1}'>
-                  {%- assign products = block.settings.products | default: block.settings.collection.products -%}
-                  {%- for product in products limit: block.settings.products_count -%}
-                    {%- render 'product-card', product: product, stacked: section.settings.stack_products, background: section.settings.product_card_background, text_color: block.settings.text_color, show_badges: true -%}
-                  {%- endfor -%}
-                </product-list>
-            </scroll-carousel>
-            </div>
-          {% endif %}
-          {% endif %}  
-          {% endif %}
+          
+          <style>
+            .media-with-text__content {
+              padding: 2rem !important;
+              margin-bottom: 3rem !important;
+              border-radius: 20px !important;
+              border: 1px solid rgba(225, 0, 0, 0.39) !important;
+              background: linear-gradient(180deg, #000 5.45%, #000 85.91%) !important;
+              box-shadow: 0 4px 8px 10px rgba(255, 0, 0, 0.25) !important;
+            }
+            
+            @media screen and (min-width: 768px) {
+              .media-with-text__content {
+                margin-bottom: 4rem !important;
+              }
+            }
+            
+            .custom-vod-section {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 1rem;
+            }
+            
+            .how-to-watch-pill {
+              background-color: var(--color-primary);
+              color: black;
+              font-family: "Blender Pro", sans-serif !important;
+              font-weight: 700 !important;
+              font-size: 13px !important;
+              text-transform: uppercase;
+              letter-spacing: 0.1em;
+              padding: 2px 8px;
+              border-radius: 20px;
+              white-space: nowrap;
+            }
+            
+            .purchase-unlock-text {
+              display: flex;
+              flex-direction: column;
+              gap: 0;
+            }
+            
+            .purchase-line,
+            .unlock-line {
+              font-size: 20px;
+              line-height: 1.2;
+              text-transform: uppercase;
+            }
+            
+            .purchase-unlock-text .bold {
+              font-family: "Blender Pro", sans-serif !important;
+              font-weight: 700 !important;
+              color: white;
+            }
+            
+            .purchase-unlock-text .regular {
+              font-family: "Blender Pro", sans-serif !important;
+              font-weight: 400 !important;
+              color: white;
+            }
+            
+            @media screen and (max-width: 767px) {
+              .purchase-line,
+              .unlock-line {
+                font-size: 18px;
+              }
+            }
+          </style>
         </div>
       </div>
     {%- endfor -%}
@@ -896,13 +807,28 @@
           "max": 400,
           "step": 10,
           "unit": "px",
-          "label": "subheading Image size",
+          "label": "Image Before Subheading Size",
           "default": 150
         },
         {
           "type": "text",
           "id": "subheading",
           "label": "Subheading"
+        },
+        {
+          "type": "image_picker",
+          "id": "sub_image_after",
+          "label": "Image After Subheading"
+        },
+        {
+          "type": "range",
+          "id": "sub_img_after_size",
+          "min": 90,
+          "max": 400,
+          "step": 10,
+          "unit": "px",
+          "label": "Image After Subheading Size",
+          "default": 150
         },
         {
           "type": "range",

@@ -1,0 +1,341 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  #shopify-section-{{ section.id }} .evolution-section {
+    background-image: url('{{ section.settings.background_image | image_url }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 2em 0;
+    min-height: auto;
+  }
+
+  .evolution-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+  }
+
+  .evolution-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    align-items: end;
+  }
+
+  /* Left side - 3 image columns */
+  .evolution-episode {
+    position: relative;
+    height: 680px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .evolution-episode__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  .evolution-episode__gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    z-index: 2;
+  }
+
+  .evolution-episode__content {
+    position: relative;
+    z-index: 3;
+    padding: var(--spacing-lg);
+    color: var(--color-light);
+  }
+
+  .evolution-episode__number {
+    font-family: var(--font-body) !important;
+    font-weight: 400 !important;
+    font-size: 1rem;
+    margin-bottom: var(--spacing-xs);
+    text-transform: uppercase;
+  }
+
+  .evolution-episode__title {
+    font-family: var(--font-bold) !important;
+    font-weight: 700 !important;
+    font-size: 1rem;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  /* Right side - Text content */
+  .evolution-text {
+    grid-column: span 3;
+    padding-left: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 680px;
+  }
+
+  .evolution-text__subtitle {
+    font-family: var(--font-bold) !important;
+    font-weight: 700 !important;
+    font-size: 1.125rem;
+    color: var(--color-subtle);
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+  }
+
+  .evolution-text__title {
+    margin: 0;
+  }
+
+  .evolution-text__title-row-1 {
+    color: var(--color-primary);
+    display: block;
+  }
+
+  .evolution-text__title-row-2 {
+    color: var(--color-light);
+    display: block;
+  }
+
+  /* Mobile Layout - Reverse Stack */
+  @media screen and (max-width: 767px) {
+    .evolution-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-xl);
+    }
+
+    .evolution-text {
+      grid-column: span 1;
+      order: -1; /* Move to top */
+      padding-left: 0;
+      height: auto;
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .evolution-episode {
+      grid-column: span 1;
+      height: 270px; /* Smaller on mobile */
+    }
+
+    .evolution-episode__gradient {
+      height: 80px;
+    }
+
+    .evolution-episode__content {
+      padding: var(--spacing-md);
+    }
+  }
+</style>
+
+<div class="evolution-section">
+  <div class="evolution-container">
+    <div class="evolution-grid">
+      
+      <!-- Episode 1 -->
+      <div class="evolution-episode">
+        {%- if section.settings.episode_1_image != blank -%}
+          <img src="{{ section.settings.episode_1_image | image_url }}" 
+               alt="{{ section.settings.episode_1_title }}"
+               class="evolution-episode__image"
+               width="400"
+               height="680">
+        {%- endif -%}
+        <div class="evolution-episode__gradient"></div>
+        <div class="evolution-episode__content">
+          {%- if section.settings.episode_1_number != blank -%}
+            <div class="evolution-episode__number">{{ section.settings.episode_1_number }}</div>
+          {%- endif -%}
+          {%- if section.settings.episode_1_title != blank -%}
+            <h3 class="evolution-episode__title">{{ section.settings.episode_1_title }}</h3>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Episode 2 -->
+      <div class="evolution-episode">
+        {%- if section.settings.episode_2_image != blank -%}
+          <img src="{{ section.settings.episode_2_image | image_url }}" 
+               alt="{{ section.settings.episode_2_title }}"
+               class="evolution-episode__image"
+               width="400"
+               height="680">
+        {%- endif -%}
+        <div class="evolution-episode__gradient"></div>
+        <div class="evolution-episode__content">
+          {%- if section.settings.episode_2_number != blank -%}
+            <div class="evolution-episode__number">{{ section.settings.episode_2_number }}</div>
+          {%- endif -%}
+          {%- if section.settings.episode_2_title != blank -%}
+            <h3 class="evolution-episode__title">{{ section.settings.episode_2_title }}</h3>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Episode 3 -->
+      <div class="evolution-episode">
+        {%- if section.settings.episode_3_image != blank -%}
+          <img src="{{ section.settings.episode_3_image | image_url }}" 
+               alt="{{ section.settings.episode_3_title }}"
+               class="evolution-episode__image"
+               width="400"
+               height="680">
+        {%- endif -%}
+        <div class="evolution-episode__gradient"></div>
+        <div class="evolution-episode__content">
+          {%- if section.settings.episode_3_number != blank -%}
+            <div class="evolution-episode__number">{{ section.settings.episode_3_number }}</div>
+          {%- endif -%}
+          {%- if section.settings.episode_3_title != blank -%}
+            <h3 class="evolution-episode__title">{{ section.settings.episode_3_title }}</h3>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Right side text content -->
+      <div class="evolution-text">
+        {%- if section.settings.subtitle != blank -%}
+          <h4 class="evolution-text__subtitle">{{ section.settings.subtitle }}</h4>
+        {%- endif -%}
+        
+        {%- if section.settings.title_row_1 != blank or section.settings.title_row_2 != blank -%}
+          <h1 class="evolution-text__title">
+            {%- if section.settings.title_row_1 != blank -%}
+              <span class="evolution-text__title-row-1">{{ section.settings.title_row_1 }}</span>
+            {%- endif -%}
+            {%- if section.settings.title_row_2 != blank -%}
+              <span class="evolution-text__title-row-2">{{ section.settings.title_row_2 }}</span>
+            {%- endif -%}
+          </h1>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "The Evolution",
+  "class": "shopify-section--the-evolution",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "header", 
+      "content": "Episode 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "episode_1_image",
+      "label": "Episode 1 Image"
+    },
+    {
+      "type": "text",
+      "id": "episode_1_number",
+      "label": "Episode 1 Number",
+      "default": "EPISODE 1"
+    },
+    {
+      "type": "text",
+      "id": "episode_1_title",
+      "label": "Episode 1 Title",
+      "default": "WHERE IT STARTED"
+    },
+    {
+      "type": "header",
+      "content": "Episode 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "episode_2_image",
+      "label": "Episode 2 Image"
+    },
+    {
+      "type": "text",
+      "id": "episode_2_number",
+      "label": "Episode 2 Number",
+      "default": "EPISODE 75"
+    },
+    {
+      "type": "text",
+      "id": "episode_2_title",
+      "label": "Episode 2 Title",
+      "default": "WHERE IT'S NOW"
+    },
+    {
+      "type": "header",
+      "content": "Episode 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "episode_3_image",
+      "label": "Episode 3 Image"
+    },
+    {
+      "type": "text",
+      "id": "episode_3_number",
+      "label": "Episode 3 Number",
+      "default": "CHAPTER ONE"
+    },
+    {
+      "type": "text",
+      "id": "episode_3_title",
+      "label": "Episode 3 Title",
+      "default": "WHERE IT'S GOING"
+    },
+    {
+      "type": "header",
+      "content": "Main Text Content"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle (H4)",
+      "default": "YOU'VE WATCHED IT GROW..."
+    },
+    {
+      "type": "text",
+      "id": "title_row_1",
+      "label": "Title - First Row",
+      "default": "NOW WITNESS",
+      "info": "This will appear in red"
+    },
+    {
+      "type": "text",
+      "id": "title_row_2",
+      "label": "Title - Second Row", 
+      "default": "THE EVOLUTION.",
+      "info": "This will appear in white"
+    }
+  ],
+  "presets": [
+    {
+      "name": "The Evolution"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,143 @@
+/* ================================
+   SKIBIDI TOILET CUSTOM STYLES
+   ================================ */
+
+/* ================================
+   CSS VARIABLES / CUSTOM PROPERTIES
+   ================================ */
+:root {
+  /* FONTS */
+  --font-primary: "JMH Rastan Black", sans-serif;
+  --font-secondary: "Oxanium", sans-serif;
+  --font-accent: "PP Fragment", sans-serif;
+  --font-header: "Steelfish", sans-serif;
+  --font-bold: "Blender Pro", sans-serif;
+  --font-body: "Blender Pro", sans-serif;
+
+  /* COLORS */
+  --color-primary: #ff6b00;
+  --color-secondary: #00ff88;
+  --color-accent: #ff0066;
+  --color-dark: #000000;
+  --color-light: #ffffff;
+  --color-gray: #666666;
+  --color-bg: #0a0a0a;
+  
+  /* SPACING */
+  --spacing-xs: 0.5rem;   /* 8px */
+  --spacing-sm: 1rem;     /* 16px */
+  --spacing-md: 1.5rem;   /* 24px */
+  --spacing-lg: 2rem;     /* 32px */
+  --spacing-xl: 3rem;     /* 48px */
+  --spacing-xxl: 4rem;    /* 64px */
+  
+  /* LAYOUT */
+  --container-max-width: 1200px;
+  --grid-gap: var(--spacing-lg);
+  
+  /* BORDERS & RADIUS */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-width: 2px;
+  
+  /* SHADOWS */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.3);
+  
+  /* TRANSITIONS */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* ================================
+   TYPOGRAPHY
+   ================================ */
+
+/* Font Face Declarations */
+@font-face {
+  font-family: "Steelfish";
+  src: url("{{ 'Steelfish Eb.otf' | asset_url }}") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Blender Pro";
+  src: url("{{ 'BlenderPro-Book.otf' | asset_url }}") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Blender Pro";
+  src: url("{{ 'BlenderPro-Medium.otf' | asset_url }}") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Global Typography Rules */
+h1, h2, h3 {
+  font-family: var(--font-header) !important;
+  font-weight: 800 !important;
+}
+
+h4, h5, h6 {
+  font-family: var(--font-bold) !important;
+  font-weight: 700 !important;
+}
+
+p, span, div, li, td, th, label, input, textarea {
+  font-family: var(--font-body) !important;
+  font-weight: 400 !important;
+}
+
+a, button {
+  font-family: var(--font-bold) !important;
+  font-weight: 700 !important;
+}
+
+
+/* ================================
+   UTILITY CLASSES
+   ================================ */
+
+
+/* ================================
+   PRODUCT CARDS
+   ================================ */
+.product-card {
+  background-image:url('https://cdn.shopify.com/s/files/1/0606/6552/8395/files/product-tile.png?v=1754544721');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 1em;
+  border-radius:0 ;
+  -webkit-border-radius:0 ;
+  -moz-border-radius:0 ;
+  -ms-border-radius:0 ;
+  -o-border-radius:0 ;
+}
+
+.product-card__title, .price-list sale-price  {
+  color: var(--color-light) !important;
+  text-transform: uppercase;
+}
+
+#shopify-section-template--16785210572875__featured_collection_8MMTQp .product-list {
+  --product-list-gap: 0 !important;
+  padding-top: 4em;
+  padding-bottom: 4em;
+}
+
+.featured-collection.px-8 .section-header  {
+  display: none
+}
+/* ================================
+   RESPONSIVE DESIGN
+   ================================ */

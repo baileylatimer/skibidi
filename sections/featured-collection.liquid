@@ -30,9 +30,16 @@
       --product-list-carousel-item-width: calc(var(--container-inner-width) / {{ section.settings.products_per_row_desktop }} - (var(--product-list-column-gap) / {{ section.settings.products_per_row_desktop }} * {{ section.settings.products_per_row_desktop | minus: 1 }}));
     }
   }
+
+  .featured-collection {
+    background-image: url('https://cdn.shopify.com/s/files/1/0606/6552/8395/files/product-bg.jpg?v=1754544374');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 </style>
 
-<div {% render 'section-properties' %}>
+<div class="featured-collection px-8">
   <div class="section-stack">
     {%- assign link_url = section.settings.link_url | default: section.settings.collection.url -%}
     {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, heading_color: section.settings.heading_color, heading_gradient: section.settings.heading_gradient, content: section.settings.content, link_text: section.settings.link_text, link_url: link_url -%}

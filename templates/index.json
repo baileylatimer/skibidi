@@ -89,50 +89,30 @@
         "head_text_color": ""
       }
     },
-    "media_with_text_7mdcbV": {
-      "type": "media-with-text",
-      "blocks": {
-        "image_AD3hPx": {
-          "type": "image",
-          "settings": {
-            "media_width": 50,
-            "media_position": "start",
-            "text_position": "place-self-center-start text-start",
-            "icon": "none",
-            "icon_width": 48,
-            "subheading": "HOW IT WORKS",
-            "title": "Purchase any Product.    Unlock the Content.",
-            "content": "<p>A bespoke site and experience, custom-tailored for your event and merchandise. Fans explore a beautifully designed event page, view captivating trailers, and purchase products. Upon checkout, the content begins streaming effortlessly, creating a seamless and immersive experience from start to finish.<\/p>",
-            "link_text": "",
-            "link_url": "",
-            "link_text2": "",
-            "link_url2": "",
-            "button_style": "fill",
-            "button_size": "lg",
-            "background": "#000000",
-            "background_gradient": "",
-            "text_color": "#ffffff",
-            "text_gradient": "",
-            "button_background": "",
-            "button_text_color": ""
-          }
-        }
-      },
-      "block_order": [
-        "image_AD3hPx"
-      ],
-      "custom_css": [
-        ".bold {font-size: 0.8em; letter-spacing: 2px; font-weight: 700; padding-bottom: 3%;}",
-        "img {width: 100%; height: auto; object-fit: contain;}",
-        " {padding-right: 12%; padding-left: 12%; padding-top: 3%; padding-bottom: 3%; background-color: black;}"
-      ],
+    "featured_collection_8MMTQp": {
+      "type": "featured-collection",
+      "name": "Featured collection",
       "settings": {
+        "collection": "frontpage",
+        "products": [],
         "full_width": true,
-        "allow_transparent_header": false,
-        "spacing": "none",
-        "sec_font": "dm_sans_n4",
-        "background": "#000000",
-        "background_gradient": ""
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 8,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
       }
     },
     "media_with_text_VdL3Ja": {
@@ -535,7 +515,7 @@
   },
   "order": [
     "vod_video_4dR3eN",
-    "media_with_text_7mdcbV",
+    "featured_collection_8MMTQp",
     "media_with_text_VdL3Ja",
     "media_with_text_TxKkiz",
     "collection_list_9ttGnn",

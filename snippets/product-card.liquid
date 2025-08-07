@@ -170,7 +170,7 @@ Supported variables
       {%- endif -%}
     {%- endif -%}
 
-    <div class="v-stack gap-0.5 w-full {% if text_alignment == 'center' %}justify-items-center{% endif %}">
+    <div class=" gap-0.5 w-full flex flex-col items-start justify-start {% if text_alignment == 'center' %}justify-items-center{% endif %}">
       {%- if show_rating and show_vendor == false or product.vendor == blank -%}
         <div class="rating-with-text">
           <span class="product-card__title"><a href="{{ product.url }}" class="bold" data-instant>{{ product.title }}</a></span>

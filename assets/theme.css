@@ -2018,7 +2018,7 @@ scroll-carousel {
 }
 
 .section {
-  padding-block-start: calc(var(--background-differs-from-previous) * var(--calculated-section-spacing-block-start));
+  /* padding-block-start: calc(var(--background-differs-from-previous) * var(--calculated-section-spacing-block-start)); */
   padding-block-end: var(--calculated-section-spacing-block-end);
 }
 

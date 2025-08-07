@@ -1,0 +1,332 @@
+<style>
+  {{ section.settings.sec_font | font_face }}  
+  #shopify-section-{{ section.id }} {
+  font-family: {{ section.settings.sec_font.family }},{{ section.settings.sec_font.fallback_families }}; 
+    {%- if section.settings.allow_transparent_header -%}
+      margin-block-start: calc(-1 * var(--header-height) * var(--section-is-first));
+     {%- endif -%} 
+  }
+  {%- if section.settings.allow_transparent_header -%}
+    #shopify-section-{{ section.id }}>.section{
+      padding-block-start: calc(1.1 * var(--header-height) * var(--section-is-first));
+  }
+  {%- endif -%}
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .article-list {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.article_per_row }}, 1fr);
+    }
+  }
+
+  @media screen and (min-width: 1400px) {
+    #shopify-section-{{ section.id }} .article-list {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.article_per_row }}, 1fr);
+    }
+  }
+</style>
+<div {% render 'section-properties' %} {% if section.settings.allow_transparent_header %}allow-transparent-header{% endif %}>
+  <div class="container">
+  {%- assign text_position = section.settings.text_position -%}
+  <div class="section-stack">
+    {%- capture content -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="bold">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="h2">
+          {%- render 'styled-text', content: section.settings.title, text_color: section.settings.heading_color, gradient: section.settings.heading_gradient -%}
+        </h2>
+      {%- endif -%}
+
+      {{- section.settings.content -}}
+    {%- endcapture -%}
+
+    {%- if content != blank -%}
+      <div class="intro">
+        <div class="prose {% if text_position == 'center' %}text-center{% elsif text_position == 'end' %}text-right{% endif %}">
+          {{- content -}}
+        </div>
+      </div>
+    {%- endif -%}
+   <div class="main">
+    <div class="article-list gap-12"> 
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'article-block' %}
+          <div class="article-block">
+            <div class="article-header">
+              <h3>{{ block.settings['article-title'] }}</h3>
+              <div class="header-delimeter"></div>
+              <h3>{{ block.settings['article-date'] }}</h3>
+            </div>
+            <div class="article-content">
+              <div
+                class="article-illustration"
+                style="background: center / cover no-repeat url({{ block.settings.article_image | img_url : '250x 250x' }}); background-size: cover;"
+              ></div>
+              <p>{{ block.settings['article-text'] }}</p>
+            </div>
+            <div class="article-footer">
+              <a href="{{ block.settings.article_url }}">Read more</a>
+            </div>
+          </div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+  </div>
+   </div>    
+</div>
+{% stylesheet %}
+  div.article-block {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    gap: 24px;
+  }
+  div.article-header {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  div.article-header h3 {
+    display: block;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 8.11601px;
+    line-height: 9px;
+    letter-spacing: 0.15em;
+    color: #ffffff;
+  }
+  @media screen and (max-width: 450px) {
+    div.article-header h3 {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 11.2413px;
+      line-height: 112%;
+      letter-spacing: 0.15em;
+    }
+  }
+  div.article-header .header-delimeter {
+    align-self: center;
+    height: 1px;
+    margin-right: 8px;
+    margin-left: 8px;
+    border-top: 1px solid #535353;
+    width: auto;
+    flex: 1 0 auto;
+    display: block;
+  }
+  div.article-content {
+    padding: 10px 0px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: flex-start;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: normal;
+        border: 0px;
+  }
+  @media screen and (max-width: 450px) {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 139%;
+  }
+  div.article-content p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  div.article-content .article-illustration {
+    display: inline-block;
+    height: 78px;
+    width: 78px;
+    border-radius: 9px;
+    flex: 1 0 auto;
+    align-self: center;
+  }
+  div.article-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    color: #ffffff;
+  }
+  div.article-footer a {
+    color: #ffffff;
+    font-style: normal;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 8.11601px;
+    line-height: 9px;
+    letter-spacing: 0.15em;
+    text-decoration-line: underline;
+        text-underline-offset: 4px;
+  }
+  div.article-footer a:hover {
+    color: #d7d7d7;
+    cursor: pointer;
+  }
+{% endstylesheet %}
+{% javascript %}
+{% endjavascript %}
+{% schema %}
+{
+  "name": "press-and-media",
+  "class": "shopify-section--press-and-media",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_transparent_header",
+      "label": "Allow transparent header",
+      "info": "This setting only applies when this section is the first one.",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "sec_font",
+      "label": "Page font",
+      "default": "helvetica_n4"
+    },
+    {
+      "type": "header",
+      "content": "Section Content",
+      "info": "Section Header Heading & Subheading"
+    },
+    {
+      "type": "range",
+      "id": "article_per_row",
+      "min": 2,
+      "max": 5,
+      "label": "Article per row (desktop)",
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Press & Media"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Reach Out to US"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Text position",
+      "options": [
+        {
+          "value": "start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "end",
+          "label": "Right"
+        }
+      ],
+      "default": "start"
+    },
+    {
+      "type": "header",
+      "content": "Section colors",
+      "info": "Background Image replaces Gradient replaces solid colors when set."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_img",
+      "label": "Section Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mob_background_img",
+      "label": "Mobile Section Background Image"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color", 
+      "default": "rgba(0,0,0,0)"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Article",
+      "type": "article-block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "article-title",
+          "label": "Title",
+          "default": "Tubefilter"
+        },
+        {
+          "type": "text",
+          "id": "article-date",
+          "label": "Date",
+          "default": "June 06 2023"
+        },
+        {
+          "type": "text",
+          "id": "article-text",
+          "label": "Text",
+          "default": "Here is a headline for INVIZ. They just announced a very cool exciting new project that will change the future of entertainment."
+        },
+        {
+          "type": "url",
+          "id": "article_url",
+          "label": "Link url"
+        },
+        {
+          "type": "image_picker",
+          "id": "article_image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press & Media",
+      "blocks": [
+        
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1267 @@
+{%- comment -%}
+  ------------------------------------------------------------------------------------------------------------------------
+  CSS
+  ------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+<style>
+  {%- unless section.settings.head_background.alpha == 0.0 and section.settings.head_text_color.alpha == 0.0 -%}
+   :root{
+     {%- unless section.settings.head_background.alpha == 0.0 -%}--header_pgBackground: {{ section.settings.head_background }};{%- endunless -%}
+     {%- unless section.settings.head_text_color.alpha == 0.0 -%}--header_pgTextColor: {{ section.settings.head_text_color }};{%- endunless -%}
+   }
+  {%- endunless -%}
+  {{ section.settings.sec_font | font_face }}
+  #shopify-section-{{ section.id }}{
+    font-family: {{ section.settings.sec_font.family }}
+    , {{ section.settings.sec_font.fallback_families }}
+    ;
+    --media-with-text-gap: {% if section.settings.spacing == 'none' %}
+      0{% else %}
+      var(--grid-gutter){% endif %};
+    --media-with-text-item-grid-template: "media" "content" / auto;
+  }
+  {%- if section.settings.allow_transparent_header -%}
+    #shopify-section-{{ section.id }}{
+      margin-block-start: calc(-1 * var(--header-height) * var(--section-is-first));
+    }
+    #shopify-section-{{ section.id }}> .section {
+      padding-block-start: calc(0 * var(--header-height) * var(--section-is-first));
+    }
+  {%- endif -%}
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }}{
+      --media-with-text-gap: {% if section.settings.spacing == 'none' %}
+        0{% elsif section.settings.spacing == 'small' %}
+        var(--spacing-6){% elsif section.settings.spacing == 'medium' %}
+        var(--spacing-12){% else %}
+        var(--spacing-18){% endif %};
+    }
+  }
+
+  {%- for block in section.blocks -%}
+    section.shopify-section.shopify-section--mvod_video .media-with-text__content{
+      max-width:{{ block.settings.text_width}}%;
+    }
+    {%- assign media_ratio = block.settings.media_width | divided_by: 50.0 -%}
+    {%- assign content_ratio = 2.0 | minus: media_ratio -%}
+
+    #block-{{ section.id }}-{{ block.id }}{
+      --media-with-text-item-icon-width: {{ block.settings.icon_width }}
+      px;
+    }
+    @media screen and (max-width: 1500px) {
+    section.shopify-section.shopify-section--mvod_video .media-with-text__content{
+      max-width:100%;
+    }
+    }
+    @media screen and (min-width: 1000px) {
+      #block-{{ section.id }}-{{ block.id }}{
+    {% unless block.settings.media_position == 'top' %}
+        --media-with-text-item-grid-template: {% if block.settings.media_position == 'start' %}
+          "media content" / minmax(0, {{ media_ratio }}fr) minmax(0, {{ content_ratio }}fr){% else %}
+          "content media" / minmax(0, {{ content_ratio }}fr) minmax(0, {{ media_ratio }}fr){% endif %};
+      {% endunless %}
+      }
+    }
+  {%- endfor -%}
+</style>
+
+{%- comment -%}
+  ------------------------------------------------------------------------------------------------------------------------
+  LIQUID
+  ------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+<div
+  {% render 'section-properties' %}
+  {% if section.settings.allow_transparent_header %}
+    allow-transparent-header
+  {% endif %}
+>
+  <media-with-text class="media-with-text {% if section.settings.spacing == 'none' %}{% if section.settings.full_width %}full-bleed{% else %}rounded{% endif %}{% endif %}">
+    {% assign add_script = false %}
+    {%- for block in section.blocks -%}
+      {%- if forloop.index == 1 -%}{% assign add_script = true %}{%- endif -%}
+      <div id="block-{{ section.id }}-{{ block.id }}" class="media-with-text__item" {{ block.shopify_attributes }}>
+        <div class="media-with-text__media {% unless section.settings.spacing == 'none' %}rounded{% endunless %}" reveal-on-scroll="true">
+          {%- if block.type == 'image' -%}
+            {%- if block.settings.image != blank -%}
+              {%- assign width_ratio = 100.0 | divided_by: block.settings.media_width -%}
+              {%- assign maximum_image_width = settings.page_width | divided_by: width_ratio -%}
+
+              {%- capture sizes -%}(max-width: 999px) 100vw, min({{ maximum_image_width | ceil }}px, {{ block.settings.media_width }}vw){% endcapture %}
+
+              {{-
+                block.settings.image
+                | image_url: width: block.settings.image.width
+                | image_tag:
+                  loading: 'lazy',
+                  sizes: sizes,
+                  widths: '300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600'
+              -}}
+            {%- else -%}
+              {{- 'image' | placeholder_svg_tag: 'aspect-short placeholder' -}}
+            {%- endif -%}
+          {%- else -%}
+            {%- capture poster -%}
+              {%- assign poster_image = block.settings.poster_image | default: block.settings.video.preview_image -%}
+
+              {%- if poster_image -%}
+                {{- poster_image | image_url: width: poster_image.width | image_tag: loading: 'lazy', sizes: '(max-width: 699px) 400px, 800px', widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', class: 'rounded' -}}
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'rounded' }}
+              {%- endif -%}
+            {%- endcapture -%}
+
+            {%- if block.settings.bitmovin -%}
+              <div class="player-container{% if block.settings.full_height%} full_height{% endif %}">
+                <div class="player-switch">
+                  <div
+                    id="VODplayer"
+                    {% if block.settings.custom_buttons %}
+                      class="cus_buttons"
+                    {% endif %}
+                    data-video_URL="{%- if block.settings.video != blank -%}{{ block.settings.video.sources[1].url }}{%- else -%}{{ block.settings.bitmovin_URL }}{%- endif -%}"
+                    {%- if block.settings.bitmovin_subtitle != blank -%}
+                      data-subtitle="{{ block.settings.bitmovin_subtitle }}"
+                    {%- endif -%}
+                    {%- if block.settings.bit_poster_image != blank -%}
+                      data-poster="{{ block.settings.bit_poster_image | image_url }}"
+                    {%- endif -%}
+                    data-pip="{% if block.settings.use_pip %}true{% else %}false{% endif %}"
+                    data-autoplay="{% if block.settings.autoplay %}true{% else %}false{% endif %}"
+                  ></div>
+                </div>
+                <div class="mob_details">
+                  <button id="details">Details <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M10.9997 1.17019C10.8123 0.983936 10.5589 0.879395 10.2947 0.879395C10.0305 0.879395 9.77707 0.983936 9.5897 1.17019L5.9997 4.71019L2.4597 1.17019C2.27234 0.983936 2.01889 0.879395 1.7547 0.879395C1.49052 0.879395 1.23707 0.983936 1.0497 1.17019C0.955976 1.26315 0.881582 1.37375 0.830813 1.49561C0.780044 1.61747 0.753906 1.74818 0.753906 1.88019C0.753906 2.0122 0.780044 2.1429 0.830813 2.26476C0.881582 2.38662 0.955976 2.49722 1.0497 2.59019L5.2897 6.83019C5.38267 6.92392 5.49327 6.99831 5.61513 7.04908C5.73699 7.09985 5.86769 7.12599 5.9997 7.12599C6.13172 7.12599 6.26242 7.09985 6.38428 7.04908C6.50614 6.99831 6.61674 6.92392 6.7097 6.83019L10.9997 2.59019C11.0934 2.49722 11.1678 2.38662 11.2186 2.26476C11.2694 2.1429 11.2955 2.0122 11.2955 1.88019C11.2955 1.74818 11.2694 1.61747 11.2186 1.49561C11.1678 1.37375 11.0934 1.26315 10.9997 1.17019Z" fill="#FFFBF5"></path></svg></button>
+                </div>
+              </div>
+            {%- elsif block.settings.video -%}
+              <video-media
+                {% if block.settings.autoplay %}
+                  autoplay
+                {% else %}
+                  show-play-button
+                {% endif %}
+              >
+                {%- unless block.settings.autoplay -%}
+                  {{- poster -}}
+                {%- endunless -%}
+
+                {%- if block.settings.autoplay -%}
+                  {{-
+                    block.settings.video
+                    | video_tag: playslinline: true, muted: true, loop: true, preload: 'metadata'
+                  -}}
+                {%- else -%}
+                  {{-
+                    block.settings.video
+                    | video_tag: playslinline: true, controls: true, muted: false, loop: false, preload: 'metadata'
+                  -}}
+                {%- endif -%}
+              </video-media>
+            {%- else -%}
+              <video-media
+                host="{{ block.settings.external_video_url.type }}"
+                {% if block.settings.autoplay %}
+                  autoplay
+                {% else %}
+                  show-play-button
+                {% endif %}
+              >
+                {%- unless block.settings.autoplay -%}
+                  {{- poster -}}
+                {%- endunless -%}
+                <template>
+                  {%- if block.settings.external_video_url.type == 'youtube' -%}
+                    <iframe
+                      src="https://www.youtube.com/embed/{{ block.settings.external_video_url.id }}?playsinline=1&autoplay=1&controls=0&mute={% if block.settings.autoplay %}1{% else %}0{% endif %}&loop=1&playlist={{ block.settings.external_video_url.id }}&enablejsapi=1&rel=0&modestbranding=1&origin={{ 'https://' | append: request.host | url_encode }}"
+                      allow="autoplay; encrypted-media"
+                      allowfullscreen="allowfullscreen"
+                    ></iframe>
+                  {%- elsif block.settings.external_video_url.type == 'vimeo' -%}
+                    <iframe
+                      src="https://player.vimeo.com/video/{{ block.settings.external_video_url.id }}?autoplay=1&autopause=1&background=1&loop=1&muted={% if block.settings.autoplay %}1{% else %}0{% endif %}&transparent=0&responsive=1&portrait=0&title=0&byline=0&color={{ settings.text_color | remove_first: '#' }}"
+                      allow="autoplay; encrypted-media;"
+                      allowfullscreen="allowfullscreen"
+                    ></iframe>
+                  {%- endif -%}
+                </template>
+              </video-media>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+        {% if block.settings.custom_buttons %}
+          <div class="custom_player_button_outer">
+            <div class="player_button_inner">
+              <button class="video-pause-button_mvod" style="z-index:10" type="button" {{ block.shopify_attributes }}>
+                <span class="sr-only">{{ 'general.accessibility.play_video' | t }}</span>
+                {%- render 'icon' with 'pause', width: 35, height: 35 -%}
+                {%- render 'icon' with 'play', width: 35, height: 35 -%}
+              </button>
+              <button class="mute_button_mvod" style="z-index:10" type="button" {{ block.shopify_attributes }}>
+                <span class="sr-only">Mute</span>
+                {%- render 'icon' with 'mute', width: 35, height: 35 -%}
+                {%- render 'icon' with 'unmute', width: 35, height: 35 -%}
+              </button>
+              <button class="full_screen_mvod" style="z-index:10" type="button" {{ block.shopify_attributes }}>
+                <span class="sr-only">FullScreen</span>
+                {%- render 'icon' with 'fullscreen', width: 35, height: 35 -%}
+              </button>
+            </div>
+          </div>
+        {% endif %}
+
+        {%- capture content_class -%}media-with-text__content
+          {% if block.settings.media_position == 'top' %}set_top{% endif %}
+          {% unless section.settings.spacing == 'none' %}rounded{% endunless %}
+        {%- endcapture -%}
+        <div
+          {% render 'surface',
+            class: content_class,
+            background_img: block.settings.block_background_img,
+            background: block.settings.background,
+            background_gradient: block.settings.background_gradient,
+            text_color: block.settings.text_color
+          %}
+        >
+          <div class="prose break-all {{ block.settings.text_position }}" reveal-on-scroll="true">
+            {% if block.settings.media_position == 'top' %}<div class="first_con">{% endif %}
+            {%- if block.settings.custom_icon != blank -%}
+              {%- capture sizes -%}
+                {{ block.settings.icon_width }}px{%- endcapture -%}
+              {%- capture widths -%}
+                {{ block.settings.icon_width }}, {{ block.settings.icon_width | times: 2 | at_most: block.settings.custom_icon.width }}{%- endcapture -%}
+              {{-
+                block.settings.custom_icon
+                | image_url: width: block.settings.custom_icon.width
+                | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'media-with-text__icon'
+              -}}
+            {%- elsif block.settings.icon != 'none' -%}
+              {%- render 'icon' with block.settings.icon,
+                width: block.settings.icon_width,
+                height: block.settings.icon_width,
+                class: 'media-with-text__icon'
+              -%}
+            {%- endif -%}
+            <div class="sub_mvod_outer">
+              {%- if block.settings.sub_image != blank -%}
+                {{-
+                  block.settings.sub_image
+                  | image_url: width: block.settings.sub_img_size
+                  | image_tag: class: 'sub_mvod_img'
+                -}}
+              {%- endif -%}
+              {%- if block.settings.subheading != blank -%}
+                <p
+                  class="sub_mvod"
+                  style="--desk_fontSize: {{ block.settings.sub_desk_fontsize }}px;--mob_fontSize: {{ block.settings.sub_mob_fontsize }}px;"
+                >
+                  {{ block.settings.subheading | escape }}
+                </p>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.head_image != blank -%}
+              {{ block.settings.head_image | image_url: width: block.settings.head_img_size | image_tag }}
+            {%- elsif block.settings.title != blank -%}
+              <p
+                class="h2"
+                style="--desk_fontSize: {{ block.settings.head_desk_fontsize }}px;--mob_fontSize: {{ block.settings.head_mob_fontsize }}px;"
+              >
+                {%- render 'styled-text', content: block.settings.title, gradient: block.settings.text_gradient -%}
+              </p>
+            {%- endif -%}
+            {%- if block.settings.tags != blank -%}
+              <ul class="mvod_tag">
+                {% assign tags = block.settings.tags | split: ', ' %}
+                {% for tag in tags %}
+                  {% if tag == 'Dolby' %}
+                    <li>{%- render 'icon' with 'dolby', width: 45, height: 15 -%}</li>
+                  {% else %}
+                    <li>{{ tag }}</li>
+                  {%- endif -%}
+                {% endfor %}
+              </ul>
+            {%- endif -%}
+            {% if block.settings.media_position == 'top' %}</div>{% endif %}
+            {% if block.settings.media_position == 'top' %}<div class="middle_con">{% endif %}
+            {{- block.settings.content -}}
+            {% if block.settings.media_position == 'top' %}</div>{% endif %}
+            {%- if block.settings.show_readMore -%}<button id="readMoreBtn">Read More</button>{%- endif -%}
+          </div>
+          {% if block.settings.show_before %}
+          {% if block.settings.show_product %}
+          {% if block.settings.show_one %}
+            <div class="non_scrollable_product" style="--desk_padding: {{ block.settings.product_padding }}px; --mob_padding: {{ block.settings.product_padding }}px;">
+              {%- assign products = block.settings.products | default: block.settings.collection.products -%}
+              {%- for product in products limit: block.settings.products_count -%}
+                {%- render 'product-card_new', product: product, stacked: section.settings.stack_products, background: section.settings.product_card_background, text_color: block.settings.text_color, show_badges: true -%}
+              {%- endfor -%}
+            </div>
+            {% else %}
+            <div class="scrollable_product" style="--desk_padding: {{ block.settings.product_padding }}px; --mob_padding: {{ block.settings.product_padding }}px;">
+            {%- assign scroll_area_id = 'scroll-area-' | append: block.id -%}      
+            <scroll-carousel selector="product-card" id="{{ scroll_area_id }}" class="scroll-area bleed {% if block.settings.products_count > block.settings.products_per_row_desktop %}is-scrollable{% endif %}">
+                <product-list class="VOD_product-list" data-slick='{"slidesToShow": {{ block.settings.products_per_row_desktop }}, "slidesToScroll": 1}'>
+                  {%- assign products = block.settings.products | default: block.settings.collection.products -%}
+                  {%- for product in products limit: block.settings.products_count -%}
+                    {%- render 'product-card', product: product, stacked: section.settings.stack_products, background: section.settings.product_card_background, text_color: block.settings.text_color, show_badges: true -%}
+                  {%- endfor -%}
+                </product-list>
+            </scroll-carousel>
+            </div>
+          {% endif %}
+          {% endif %}
+          <div class="price_sec_outer{% unless block.settings.no_seperator %} no_seperator{% endunless %}">
+            <div class="price_title_sec{%- if block.settings.sub_price != blank or block.settings.link_text != blank or block.settings.link_text2 != blank -%}{% else %} full{%- endif -%}">
+              {%- if block.settings.sub_heading != blank -%}
+                <h4
+                  class="sub_heading"
+                  style="--sub_txt_color:{{ block.settings.sub_txt_color }};--sub_bg_color:{{ block.settings.sub_bg_color }};--desk_fontSize: {{ block.settings.sub_heading_desk_fontsize }}px;--mob_fontSize: {{ block.settings.sub_heading_mob_fontsize }}px;"
+                >
+                  {{ block.settings.sub_heading }}
+                </h4>
+              {%- endif -%}
+              {%- if block.settings.rich_text != blank -%}
+                <h4 style="--desk_fontSize: {{ block.settings.subhead_desk_fontsize }}px;--mob_fontSize: {{ block.settings.subhead_mob_fontsize }}px;">
+                  {{ block.settings.rich_text }}
+                </h4>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.sub_price != blank
+              or block.settings.link_text != blank
+              or block.settings.link_text2 != blank
+            -%}
+              <div class="price_sec">
+                {%- if block.settings.sub_price != blank -%}
+                  <div class="subscription_sec">
+                    {%- if block.settings.sub_price != blank -%}
+                      <p
+                        class="price big"
+                        style="--desk_fontSize: {{ block.settings.sub_price_desk_fontsize }}px;--mob_fontSize: {{ block.settings.sub_price_mob_fontsize }}px;"
+                      >
+                        {{ block.settings.sub_price }}
+                      </p>
+                    {%- endif -%}
+                    {%- if block.settings.sub_cycle != blank -%}
+                      <p
+                        class="sub_last"
+                        style="--desk_fontSize: {{ block.settings.sub_cycle_desk_fontsize }}px;--mob_fontSize: {{ block.settings.sub_cycle_mob_fontsize }}px;"
+                      >
+                        {{ block.settings.sub_cycle }}
+                      </p>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+                <div class="link_sec">
+                  {%- if block.settings.link_text != blank -%}
+                    {%- render 'button',
+                      href: block.settings.link_url,
+                      content: block.settings.link_text,
+                      size: block.settings.button_size,
+                      style: block.settings.button_style,
+                      background: block.settings.button_background,
+                      text_color: block.settings.button_text_color
+                    -%}
+                  {%- endif -%}
+                  {%- if block.settings.link_text2 != blank -%}
+                    {%- render 'button',
+                      href: block.settings.link_url2,
+                      content: block.settings.link_text2,
+                      size: block.settings.button_size,
+                      style: block.settings.button_style,
+                      background: block.settings.button_background,
+                      text_color: block.settings.button_text_color
+                    -%}
+                  {%- endif -%}
+                </div>
+              </div>
+            {% endif %}
+          </div>  
+          {% else %}
+          <div class="price_sec_outer{% unless block.settings.no_seperator %} no_seperator{% endunless %}">
+            <div class="price_title_sec{%- if block.settings.sub_price != blank or block.settings.link_text != blank or block.settings.link_text2 != blank -%}{% else %} full{%- endif -%}">
+              {%- if block.settings.sub_heading != blank -%}
+                <h4
+                  class="sub_heading"
+                  style="--sub_txt_color:{{ block.settings.sub_txt_color }};--sub_bg_color:{{ block.settings.sub_bg_color }};--desk_fontSize: {{ block.settings.sub_heading_desk_fontsize }}px;--mob_fontSize: {{ block.settings.sub_heading_mob_fontsize }}px;"
+                >
+                  {{ block.settings.sub_heading }}
+                </h4>
+              {%- endif -%}
+              {%- if block.settings.rich_text != blank -%}
+                <h4 style="--desk_fontSize: {{ block.settings.subhead_desk_fontsize }}px;--mob_fontSize: {{ block.settings.subhead_mob_fontsize }}px;">
+                  {{ block.settings.rich_text }}
+                </h4>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.sub_price != blank
+              or block.settings.link_text != blank
+              or block.settings.link_text2 != blank
+            -%}
+              <div class="price_sec">
+                {%- if block.settings.sub_price != blank -%}
+                  <div class="subscription_sec">
+                    {%- if block.settings.sub_price != blank -%}
+                      <p
+                        class="price big"
+                        style="--desk_fontSize: {{ block.settings.sub_price_desk_fontsize }}px;--mob_fontSize: {{ block.settings.sub_price_mob_fontsize }}px;"
+                      >
+                        {{ block.settings.sub_price }}
+                      </p>
+                    {%- endif -%}
+                    {%- if block.settings.sub_cycle != blank -%}
+                      <p
+                        class="sub_last"
+                        style="--desk_fontSize: {{ block.settings.sub_cycle_desk_fontsize }}px;--mob_fontSize: {{ block.settings.sub_cycle_mob_fontsize }}px;"
+                      >
+                        {{ block.settings.sub_cycle }}
+                      </p>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+                <div class="link_sec">
+                  {%- if block.settings.link_text != blank -%}
+                    {%- render 'button',
+                      href: block.settings.link_url,
+                      content: block.settings.link_text,
+                      size: block.settings.button_size,
+                      style: block.settings.button_style,
+                      background: block.settings.button_background,
+                      text_color: block.settings.button_text_color
+                    -%}
+                  {%- endif -%}
+                  {%- if block.settings.link_text2 != blank -%}
+                    {%- render 'button',
+                      href: block.settings.link_url2,
+                      content: block.settings.link_text2,
+                      size: block.settings.button_size,
+                      style: block.settings.button_style,
+                      background: block.settings.button_background,
+                      text_color: block.settings.button_text_color
+                    -%}
+                  {%- endif -%}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+          {% if block.settings.show_product %}
+          {% if block.settings.show_one %}
+            <div class="non_scrollable_product" style="--desk_padding: {{ block.settings.product_padding }}px; --mob_padding: {{ block.settings.product_padding }}px;">
+              {%- assign products = block.settings.products | default: block.settings.collection.products -%}
+              {%- for product in products limit: block.settings.products_count -%}
+                {%- render 'product-card_new', product: product, stacked: section.settings.stack_products, background: section.settings.product_card_background, text_color: block.settings.text_color, show_badges: true -%}
+              {%- endfor -%}
+            </div>
+            {% else %}
+            <div class="scrollable_product" style="--desk_padding: {{ block.settings.product_padding }}px; --mob_padding: {{ block.settings.product_padding }}px;">
+            {%- assign scroll_area_id = 'scroll-area-' | append: block.id -%}      
+            <scroll-carousel selector="product-card" id="{{ scroll_area_id }}" class="scroll-area bleed {% if block.settings.products_count > block.settings.products_per_row_desktop %}is-scrollable{% endif %}">
+                <product-list class="VOD_product-list" data-slick='{"slidesToShow": {{ block.settings.products_per_row_desktop }}, "slidesToScroll": 1}'>
+                  {%- assign products = block.settings.products | default: block.settings.collection.products -%}
+                  {%- for product in products limit: block.settings.products_count -%}
+                    {%- render 'product-card', product: product, stacked: section.settings.stack_products, background: section.settings.product_card_background, text_color: block.settings.text_color, show_badges: true -%}
+                  {%- endfor -%}
+                </product-list>
+            </scroll-carousel>
+            </div>
+          {% endif %}
+          {% endif %}  
+          {% endif %}
+        </div>
+      </div>
+    {%- endfor -%}
+  </media-with-text>
+</div>
+{%- if section.settings.page_logo != blank -%}
+  <img src="{{ section.settings.page_logo | img_url: width: 'master' }}" width="{{ section.settings.page_logo_width  }}"  id="new_logo" style="display: none;"/>
+  <script>
+    function appendLogo() {
+      console.log('logo_loaded');
+      var newLogoImg = document.getElementById('new_logo');
+      if (newLogoImg) {
+          var newLogoSrc = newLogoImg.getAttribute('src');
+          var newWidth = newLogoImg.getAttribute('width');
+          var headerLogoImg = document.querySelector('.header__logo img');
+          headerLogoImg.setAttribute('src', newLogoSrc);
+          headerLogoImg.setAttribute('srcset', newLogoSrc);
+          headerLogoImg.setAttribute('width', newWidth);
+          headerLogoImg.setAttribute('id', 'header_logo');
+      }
+    }
+    function onPageLoad() {
+      appendLogo();
+    }
+    function onDocumentReady() {
+      appendLogo();
+    }
+    window.addEventListener('load', onPageLoad);
+    document.addEventListener('DOMContentLoaded', appendLogo);
+    document.addEventListener("shopify:section:load", appendLogo);
+  </script>
+{%- endif -%}
+<script type="text/javascript">
+    setTimeout(function() {
+
+      function isElementOutOfViewport(el) {
+        var rect = el.getBoundingClientRect();
+        return (
+          rect.top >= window.innerHeight ||
+          rect.bottom <= 0 ||
+          rect.left >= window.innerWidth ||
+          rect.right <= 0
+        );
+      }
+      function handlePlayerVisibility() {
+        var container = $('.player-container');
+        var switchElement = $('.player-switch');
+        var isContainerOutOfViewport = isElementOutOfViewport(container[0]);
+        if (isContainerOutOfViewport) {
+          switchElement.addClass('fixed-player');
+        } else {
+          switchElement.removeClass('fixed-player');
+        }
+      }
+      handlePlayerVisibility();
+      // function handlePlayerVisibility_mob() {
+      //   var container = $('section.shopify-section.shopify-section--mvod_video');
+      //   var switchElement = $('section.shopify-section.shopify-section--mvod_video>div');
+      //   var isContainerOutOfViewport = isElementOutOfViewport(container[0]);
+      //   if (isContainerOutOfViewport) {
+      //     switchElement.addClass('fixed-top');
+      //   } else {
+      //     switchElement.removeClass('fixed-top');
+      //   }
+      // }
+      // handlePlayerVisibility_mob();
+      if ($(window).width() < 768) {
+        window.addEventListener("scroll", handlePlayerVisibility);
+      } else {
+          window.addEventListener("scroll", handlePlayerVisibility);
+      }
+      
+
+      var container = document.getElementById('VODplayer');
+      var autoplayValue = container.getAttribute('data-autoplay') === 'true';
+      var pipValue = container.getAttribute('data-pip') === 'true';
+      var playerConfig = {
+          key: "2405c7f1-666a-4b13-8aa3-cab63945067a",
+          playback: {
+              muted: autoplayValue,
+              autoplay: autoplayValue,
+              controls: true
+          },
+          isBackgroundPlaybackEnabled: true,
+          isPictureInPictureEnabled: false,
+          style: {
+              ux: false
+          },
+          cast: {
+            enable: true
+        }
+      };
+      var player = new bitmovin.player.Player(container, playerConfig);
+      var source = {
+          progressive: container.getAttribute('data-video_URL'),
+          poster: container.getAttribute('data-poster'),
+      };
+    var playerContainer = document.getElementById('VODplayer');
+
+      // Load the player
+      player.load(source).then(function() {
+          // Check if data-subtitle attribute is present
+          var subtitleURL = container.getAttribute('data-subtitle');
+          console.log('subtitles', subtitleURL); // Success!
+          if (subtitleURL) {
+              console.log('subtitle loaded source'); // Success!
+              var enSubtitle = {
+                  id: "sub1",
+                  lang: "en",
+                  label: "English",
+                  url: subtitleURL,
+                  kind: "subtitle"
+              };
+
+              player.subtitles.add(enSubtitle);
+              player.subtitles.enable(enSubtitle.id);
+          }
+         var pauseButton = document.querySelector('.video-pause-button_mvod');
+        player.on('paused', function() {
+            pauseButton.classList.add('play');
+        });
+        player.on('play', function() {
+            pauseButton.classList.remove('play');
+        });
+        player.on('playbackfinished', function() {
+          this.play();
+            //pauseButton.classList.add('play');
+        });
+      }).catch(function() {
+          console.log('Error while loading source'); // Error!
+      });
+  }, 1000);
+</script>
+
+{% schema %}
+{
+  "name": "VOD Video",
+  "class": "shopify-section--mvod_video",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+          "type": "select",
+          "id": "spacing",
+          "label": "Section spacing",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            }, {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            }
+          ],
+          "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_transparent_header",
+      "label": "Allow transparent header",
+      "info": "This setting only applies when this section is the first one.",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "sec_font",
+      "label": "Section font",
+      "default": "helvetica_n4"
+    },
+    {
+      "type": "header",
+      "content": "Section colors",
+      "info": "Background Image replaces Gradient replaces solid colors when set."
+    }, {
+      "type": "image_picker",
+      "id": "background_img",
+      "label": "Section Background Image"
+    }, {
+      "type": "image_picker",
+      "id": "mob_background_img",
+      "label": "Mobile Section Background Image"
+    }, {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    }, {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desk",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "label": "Section Top Padding for Desktop",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desk",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "label": "Section Bottom Padding for Desktop",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mob",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "label": "Section Top Padding for Mobile",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mob",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "label": "Section Bottom Padding for Mobile",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Header Colors",
+      "info": "Header Background Color & Text Color for this template"
+    },
+    {
+      "type": "image_picker",
+      "id": "page_logo",
+      "label": "Page Logo",
+      "info": "This will replace the Logo Image for this template"
+    },
+    {
+      "type": "range",
+      "id": "page_logo_width",
+      "min": 90,
+      "max": 450,
+      "step": 10,
+      "label": "Page Logo Width",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "head_background",
+      "label": "Header Background"
+    },
+    {
+      "type": "color",
+      "id": "head_text_color",
+      "label": "Header Text Color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "select",
+          "id": "media_position",
+          "label": "Video position",
+          "options": [
+            {
+              "value": "start",
+              "label": "Left"
+            }, {
+              "value": "end",
+              "label": "Right"
+            },
+            {
+              "value": "top",
+              "label": "Top"
+            }
+          ],
+          "default": "start"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Replaces external video if both are set. For best visual results and avoid platform branding, we recommend uploading a MP4 file."
+        },
+        {
+          "type": "checkbox",
+          "id": "bitmovin",
+          "label": "Use Bitmovin Player",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "bit_poster_image",
+          "label": "BitMovin Poster image",
+          "info": "Only used when autoplay is disabled."
+        },
+        {
+          "type": "text",
+          "id": "bitmovin_URL",
+          "label": "Video URL MP4",
+          "default": "https://cdn.shopify.com/videos/c/o/v/ae3b766d9b6b4e30a25d0404fb48ee13.mp4"
+        },
+        {
+          "type": "text",
+          "id": "bitmovin_subtitle",
+          "label": "English Subtitle",
+          "default": "https://bitdash-a.akamaihd.net/content/sintel/subtitles/subtitles_en.vtt"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_pip",
+          "label": "Use PIP",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "custom_buttons",
+          "label": "Use Custom Button for Bitmovin Player",
+          "default": true
+        },
+        {
+          "type": "video_url",
+          "id": "external_video_url",
+          "accept": [
+            "vimeo", "youtube"
+          ],
+          "label": "Video URL",
+          "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+        }, {
+          "type": "image_picker",
+          "id": "poster_image",
+          "label": "Poster image",
+          "info": "Only used when autoplay is disabled."
+        }, {
+          "type": "checkbox",
+          "id": "autoplay",
+          "label": "Autoplay",
+          "info": "Video are muted to allow autoplay.",
+          "default": true
+        }, {
+          "type": "range",
+          "id": "media_width",
+          "label": "Video width",
+          "min": 30,
+          "max": 70,
+          "step": 5,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "checkbox",
+          "id": "full_height",
+          "label": "Video Full Height",
+          "info": "Video Height will be same as screen hight. this will affect the video width",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "text_width",
+          "label": "Text Section Max width",
+          "min": 60,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 60
+        },
+        {
+          "type": "select",
+          "id": "text_position",
+          "label": "Content position",
+          "options": [
+            {
+              "value": "place-self-start text-start",
+              "label": "Top left"
+            },
+            {
+              "value": "place-self-start-center text-center",
+              "label": "Top center"
+            },
+            {
+              "value": "place-self-start-end text-end",
+              "label": "Top right"
+            },
+            {
+              "value": "place-self-center-start text-start",
+              "label": "Middle left"
+            }, {
+              "value": "place-self-center text-center",
+              "label": "Middle center"
+            }, {
+              "value": "place-self-center-end text-end",
+              "label": "Middle right"
+            }, {
+              "value": "place-self-end-start text-start",
+              "label": "Bottom left"
+            }, {
+              "value": "place-self-end-center text-center",
+              "label": "Bottom center"
+            }, {
+              "value": "place-self-end text-end",
+              "label": "Bottom right"
+            }
+          ],
+          "default": "place-self-center text-center"
+        }, {
+          "type": "image_picker",
+          "id": "sub_image",
+          "label": "Image Before Subheading"
+        },
+        {
+          "type": "range",
+          "id": "sub_img_size",
+          "min": 90,
+          "max": 400,
+          "step": 10,
+          "unit": "px",
+          "label": "subheading Image size",
+          "default": 150
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "type": "range",
+          "id": "sub_desk_fontsize",
+          "min": 8,
+          "max": 54,
+          "step": 2,
+          "unit": "px",
+          "label": "subheading Desktop Font size",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "sub_mob_fontsize",
+          "min": 8,
+          "max": 54,
+          "step": 2,
+          "unit": "px",
+          "label": "subheading Mobile Font size",
+          "default": 12
+        },
+        {
+          "type": "image_picker",
+          "id": "head_image",
+          "label": "Heading Image"
+        },
+        {
+          "type": "range",
+          "id": "head_img_size",
+          "min": 90,
+          "max": 400,
+          "step": 10,
+          "unit": "px",
+          "label": "subheading Image size",
+          "default": 150
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Heading"
+        },
+        {
+          "type": "range",
+          "id": "head_desk_fontsize",
+          "min": 8,
+          "max": 54,
+          "step": 2,
+          "unit": "px",
+          "label": "Heading Desktop Font size",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "head_mob_fontsize",
+          "min": 8,
+          "max": 54,
+          "step": 2,
+          "unit": "px",
+          "label": "Heading Mobile Font size",
+          "default": 12
+        },
+        {
+          "type": "text",
+          "id": "tags",
+          "label": "Tags",
+          "info": "Add Comma Seperated Tags",
+          "default": "1h 16m, 2023, Unrated, 4k UHD, Dolby"
+        }, {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_readMore",
+          "label": "Show Read More",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Subcription Section",
+          "info": "Subscription Details"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product",
+          "label": "Show scrollable product",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_one",
+          "label": "Show only one product",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_before",
+          "label": "Show before last section",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "products_count",
+          "min": 2,
+          "max": 10,
+          "label": "Products to show",
+          "default": 6
+        },
+        {
+          "type": "range",
+          "id": "products_per_row_desktop",
+          "min": 1,
+          "max": 3,
+          "label": "Products per row (desktop)",
+          "default": 1
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "product_list",
+          "id": "products",
+          "label": "Products",
+          "info": "Replaces collection when selected."
+        },
+        {
+          "type": "range",
+          "id": "product_padding",
+          "min": 20,
+          "max": 100,
+          "label": "product section padding",
+          "default": 20
+        },
+        {
+          "type": "checkbox",
+          "id": "no_seperator",
+          "label": "Use seperator line",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "sub_heading",
+          "label": "Subscription Heading",
+          "default": "VIDEO ON DEMAND"
+        },
+        {
+          "type": "range",
+          "id": "sub_heading_desk_fontsize",
+          "min": 8,
+          "max": 54,
+          "step": 2,
+          "unit": "px",
+          "label": "Subscription Heading Desktop Font size",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "sub_heading_mob_fontsize",
+          "min": 8,
+          "max": 54,
+          "step": 2,
+          "unit": "px",
+          "label": "Subscription Heading Mobile Font size",
+          "default": 12
+        },
+        {
+          "type": "color",
+          "id": "sub_txt_color",
+          "label": "Subscription Heading Text Color",
+          "default": "#ffffff"
+        }, {
+          "type": "color",
+          "id": "sub_bg_color",
+          "label": "Subscription Heading Background",
+          "default": "#000000"
+        }, {
+          "type": "text",
+          "id": "rich_text",
+          "label": "Heading",
+          "default": "Purchase Any Product.<br>Unlock the Movie."
+        },
+        {
+          "type": "range",
+          "id": "subhead_desk_fontsize",
+          "min": 8,
+          "max": 54,
+          "step": 2,
+          "unit": "px",
+          "label": "Subscription Heading Desktop Font size",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "subhead_mob_fontsize",
+          "min": 8,
+          "max": 54,
+          "step": 2,
+          "unit": "px",
+          "label": "Subscription Heading Mobile Font size",
+          "default": 12
+        },
+        {
+          "type": "text",
+          "id": "sub_price",
+          "label": "Subscription Price",
+          "default": "$14.99"
+        },
+        {
+          "type": "range",
+          "id": "sub_price_desk_fontsize",
+          "min": 8,
+          "max": 54,
+          "step": 2,
+          "unit": "px",
+          "label": "Subscription Price Desktop Font size",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "sub_price_mob_fontsize",
+          "min": 8,
+          "max": 54,
+          "step": 2,
+          "unit": "px",
+          "label": "Subscription Price Mobile Font size",
+          "default": 12
+        },
+        {
+          "type": "text",
+          "id": "sub_cycle",
+          "label": "Subscription Period",
+          "default": "One-time payment"
+        },
+        {
+          "type": "range",
+          "id": "sub_cycle_desk_fontsize",
+          "min": 8,
+          "max": 54,
+          "step": 2,
+          "unit": "px",
+          "label": "Subscription Period Desktop Font size",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "sub_cycle_mob_fontsize",
+          "min": 8,
+          "max": 54,
+          "step": 2,
+          "unit": "px",
+          "label": "Subscription Period Mobile Font size",
+          "default": 12
+        },{
+          "type": "text",
+          "id": "link_text",
+          "label": "Button text"
+        }, {
+          "type": "url",
+          "id": "link_url",
+          "label": "Button URL"
+        }, {
+          "type": "text",
+          "id": "link_text2",
+          "label": "Second Button text"
+        }, {
+          "type": "url",
+          "id": "link_url2",
+          "label": "Second Button URL"
+        }, {
+          "type": "select",
+          "id": "button_style",
+          "label": "Style",
+          "options": [
+            {
+              "value": "outline",
+              "label": "Outline"
+            }, {
+              "value": "fill",
+              "label": "Fill"
+            }
+          ],
+          "default": "fill"
+        }, {
+          "type": "select",
+          "id": "button_size",
+          "label": "Size",
+          "options": [
+            {
+              "value": "sm",
+              "label": "Small"
+            }, {
+              "value": "base",
+              "label": "Medium"
+            }, {
+              "value": "lg",
+              "label": "Large"
+            }, {
+              "value": "xl",
+              "label": "X-Large"
+            }
+          ],
+          "default": "lg"
+        }, {
+          "type": "header",
+          "content": "Colors",
+          "info": "Gradient replaces solid colors when set. Background is ignored when image is used."
+        }, {
+          "type": "color",
+          "id": "background",
+          "label": "Background",
+          "default": "#000000"
+        }, {
+          "type": "color_background",
+          "id": "background_gradient",
+          "label": "Background gradient"
+        },{
+          "type": "range",
+          "id": "bg_opacity",
+          "label": "Background opacity",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "unit": "%",
+          "default": 50
+        },{
+          "type": "color",
+          "id": "text_color",
+          "label": "Text",
+          "default": "#ffffff"
+        }, {
+          "type": "color_background",
+          "id": "text_gradient",
+          "label": "Text gradient"
+        }, {
+          "type": "color",
+          "id": "button_background",
+          "label": "Button background"
+        }, {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "VOD Video",
+      "blocks": [
+        {
+          "type": "video"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,360 @@
+{%- if section.settings.allow_transparent_header -%}
+  <style>
+    #shopify-section-{{ section.id }} {
+        margin-block-start: calc(-1 * var(--header-height) * var(--section-is-first));
+    }
+      #shopify-section-{{ section.id }}>.section{
+        padding-block-start: calc(1.1 * var(--header-height) * var(--section-is-first));
+    }
+  </style>
+{%- endif -%}
+{% if section.settings.full_height %}
+  {% capture class %}full_height{% endcapture %}
+{% endif %}
+<div
+  {% render 'section-properties', class: class %}
+  {% if section.settings.allow_transparent_header %}
+    allow-transparent-header
+  {% endif %}
+>
+  <div class="customer-form">
+    {%- if section.settings.left_image != blank -%}
+      {{-
+        section.settings.left_image
+        | image_url: width: section.settings.image.width
+        | image_tag:
+          loading: 'lazy',
+          sizes: '50vw',
+          widths: '300,400,500,600,700,800,1000,1200,1400',
+          class: 'customer-form__image rounded'
+      -}}
+    {%- endif -%}
+
+    <div
+      {% render 'surface',
+        class: 'customer-form__box',
+        background_gradient: section.settings.background_gradient_inner,
+        background: section.settings.background_inner,
+        text_color: section.settings.text_color,
+        background_fallback: 'bg-secondary'
+      %}
+    >
+      <div class="customer-form__box-inner text-center">
+        <div class="v-stack gap-4">
+          <h1 class="h2">
+            {%- assign content = section.settings.heading -%}
+            {%- render 'styled-text', content: content, gradient: section.settings.heading_gradient -%}
+          </h1>
+          {%- if section.settings.subheading != blank -%}
+            <p class="bold">{{ section.settings.subheading | escape }}</p>
+          {%- endif -%}
+
+          <div class="v-stack gap-6">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when '@app' -%}
+                  {%- render block -%}
+
+                {%- when 'liquid' -%}
+                  {%- if block.settings.liquid != blank -%}
+                    <div {{ block.shopify_attributes }}>
+                      {{- block.settings.liquid -}}
+                    </div>
+                  {%- endif -%}
+
+                {%- when 'fields' -%}
+                  <div {{ block.shopify_attributes }}>
+                    {%- form 'create_customer', class: 'form' -%}
+                      <div class="fieldset">
+                        {%- if form.errors -%}
+                          {%- assign form_errors = form.errors | default_errors -%}
+                          {%- render 'banner', status: 'error', content: form_errors -%}
+                        {%- endif -%}
+
+                        {%- if request.locale.iso_code == 'ja' -%}
+                          {%- assign last_name_label = 'customer.register.last_name' | t -%}
+                          {%- render 'input',
+                            name: 'customer[last_name]',
+                            label: last_name_label,
+                            autocomplete: 'family-name',
+                            required: true
+                          -%}
+
+                          {%- assign first_name_label = 'customer.register.first_name' | t -%}
+                          {%- render 'input',
+                            name: 'customer[first_name]',
+                            label: first_name_label,
+                            autocomplete: 'given-name',
+                            required: true
+                          -%}
+                        {%- else -%}
+                          {%- assign first_name_label = 'customer.register.first_name' | t -%}
+                          {%- render 'input',
+                            name: 'customer[first_name]',
+                            label: first_name_label,
+                            autocomplete: 'given-name',
+                            required: true
+                          -%}
+
+                          {%- assign last_name_label = 'customer.register.last_name' | t -%}
+                          {%- render 'input',
+                            name: 'customer[last_name]',
+                            label: last_name_label,
+                            autocomplete: 'family-name',
+                            required: true
+                          -%}
+                        {%- endif -%}
+
+                        {%- assign email_label = 'customer.register.email' | t -%}
+                        {%- render 'input',
+                          type: 'email',
+                          name: 'customer[email]',
+                          label: email_label,
+                          autocomplete: 'email',
+                          required: true
+                        -%}
+
+                        {%- assign password_label = 'customer.register.password' | t -%}
+                        {%- render 'input',
+                          type: 'password',
+                          name: 'customer[password]',
+                          label: password_label,
+                          minlength: 5,
+                          autocomplete: 'new-password',
+                          required: true
+                        -%}
+
+                        {%- if block.settings.show_email_consent -%}
+                          {%- assign consent_label = 'customer.register.accepts_marketing' | t -%}
+                          {%- render 'checkbox', name: 'customer[accepts_marketing]', label: consent_label -%}
+                        {%- endif -%}
+                      </div>
+
+                      {%- assign submit_label = 'customer.register.submit' | t -%}
+                      <input type="hidden" id="return_to" name="return_to" value="">
+                      {%- render 'button',
+                        content: submit_label,
+                        type: 'submit',
+                        size: section.settings.button_size,
+                        style: section.settings.button_style,
+                        background: section.settings.button_background,
+                        stretch: true,
+                        secondary: true,
+                        text_color: section.settings.button_text_color
+                      -%}
+
+                      <div>
+                        <a href="{{ routes.account_login_url }}" class="link text-subdued">
+                          {{- 'customer.register.login' | t -}}
+                        </a>
+                      </div>
+                    {%- endform -%}
+                  </div>
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    function getCurrentURL() {
+        return window.location.href;
+    }
+    // Function to set value based on URL
+    function setValueBasedOnURL() {
+        var url = getCurrentURL();
+        var inputField = document.getElementById("return_to");
+
+        if (url.includes("https://inviz.tv/account/register?redirect_uri=/checkout")) {
+            inputField.value = "/cart?redirect_uri=/checkout";
+        } else {
+            inputField.value = "/";
+        }
+    }
+
+    // Call the function when the page loads
+    setValueBasedOnURL();
+  });
+</script>
+{% schema %}
+{
+  "name": "Customer register",
+  "class": "shopify-section--main-customers-register",
+  "tag": "section",
+  "settings": [
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full width",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "full_height",
+        "label": "Full Height",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "allow_transparent_header",
+        "label": "Allow transparent header",
+        "info": "This setting only applies when this section is the first one.",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Section colors",
+        "info": "Background Image replaces Gradient replaces solid colors when set."
+      },
+      {
+        "type": "image_picker",
+        "id": "background_img",
+        "label": "Section Background Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "mob_background_img",
+        "label": "Mobile Section Background Image"
+      },
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "header",
+        "content": "SignUp Form",
+        "info": "Sign Up Form Content"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Sign up"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading"
+      },
+      {
+        "type": "image_picker",
+        "id": "left_image",
+        "label": "Image",
+        "info": "1400 x 1400px .jpg recommended. Does not show on mobile."
+      },
+      {
+        "type": "header",
+        "content": "Colors",
+        "info": "Gradient replaces solid colors when set."
+      },
+      {
+        "type": "color",
+        "id": "background_inner",
+        "label": "Background"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient_inner",
+        "label": "Background gradient"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text"
+      },
+      {
+        "type": "color_background",
+        "id": "heading_gradient",
+        "label": "Heading gradient"
+      },
+      {
+        "type": "color",
+        "id": "button_background",
+        "label": "Button background"
+      },
+      {
+        "type": "color",
+        "id": "button_text_color",
+        "label": "Button text"
+      },
+    {
+       "type": "select",
+       "id": "button_style",
+       "label": "Style",
+       "options": [
+         {
+          "value": "outline",
+          "label": "Outline"
+         },
+         {
+           "value": "fill",
+           "label": "Fill"
+         }
+       ],
+      "default": "fill"
+    },
+    {
+    "type": "select",
+    "id": "button_size",
+     "label": "Size",
+     "options": [
+        {
+         "value": "sm",
+         "label": "Small"
+        },
+        {
+        "value": "base",
+        "label": "Medium"
+        },
+        {
+        "value": "lg",
+        "label": "Large"
+        },
+        {
+          "value": "xl",
+          "label": "X-Large"
+        }
+       ],
+      "default": "lg"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "fields",
+      "name": "Fields",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_email_consent",
+          "label": "Show email consent",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "liquid",
+      "name": "Liquid",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "liquid",
+          "label": "Liquid"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,176 @@
+{%- if section.settings.allow_transparent_header -%}
+  <style>
+  #shopify-section-{{ section.id }} {
+      margin-block-start: calc(-1 * var(--header-height) * var(--section-is-first));
+  }
+    #shopify-section-{{ section.id }}>.section{
+      padding-block-start: calc(1.1 * var(--header-height) * var(--section-is-first));
+  }
+</style>
+{%- endif -%} 
+<div {% render 'section-properties' %} {% if section.settings.allow_transparent_header %}allow-transparent-header{% endif %}>
+<div class="not-found">
+  <div class="prose text-center">
+      {%- if section.settings.subheading != blank -%}
+        <p class="bold">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="h2">
+          {%- render 'styled-text', content: section.settings.title, text_color: section.settings.heading_color, gradient: section.settings.heading_gradient -%}
+        </h2>
+      {%- else -%}
+       <h2 class="h4">{{ '404.general.title' | t }}</h2> 
+      {%- endif -%}
+      {%- if section.settings.content != blank -%}
+      {{- section.settings.content -}}
+      {%- endif -%}  
+    {%- capture button_content -%}{{ '404.general.continue_shopping' | t }}{%- endcapture -%}
+    {%- if section.settings.btn_url != blank -%}
+       {%- render 'button', content: button_content, href: section.settings.btn_url, size: 'xl' -%}
+    {%- else  -%}
+    {% render 'button', content: section.settings.button_text, href: section.settings.button_url, size: section.settings.button_size, style: section.settings.button_style, background: section.settings.button_background, text_color: section.settings.button_text_color, block: block %}  
+    {% comment %}{%- render 'button', content: button_content, href: routes.all_products_collection_url, size: 'xl' -%}{% endcomment %}
+    {%- endif -%}
+  </div>
+</div>
+</div>
+{% schema %}
+{
+  "name": "404",
+  "class": "shopify-section--404",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_transparent_header",
+      "label": "Allow transparent header",
+      "info": "This setting only applies when this section is the first one.",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Section colors",
+      "info": "Background Image replaces Gradient replaces solid colors when set."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_img",
+      "label": "Section Background Image"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color"
+    },
+    {
+      "type": "color_background",
+      "id": "heading_gradient",
+      "label": "Heading gradient"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text"
+    },
+    {
+       "type": "select",
+       "id": "button_style",
+       "label": "Style",
+       "options": [
+         {
+          "value": "outline",
+          "label": "Outline"
+         },
+         {
+           "value": "fill",
+           "label": "Fill"
+         }
+       ],
+      "default": "fill"
+    },
+    {
+    "type": "select",
+    "id": "button_size",
+     "label": "Size",
+     "options": [
+        {
+         "value": "sm",
+         "label": "Small"
+        },
+        {
+        "value": "base",
+        "label": "Medium"
+        },
+        {
+        "value": "lg",
+        "label": "Large"
+        },
+        {
+          "value": "xl",
+          "label": "X-Large"
+        }
+       ],
+      "default": "lg"
+    },
+    {
+      "type": "header",
+      "content": "404 Page",
+      "info": "404 Page Content"
+    },
+    {
+          "type": "text",
+          "id": "subheading",
+          "label": "404"
+    },
+    {
+       "type": "text",
+       "id": "title",
+       "label": "Heading",
+       "default": "404 Page Not Found"
+    },
+    {
+       "type": "richtext",
+       "id": "content",
+       "label": "Content",
+       "default": "<p>Use this text to share information about your product or shipping policies.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Text",
+      "default": "Button text"
+    },
+    {
+     "type": "url",
+     "id": "button_url",
+     "label": "Link"
+    }
+   ]
+}
+{% endschema %}

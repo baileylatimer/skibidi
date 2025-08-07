@@ -1,0 +1,51 @@
+<style>
+  nav.account-nav ul{
+    background-color:{{ section.settings.acc_overlay_color }};
+    color:{{ section.settings.acc_text_color }};
+    
+  }
+</style>
+{%- if section.settings.image != blank -%}
+  <div class="content-over-media">
+    {{- section.settings.image | image_url: width: section.settings.image.width | image_tag: widths: '300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600' -}}
+
+    <div {% render 'surface', text_color: section.settings.text_color %}>
+      <div class="prose text-center">
+        <h1 class="h2">{{ 'customer.account.welcome' | t: first_name: customer.first_name, last_name: customer.last_name }}</h1>
+        <p>{{ 'customer.account.tagline' | t }}</p>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+<nav class="account-nav">
+  <div class="relative">
+    <ul class="h-stack justify-center gap-8" role="list">
+      {%- if request.page_type == 'customers/account' or request.page_type == 'customers/order' -%}
+        {%- assign orders_tab_active = true -%}
+      {%- elsif request.page_type == 'customers/addresses' -%}
+        {%- assign addresses_tab_active = true -%}
+      {%- endif -%}
+
+      <li class="account-nav__item" {% if orders_tab_active %}aria-current="page"{% endif %}>
+        <a href="{{ routes.account_url }}" class="bold {% unless orders_tab_active %}link-faded{% endunless %}">
+          {{- 'customer.account.orders' | t -}}
+        </a>
+      </li>
+
+      <li class="account-nav__item" {% if addresses_tab_active %}aria-current="page"{% endif %}>
+        <a href="{{ routes.account_addresses_url }}" class="bold {% unless addresses_tab_active %}link-faded{% endunless %}">
+          {{- 'customer.account.addresses' | t -}}
+        </a>
+      </li>
+      <li class="account-nav__item">
+      <a href="/apps/library/" class="bold link-faded" target="_blank">Library</a>
+      </li>
+      <li class="account-nav__item">
+        <a href="{{ routes.account_logout_url }}" class="bold link-faded" data-no-instant>
+          {{- 'customer.account.logout' | t -}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

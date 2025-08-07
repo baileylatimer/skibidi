@@ -1,0 +1,1681 @@
+{
+  "store": {
+    "plan": "premium",
+    "theme": "inviz\/main",
+    "primaryLocale": "en",
+    "adminMode": false
+  },
+  "tsPublished": 1700290849,
+  "declaration": {
+    "showPurpose": true,
+    "showProvider": true,
+    "declIntroText": "We use cookies to optimize website functionality, analyze the performance, and provide personalized experience to you. Some cookies are essential to make the website operate and function correctly. Those cookies cannot be disabled. In this window you can manage your preference of cookies.",
+    "showDateGenerated": true
+  },
+  "language": {
+    "languageMode": "Single",
+    "fallbackLanguage": "en",
+    "languageDetection": "browser",
+    "languagesSupported": [
+
+    ]
+  },
+  "texts": {
+    "managed": {
+      "headerText": {
+        "en": "We respect your privacy"
+      },
+      "consentText": {
+        "en": "This website uses cookies to ensure you get the best experience."
+      },
+      "dismissButtonText": {
+        "en": "Ok"
+      },
+      "linkText": {
+        "en": "Learn more"
+      },
+      "imprintText": {
+        "en": "Imprint"
+      },
+      "preferencesButtonText": {
+        "en": "Preferences"
+      },
+      "allowButtonText": {
+        "en": "Accept"
+      },
+      "denyButtonText": {
+        "en": "Decline"
+      },
+      "leaveSiteButtonText": {
+        "en": "Leave this site"
+      },
+      "cookiePolicyText": {
+        "en": "Cookie policy"
+      },
+      "preferencesPopupTitleText": {
+        "en": "Manage consent preferences"
+      },
+      "preferencesPopupIntroText": {
+        "en": "We use cookies to optimize website functionality, analyze the performance, and provide personalized experience to you. Some cookies are essential to make the website operate and function correctly. Those cookies cannot be disabled. In this window you can manage your preference of cookies."
+      },
+      "preferencesPopupCloseButtonText": {
+        "en": "Close"
+      },
+      "preferencesPopupAcceptAllButtonText": {
+        "en": "Accept all"
+      },
+      "preferencesPopupRejectAllButtonText": {
+        "en": "Reject all"
+      },
+      "preferencesPopupSaveButtonText": {
+        "en": "Save preferences"
+      },
+      "accessSectionTitleText": {
+        "en": "Data portability"
+      },
+      "accessSectionParagraphText": {
+        "en": "You have the right to request access to your data at any time."
+      },
+      "rectificationSectionTitleText": {
+        "en": "Data Rectification"
+      },
+      "rectificationSectionParagraphText": {
+        "en": "You have the right to request your data to be updated whenever you think it is appropriate."
+      },
+      "erasureSectionTitleText": {
+        "en": "Right to be forgotten"
+      },
+      "erasureSectionParagraphText": {
+        "en": "You have the right to ask all your data to be erased. After that, you will no longer be able to access your account."
+      },
+      "declIntroText": {
+        "en": "We use cookies to optimize website functionality, analyze the performance, and provide personalized experience to you. Some cookies are essential to make the website operate and function correctly. Those cookies cannot be disabled. In this window you can manage your preference of cookies."
+      }
+    },
+    "categories": {
+      "strictlyNecessaryCookiesTitleText": {
+        "en": "Strictly necessary cookies"
+      },
+      "functionalityCookiesTitleText": {
+        "en": "Functional cookies"
+      },
+      "performanceCookiesTitleText": {
+        "en": "Performance cookies"
+      },
+      "targetingCookiesTitleText": {
+        "en": "Targeting cookies"
+      },
+      "unclassifiedCookiesTitleText": {
+        "en": "Unclassified cookies"
+      },
+      "strictlyNecessaryCookiesDescriptionText": {
+        "en": "These cookies are essential in order to enable you to move around the website and use its features, such as accessing secure areas of the website. The website cannot function properly without these cookies."
+      },
+      "functionalityCookiesDescriptionText": {
+        "en": "These cookies enable the site to provide enhanced functionality and personalisation. They may be set by us or by third party providers whose services we have added to our pages. If you do not allow these cookies then some or all of these services may not function properly."
+      },
+      "performanceCookiesDescriptionText": {
+        "en": "These cookies enable us to monitor and improve the performance of our website. For example, they allow us to count visits, identify traffic sources and see which parts of the site are most popular."
+      },
+      "targetingCookiesDescriptionText": {
+        "en": "These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other sites.    They do not store directly personal information, but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising."
+      },
+      "unclassifiedCookiesDescriptionText": {
+        "en": "Unclassified cookies are cookies that we are in the process of classifying, together with the providers of individual cookies."
+      }
+    },
+    "auto": {
+      "declName": {
+        "en": "Name"
+      },
+      "declPath": {
+        "en": "Path"
+      },
+      "declType": {
+        "en": "Type"
+      },
+      "declDomain": {
+        "en": "Domain"
+      },
+      "declPurpose": {
+        "en": "Purpose"
+      },
+      "declProvider": {
+        "en": "Provider"
+      },
+      "declRetention": {
+        "en": "Retention"
+      },
+      "declFirstParty": {
+        "en": "First-party"
+      },
+      "declThirdParty": {
+        "en": "Third-party"
+      },
+      "declSeconds": {
+        "en": "seconds"
+      },
+      "declMinutes": {
+        "en": "minutes"
+      },
+      "declHours": {
+        "en": "hours"
+      },
+      "declDays": {
+        "en": "days"
+      },
+      "declMonths": {
+        "en": "months"
+      },
+      "declYears": {
+        "en": "years"
+      },
+      "declSession": {
+        "en": "Session"
+      },
+      "cookiesDetailsText": {
+        "en": "Cookies details"
+      },
+      "preferencesPopupAlwaysAllowedText": {
+        "en": "Always allowed"
+      },
+      "submitButton": {
+        "en": "Submit"
+      },
+      "submittingButton": {
+        "en": "Submitting..."
+      },
+      "cancelButton": {
+        "en": "Cancel"
+      },
+      "guestsSupportInfoText": {
+        "en": "Please login with your customer account to further proceed."
+      },
+      "guestsSupportEmailPlaceholder": {
+        "en": "E-mail address"
+      },
+      "guestsSupportEmailValidationError": {
+        "en": "Email is not valid"
+      },
+      "guestsSupportEmailSuccessTitle": {
+        "en": "Thank you for your request"
+      },
+      "guestsSupportEmailFailureTitle": {
+        "en": "A problem occurred"
+      },
+      "guestsSupportEmailSuccessMessage": {
+        "en": "If you are registered as a customer of this store, you will soon receive an email with instructions on how to proceed."
+      },
+      "guestsSupportEmailFailureMessage": {
+        "en": "Your request was not submitted. Please try again and if problem persists, contact store owner for assistance."
+      },
+      "confirmationSuccessTitle": {
+        "en": "Your request is verified"
+      },
+      "confirmationFailureTitle": {
+        "en": "A problem occurred"
+      },
+      "confirmationSuccessMessage": {
+        "en": "We will soon get back to you as to your request."
+      },
+      "confirmationFailureMessage": {
+        "en": "Your request was not verified. Please try again and if problem persists, contact store owner for assistance"
+      },
+      "consentSectionTitleText": {
+        "en": "Your cookie consent"
+      },
+      "consentSectionNoConsentText": {
+        "en": "You have not consented to the cookies policy of this website."
+      },
+      "consentSectionConsentedText": {
+        "en": "You consented to the cookies policy of this website on"
+      },
+      "consentStatus": {
+        "en": "Consent preference"
+      },
+      "consentDate": {
+        "en": "Consent date"
+      },
+      "consentId": {
+        "en": "Consent ID"
+      },
+      "consentSectionChangeConsentActionText": {
+        "en": "Change consent preference"
+      },
+      "accessSectionGDPRRequestsActionText": {
+        "en": "Data subject requests"
+      },
+      "accessSectionAccountInfoActionText": {
+        "en": "Personal data"
+      },
+      "accessSectionOrdersRecordsActionText": {
+        "en": "Orders"
+      },
+      "accessSectionDownloadReportActionText": {
+        "en": "Request export"
+      },
+      "rectificationCommentPlaceholder": {
+        "en": "Describe what you want to be updated"
+      },
+      "rectificationCommentValidationError": {
+        "en": "Comment is required"
+      },
+      "rectificationSectionEditAccountActionText": {
+        "en": "Request an update"
+      },
+      "erasureSectionRequestDeletionActionText": {
+        "en": "Request personal data deletion"
+      }
+    }
+  },
+  "library": {
+    "previewMode": false,
+    "fadeInTimeout": 0,
+    "defaultBlocked": -1,
+    "showLink": true,
+    "showImprintLink": false,
+    "enabled": true,
+    "cookie": {
+      "name": "_pandectes_gdpr",
+      "expiryDays": 365,
+      "secure": true,
+      "domain": ""
+    },
+    "dismissOnScroll": 200,
+    "dismissOnWindowClick": true,
+    "dismissOnTimeout": false,
+    "palette": {
+      "popup": {
+        "background": "#000000",
+        "backgroundForCalculations": {
+          "a": 1,
+          "b": 0,
+          "g": 0,
+          "r": 0
+        },
+        "text": "#FFFFFF"
+      },
+      "button": {
+        "background": "transparent",
+        "backgroundForCalculations": {
+          "a": 1,
+          "b": 255,
+          "g": 255,
+          "r": 255
+        },
+        "text": "#F5F5F5",
+        "textForCalculation": {
+          "a": 1,
+          "b": 245,
+          "g": 245,
+          "r": 245
+        },
+        "border": "#F5F5F5"
+      }
+    },
+    "content": {
+      "href": "https:\/\/inviz-tv.myshopify.com\/policies\/privacy-policy",
+      "imprintHref": "\/",
+      "close": "&#10005;",
+      "target": "",
+      "logo": ""
+    },
+    "window": "<div role=\"dialog\" aria-live=\"polite\" aria-label=\"cookieconsent\" aria-describedby=\"cookieconsent:desc\" id=\"pandectes-banner\" class=\"cc-window-wrapper cc-bottom-wrapper\"><div class=\"pd-cookie-banner-window cc-window {{classes}}\"><!--googleoff: all-->{{children}}<!--googleon: all--><\/div><\/div>",
+    "compliance": {
+      "custom": "<div class=\"cc-compliance cc-highlight\">{{preferences}}{{allow}}<\/div>"
+    },
+    "type": "custom",
+    "layouts": {
+      "basic": "{{messagelink}}{{compliance}}"
+    },
+    "position": "bottom",
+    "theme": "wired",
+    "revokable": false,
+    "animateRevokable": false,
+    "revokableReset": false,
+    "revokableLogoUrl": "https:\/\/cdn.shopify.com\/s\/files\/1\/0265\/4955\/1185\/t\/111\/assets\/pandectes-reopen-logo.png?v=1700199200",
+    "revokablePlacement": "bottom-left",
+    "revokableMarginHorizontal": 15,
+    "revokableMarginVertical": 15,
+    "static": false,
+    "autoAttach": true,
+    "hasTransition": true,
+    "blacklistPage": [
+      ""
+    ]
+  },
+  "geolocation": {
+    "brOnly": false,
+    "caOnly": false,
+    "chOnly": false,
+    "euOnly": false,
+    "jpOnly": false,
+    "thOnly": false,
+    "canadaOnly": false,
+    "globalVisibility": true
+  },
+  "dsr": {
+    "guestsSupport": false,
+    "accessSectionDownloadReportAuto": false
+  },
+  "banner": {
+    "resetTs": 1700199198,
+    "extraCss": "        .cc-banner-logo {max-width: 24em!important;}    @media(min-width: 768px) {.cc-window.cc-floating{max-width: 24em!important;width: 24em!important;}}    .cc-message, .cc-header, .cc-logo {text-align: left}    .cc-window-wrapper{z-index: 2147483647;}    .cc-window{z-index: 2147483647;font-family: inherit;}    .cc-header{font-family: inherit;}    .pd-cp-ui{font-family: inherit; background-color: #000000;color:#FFFFFF;}    button.pd-cp-btn, a.pd-cp-btn{}    input + .pd-cp-preferences-slider{background-color: rgba(255, 255, 255, 0.3)}    .pd-cp-scrolling-section::-webkit-scrollbar{background-color: rgba(255, 255, 255, 0.3)}    input:checked + .pd-cp-preferences-slider{background-color: rgba(255, 255, 255, 1)}    .pd-cp-scrolling-section::-webkit-scrollbar-thumb {background-color: rgba(255, 255, 255, 1)}    .pd-cp-ui-close{color:#FFFFFF;}    .pd-cp-preferences-slider:before{background-color: #000000}    .pd-cp-title:before {border-color: #FFFFFF!important}    .pd-cp-preferences-slider{background-color:#FFFFFF}    .pd-cp-toggle{color:#FFFFFF!important}    @media(max-width:699px) {.pd-cp-ui-close-top svg {fill: #FFFFFF}}    .pd-cp-toggle:hover,.pd-cp-toggle:visited,.pd-cp-toggle:active{color:#FFFFFF!important}    .pd-cookie-banner-window {box-shadow: 0 0 18px rgb(0 0 0 \/ 20%);}  ",
+    "customJavascript": null,
+    "showPoweredBy": false,
+    "hybridStrict": true,
+    "cookiesBlockedByDefault": "7",
+    "isActive": true,
+    "implicitSavePreferences": true,
+    "cookieIcon": false,
+    "blockBots": false,
+    "showCookiesDetails": true,
+    "hasTransition": true,
+    "blockingPage": false,
+    "showOnlyLandingPage": false,
+    "leaveSiteUrl": "https:\/\/www.google.com",
+    "linkRespectStoreLang": false
+  },
+  "cookies": {
+    "0": [
+      {
+        "name": "keep_alive",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "30 minute(s)",
+        "expires": 30,
+        "unit": "declMinutes",
+        "purpose": {
+          "en": "Used in connection with buyer localization."
+        }
+      },
+      {
+        "name": "secure_customer_sig",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": "Used in connection with customer login."
+        }
+      },
+      {
+        "name": "localization",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": "Shopify store localization"
+        }
+      },
+      {
+        "name": "cart_currency",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "2 ",
+        "expires": 2,
+        "unit": "declSession",
+        "purpose": {
+          "en": "The cookie is necessary for the secure checkout and payment function on the website. This function is provided by shopify.com."
+        }
+      },
+      {
+        "name": "_pandectes_gdpr",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Pandectes",
+        "firstParty": true,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": "Used for the functionality of the cookies consent banner."
+        }
+      },
+      {
+        "name": "shopify_pay_redirect",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "1 hour(s)",
+        "expires": 1,
+        "unit": "declHours",
+        "purpose": {
+          "en": "The cookie is necessary for the secure checkout and payment function on the website. This function is provided by shopify.com."
+        }
+      },
+      {
+        "name": "_cmp_a",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "1 day(s)",
+        "expires": 1,
+        "unit": "declSession",
+        "purpose": {
+          "en": "Used for managing customer privacy settings."
+        }
+      },
+      {
+        "name": "_tracking_consent",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": "Tracking preferences."
+        }
+      },
+      {
+        "name": "cookietest",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "Session",
+        "expires": 1,
+        "unit": "declSeconds",
+        "purpose": {
+          "en": "Used to ensure our systems are working correctly."
+        }
+      },
+      {
+        "name": "_secure_session_id",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "1 day(s)",
+        "expires": 1,
+        "unit": "declSession",
+        "purpose": {
+          "en": "Used in connection with navigation through a storefront."
+        }
+      },
+      {
+        "name": "cart",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "2 ",
+        "expires": 2,
+        "unit": "declSession",
+        "purpose": {
+          "en": "Necessary for the shopping cart functionality on the website."
+        }
+      },
+      {
+        "name": "checkout_session_lookup",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "3 ",
+        "expires": 3,
+        "unit": "declSession",
+        "purpose": {
+          "en": "Used in connection with checkout."
+        }
+      },
+      {
+        "name": "cart_ts",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "2 ",
+        "expires": 2,
+        "unit": "declSession",
+        "purpose": {
+          "en": "Used in connection with checkout."
+        }
+      },
+      {
+        "name": "cart_sig",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "2 ",
+        "expires": 2,
+        "unit": "declSession",
+        "purpose": {
+          "en": "Shopify analytics."
+        }
+      },
+      {
+        "name": "checkout_session_token__cn__c1-c70b3d1032f627e913916f8a674a3ecb",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "3 ",
+        "expires": 3,
+        "unit": "declSession",
+        "purpose": {
+          "en": ""
+        }
+      }
+    ],
+    "1": [
+      {
+        "name": "LANG",
+        "domain": ".paypal.com",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": false,
+        "retention": "8 hour(s)",
+        "expires": 8,
+        "unit": "declHours",
+        "purpose": {
+          "en": "It is used to store language preferences."
+        }
+      },
+      {
+        "name": "enforce_policy",
+        "domain": ".paypal.com",
+        "path": "\/",
+        "provider": "Paypal",
+        "firstParty": false,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": "This cookie is provided by Paypal. The cookie is used in context with transactions on the website - The cookie is necessary for secure transactions."
+        }
+      },
+      {
+        "name": "x-pp-s",
+        "domain": ".paypal.com",
+        "path": "\/",
+        "provider": "Paypal",
+        "firstParty": false,
+        "retention": "Session",
+        "expires": -54,
+        "unit": "declYears",
+        "purpose": {
+          "en": "This cookie is generally provided by PayPal and supports payment services in the website."
+        }
+      },
+      {
+        "name": "l7_az",
+        "domain": ".paypal.com",
+        "path": "\/",
+        "provider": "Paypal",
+        "firstParty": false,
+        "retention": "30 minute(s)",
+        "expires": 30,
+        "unit": "declMinutes",
+        "purpose": {
+          "en": "This cookie is necessary for the PayPal login-function on the website."
+        }
+      },
+      {
+        "name": "ts",
+        "domain": ".paypal.com",
+        "path": "\/",
+        "provider": "Paypal",
+        "firstParty": false,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": "Used in context with the PayPal payment-function on the website. The cookie is necessary for making a safe transaction through PayPal."
+        }
+      },
+      {
+        "name": "ts_c",
+        "domain": ".paypal.com",
+        "path": "\/",
+        "provider": "Paypal",
+        "firstParty": false,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": "Used in context with the PayPal payment-function on the website. The cookie is necessary for making a safe transaction through PayPal."
+        }
+      },
+      {
+        "name": "tsrce",
+        "domain": ".paypal.com",
+        "path": "\/",
+        "provider": "Paypal",
+        "firstParty": false,
+        "retention": "3 day(s)",
+        "expires": 3,
+        "unit": "declSession",
+        "purpose": {
+          "en": "PayPal cookie: when making a payment via PayPal these cookies are issued – PayPal session\/security"
+        }
+      },
+      {
+        "name": "x-csrf-jwt",
+        "domain": ".paypal.com",
+        "path": "\/",
+        "provider": "Paypal",
+        "firstParty": false,
+        "retention": "1 ",
+        "expires": 1,
+        "unit": "declSession",
+        "purpose": {
+          "en": "This cookie is associated with PayPal. When making a payment via PayPal this cookie is issued."
+        }
+      }
+    ],
+    "2": [
+      {
+        "name": "_orig_referrer",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "2 ",
+        "expires": 2,
+        "unit": "declSession",
+        "purpose": {
+          "en": "Tracks landing pages."
+        }
+      },
+      {
+        "name": "_landing_page",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "2 ",
+        "expires": 2,
+        "unit": "declSession",
+        "purpose": {
+          "en": "Tracks landing pages."
+        }
+      },
+      {
+        "name": "_shopify_s",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "30 minute(s)",
+        "expires": 30,
+        "unit": "declMinutes",
+        "purpose": {
+          "en": "Shopify analytics."
+        }
+      },
+      {
+        "name": "_shopify_sa_t",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "30 minute(s)",
+        "expires": 30,
+        "unit": "declMinutes",
+        "purpose": {
+          "en": "Shopify analytics relating to marketing & referrals."
+        }
+      },
+      {
+        "name": "_shopify_sa_p",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "30 minute(s)",
+        "expires": 30,
+        "unit": "declMinutes",
+        "purpose": {
+          "en": "Shopify analytics relating to marketing & referrals."
+        }
+      },
+      {
+        "name": "_shopify_y",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": "Shopify analytics."
+        }
+      },
+      {
+        "name": "_ga",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Google",
+        "firstParty": true,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": "Cookie is set by Google Analytics with unknown functionality"
+        }
+      },
+      {
+        "name": "_gid",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Google",
+        "firstParty": true,
+        "retention": "1 day(s)",
+        "expires": 1,
+        "unit": "declSession",
+        "purpose": {
+          "en": "Cookie is placed by Google Analytics to count and track pageviews."
+        }
+      },
+      {
+        "name": "_gat",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Google",
+        "firstParty": true,
+        "retention": "1 minute(s)",
+        "expires": 1,
+        "unit": "declMinutes",
+        "purpose": {
+          "en": "Cookie is placed by Google Analytics to filter requests from bots."
+        }
+      },
+      {
+        "name": "_shopify_d",
+        "domain": "tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": false,
+        "retention": "Session",
+        "expires": 1,
+        "unit": "declSeconds",
+        "purpose": {
+          "en": "Shopify analytics."
+        }
+      },
+      {
+        "name": "_shopify_d",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "Session",
+        "expires": 1,
+        "unit": "declSeconds",
+        "purpose": {
+          "en": "Shopify analytics."
+        }
+      },
+      {
+        "name": "_shopify_ga",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "Session",
+        "expires": -54,
+        "unit": "declYears",
+        "purpose": {
+          "en": "Shopify and Google Analytics."
+        }
+      },
+      {
+        "name": "unique_interaction_id",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Shopify",
+        "firstParty": true,
+        "retention": "10 minute(s)",
+        "expires": 10,
+        "unit": "declMinutes",
+        "purpose": {
+          "en": "Shopify analytics."
+        }
+      },
+      {
+        "name": "_ga_FSP39MWD8N",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Google",
+        "firstParty": true,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "_ga_SNJV4B2P9V",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Google",
+        "firstParty": true,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "_ga_22R2EX2PXR",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Google",
+        "firstParty": true,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      }
+    ],
+    "4": [
+      {
+        "name": "__kla_id",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Klaviyo",
+        "firstParty": true,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": "Tracks when someone clicks through a Klaviyo email to your website."
+        }
+      },
+      {
+        "name": "_fbp",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Facebook",
+        "firstParty": true,
+        "retention": "3 month(s)",
+        "expires": 3,
+        "unit": "declMonths",
+        "purpose": {
+          "en": "Cookie is placed by Facebook to track visits across websites."
+        }
+      },
+      {
+        "name": "test_cookie",
+        "domain": ".doubleclick.net",
+        "path": "\/",
+        "provider": "Google",
+        "firstParty": false,
+        "retention": "15 minute(s)",
+        "expires": 15,
+        "unit": "declMinutes",
+        "purpose": {
+          "en": "To measure the visitors’ actions after they click through from an advert. Expires after each visit."
+        }
+      },
+      {
+        "name": "_gcl_au",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Google",
+        "firstParty": true,
+        "retention": "3 month(s)",
+        "expires": 3,
+        "unit": "declMonths",
+        "purpose": {
+          "en": "Cookie is placed by Google Tag Manager to track conversions."
+        }
+      },
+      {
+        "name": "IDE",
+        "domain": ".doubleclick.net",
+        "path": "\/",
+        "provider": "Google",
+        "firstParty": false,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": "To measure the visitors’ actions after they click through from an advert. Expires after 1 year."
+        }
+      }
+    ],
+    "8": [
+      {
+        "name": "_ttp",
+        "domain": ".tiktok.com",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": false,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "_tt_enable_cookie",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "_ttp",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "wpm-domain-test",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Session",
+        "expires": 1,
+        "unit": "declSeconds",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "NID",
+        "domain": ".google.com",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": false,
+        "retention": "6 month(s)",
+        "expires": 6,
+        "unit": "declMonths",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "wpm-domain-test",
+        "domain": "tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": false,
+        "retention": "Session",
+        "expires": 1,
+        "unit": "declSeconds",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "nsid",
+        "domain": "www.paypal.com",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": false,
+        "retention": "Session",
+        "expires": -54,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "_gali",
+        "domain": ".inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "35 second(s)",
+        "expires": 35,
+        "unit": "declSeconds",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "_checkout_worker_session",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "3 ",
+        "expires": 3,
+        "unit": "declSession",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "skip_shop_pay",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "1 year(s)",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "dk_widgets_https:\/\/assets.dailykarma.io\/prod\/richTemplates\/backend.html?v=1700069729000",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "cartbot_data_cart",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "klaviyoOnsite",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "lastExternalReferrer",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "tt_sessionId",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Session",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "tt_pixel_session_index",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Session",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "tt_appInfo",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Session",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "queue_token",
+        "domain": "inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "1 hour(s)",
+        "expires": 1,
+        "unit": "declHours",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "lastExternalReferrerTime",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "_boomr_clss",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "__storage_test__",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "_kla_test",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "local-storage-test",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "accessibility-config",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "dk_hidden_opt_in_object",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Session",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "dkSettings",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Session",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "translation",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Session",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "theme:popup-appeared",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "theme:recently-viewed-products",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "shopifyPaypalAcceleration",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "shopifyPayAcceleration",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "bndlr_data_USDUSen",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "accessibly_sid",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Session",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "bugsnag-anonymous-id",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "accessibly_vid",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "verdict:experiments",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "sessionType",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "trackedSourceId",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "__ui",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "__storage_test",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "__test__localStorage__",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "pf.keys",
+        "domain": "https:\/\/pay.google.com",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": false,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "allowed_payment_methods.https:\/\/inviz.tv",
+        "domain": "https:\/\/pay.google.com",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": false,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "lastSeenErrorReceiptId",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "__quiltRouterScroll",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Session",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "trackedCompleteOrderSourceId",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "cartToken",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "__8JF73ZNJMZY9A::USD_storage__",
+        "domain": "https:\/\/inviz.tv",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": true,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      },
+      {
+        "name": "__paypal_storage__",
+        "domain": "https:\/\/www.paypal.com",
+        "path": "\/",
+        "provider": "Unknown",
+        "firstParty": false,
+        "retention": "Persistent",
+        "expires": 1,
+        "unit": "declYears",
+        "purpose": {
+          "en": ""
+        }
+      }
+    ]
+  },
+  "blocker": {
+    "isActive": false,
+    "googleConsentMode": {
+      "id": "",
+      "analyticsId": "",
+      "isActive": false,
+      "adStorageCategory": 4,
+      "analyticsStorageCategory": 2,
+      "personalizationStorageCategory": 1,
+      "functionalityStorageCategory": 1,
+      "customEvent": true,
+      "securityStorageCategory": 0,
+      "redactData": true,
+      "urlPassthrough": false
+    },
+    "facebookPixel": {
+      "id": "",
+      "isActive": false,
+      "ldu": false
+    },
+    "rakuten": {
+      "isActive": false,
+      "cmp": false,
+      "ccpa": false
+    },
+    "gpcIsActive": false,
+    "defaultBlocked": 7,
+    "patterns": {
+      "whiteList": [
+
+      ],
+      "blackList": {
+        "1": [
+
+        ],
+        "2": [
+
+        ],
+        "4": [
+
+        ],
+        "8": [
+
+        ]
+      },
+      "iframesWhiteList": [
+
+      ],
+      "iframesBlackList": {
+        "1": [
+
+        ],
+        "2": [
+
+        ],
+        "4": [
+
+        ],
+        "8": [
+
+        ]
+      },
+      "beaconsWhiteList": [
+
+      ],
+      "beaconsBlackList": {
+        "1": [
+
+        ],
+        "2": [
+
+        ],
+        "4": [
+
+        ],
+        "8": [
+
+        ]
+      }
+    }
+  }
+}

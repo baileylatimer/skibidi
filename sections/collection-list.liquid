@@ -1,0 +1,685 @@
+{%- render 'section-spacing-collapsing' -%}
+
+{%- comment -%}
+------------------------------------------------------------------------------------------------------------------------
+CSS
+------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+<style>
+  {% if section.settings.custom_font %}
+    {{ section.settings.sec_font | font_face: font_display: 'fallback' }}
+  {% endif %}
+  .shopify-section--collection-list .section-header {
+    grid-template-columns: 1fr;
+    margin-block-end: var(--spacing-12);
+  }
+  .shopify-section--collection-list .section-header .prose {
+    max-width: 700px;
+  }
+  #shopify-section-{{ section.id }} collection-list.collection-list_carousel {
+      display: grid;
+      grid: auto / auto-flow calc(var( --container-inner-width) / {{ section.settings.collections_per_row }} - (var(--slider-gap) / {{ section.settings.collections_per_row }} * {{ section.settings.collections_per_row | minus: 1 }}));
+      align-items: start;
+      gap: var(--slider-gap);
+      display: grid;
+  }
+  #shopify-section-{{ section.id }} collection-list.collection-list_carousel.slick-initialized.slick-slider {
+    display: block;
+}
+  {%- if section.settings.full_width_slider -%}
+    .section.no_padding {
+      padding-inline-start: 0px;
+      padding-inline-end: 0px;
+  }
+  {%- endif -%} 
+  {%- if section.settings.col_desing == 'stack' -%}
+     #shopify-section-{{ section.id }} .collection-list {
+    --collection-list-grid: {% if section.settings.col_desing == 'stack' %}none{% else %}auto / auto-flow 73vw{% endif %};
+       gap:{{ section.settings.collections_gap }}px;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .collection-list {
+      --collection-list-grid: {% if section.settings.col_desing == 'stack' %}auto / repeat(2, minmax(0, 1fr)){% else %}auto / auto-flow 36vw{% endif %};
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .collection-list {
+      --collection-list-grid: {% if section.settings.col_desing == 'stack' %}auto / repeat({{ 3 | at_most: section.settings.collections_per_row }}, minmax(0, 1fr)){% else %}auto / auto-flow calc(var(--container-inner-width) / {{ section.settings.collections_per_row }} - (var(--grid-gutter) / 3 * 2)){% endif %};
+    }
+  }
+
+  @media screen and (min-width: 1400px) {
+    #shopify-section-{{ section.id }} .collection-list {
+      --collection-list-grid: {% if section.settings.col_desing == 'stack' %}auto / repeat({{ section.settings.collections_per_row }}, minmax(0, 1fr)){% else %}auto / auto-flow calc(var(--container-inner-width) / {{ section.settings.collections_per_row }} - (var(--grid-gutter) / {{ section.settings.collections_per_row }} * {{ section.settings.collections_per_row | minus: 1 }})){% endif %};
+    }
+  }
+  {% endif %}
+</style>
+
+{%- comment -%}
+------------------------------------------------------------------------------------------------------------------------
+LIQUID
+------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+{%- if section.settings.full_width_slider -%}
+  {%- capture class -%} no_padding1 {%- endcapture -%} 
+{%- endif -%} 
+<div {% render 'section-properties', class:class %}>
+    {%- assign link_url = section.settings.link_url | default: section.settings.collection.url -%}
+    {%- render 'section-header', subheading: section.settings.subheading, pre_font_size: section.settings.font_size_pre, title_font_size: section.settings.font_size_title, heading: section.settings.title, text_alignment:section.settings.text_alignment, heading_color: section.settings.heading_color, heading_gradient: section.settings.heading_gradient, content: section.settings.content, link_text: section.settings.link_text, link_url: link_url -%}   
+  <div class="section-stack">
+    <div class="{% if section.settings.show_progress_bar %}scrollable-with-controls{% if section.settings.col_desing == 'slider' %} is-scrollable{% endif %}{% else %}floating-controls-container{% endif %}">
+      {%- if section.settings.col_desing == 'stack' -%}
+      {%- assign scroll_area_id = 'scroll-area-' | append: section.id -%}
+      <scroll-carousel selector=".collection-card" id="{{ scroll_area_id }}" class="scroll-area bleed {% if section.blocks.size > section.settings.collections_per_row %}is-scrollable{% endif %}">
+        <collection-list class="collection-list">
+      {% else %}
+        <collection-list class="collection-list_carousel" data-mobile_item="{{ section.settings.mobile_items }}" data-slick="{'slidesToShow': {{ section.settings.collections_per_row }}, 'slidesToScroll': 1, {% if section.settings.autoplay %}'autoplay': true, {% if section.settings.smooth_scroll %}'autoplaySpeed':'0','speed': {{ section.settings.cycle_speed | times: 1000 }},{% else %}'autoplaySpeed': {{ section.settings.cycle_speed | times: 1000 }},{% endif %}{% endif %}{% if section.settings.smooth_scroll %} 'cssEase': 'linear', {% endif %}{% if section.settings.hover_pause %} 'pauseOnHover': true, {% else %} 'pauseOnHover': false,{% endif %}'arrows': false, 'infinite': true} {% if section.settings.slider_gap %}" style="--slider-gap:{{ section.settings.slider_gap  | divided_by: 2 }}px"{% endif %}>
+      {% endif %}       
+      {%- for block in section.blocks -%}
+            {%- assign collection = block.settings.collection -%}
+            {%- assign collection_url = block.settings.url | default: collection.url -%}
+
+            <a {% if collection_url != blank %}href="{{ collection_url }}"{% endif %} class="collection-card {% if block.settings.text_position contains 'place-self-end' %}collection-card--reverse-transition{% endif %} shadow" reveal-js>
+              <div class="content-over-media group {% if section.settings.rounded_corner %}rounded-sm{% endif %} {{ section.settings.img_ratio }}" {% if block.settings.background_gradient != blank %}style="--content-over-media-gradiant: {{ block.settings.background_gradient }};" {% else %}style="--content-over-media-overlay: {{ block.settings.overlay_color.rgb }} / {{ block.settings.overlay_opacity | divided_by: 100.0 }}"{% endif %}>
+                {%- if collection != blank or block.settings.image != blank -%}
+                  {%- assign image = block.settings.image | default: collection.featured_image -%}
+                  
+                  {%- if image != blank -%}
+                    {%- capture sizes -%}(max-width: 699px) 73vw, {{ settings.page_width | divided_by: section.settings.collections_per_row }}px{%- endcapture -%}
+                    {{- image | image_url: width: image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,800,1000,1200,1400,1600', class: 'zoom-image' -}}
+                  {%- endif -%}
+
+                  <div class="collection-card__content-wrapper text-custom {{ block.settings.text_position }}" style="--text-color: {{ block.settings.text_color.rgb }}">
+                    {%- if block.settings.show_arrow -%}
+                      {%- if block.settings.text_position contains 'place-self-end' -%}
+                        {%- render 'icon' with 'circle-button-right-clipped', width: 40, height: 40 -%}
+                      {%- endif -%}
+                    {%- endif -%}
+
+                    <div class="collection-card__content prose">
+
+                      {%- if block.settings.pre_image != blank -%}
+                      {%- assign image = block.settings.pre_image -%}  
+                      {{- image | image_url: width: image.width | image_tag: loading: 'lazy' -}}
+                      {%- elsif block.settings.preheading != blank -%}
+                        <h6 class="h6" style="--desk-font:{{ block.settings.t_font_size_preheading }}px; --mob-font:{{ block.settings.mobt_font_size_preheading }}px;">
+                          {%- render 'styled-text', content: block.settings.preheading -%}
+                        </h6>
+                      {%- endif -%} 
+                      {%- if block.settings.head_image != blank -%}  
+                      {%- assign image = block.settings.head_image -%}
+                      {%- assign head_image_width = block.settings.head_image_width -%}
+                      {%- assign image_style = 'max-width: ' | append: head_image_width | append: '%' -%}  
+                      {{- image | image_url: width: image.width | image_tag: loading: 'lazy', style: image_style -}} 
+                      {%- elsif block.settings.title != blank -%}
+                        <h6 class="h6" style="--desk-font:{{ block.settings.t_font_size_title }}px; --mob-font:{{ block.settings.mbot_font_size_title }}px;">
+                          {%- render 'styled-text', content: block.settings.title -%}
+                        </h6>
+                      {%- endif -%}
+                      {%- if block.settings.sub_image != blank -%}
+                      {%- assign image = block.settings.sub_image -%}
+                      {%- assign sub_image_width = block.settings.sub_image_width -%}
+                      {%- assign image_style = 'max-width: ' | append: sub_image_width | append: '%' -%}    
+                      {{- image | image_url: width: image.width | image_tag: loading: 'lazy', style: image_style -}}  
+                      {%- elsif block.settings.subheading != blank -%}
+                        <p class="bold">{{ block.settings.subheading | escape }}</p>
+                      {%- endif -%}
+                    </div>
+                    {%- if block.settings.show_arrow -%}
+                    {%- unless block.settings.text_position contains 'place-self-end' -%}
+                      {%- render 'icon' with 'circle-button-right-clipped', width: 40, height: 40 -%}
+                    {%- endunless -%}
+                    {%- endif -%}
+                  </div>
+                {%- else -%}
+                  {%- capture collection_placeholder -%}{% cycle 'collection-1', 'collection-2', 'collection-3' %}{%- endcapture -%}
+                  {{- collection_placeholder | placeholder_svg_tag: 'placeholder zoom-image' -}}
+
+                  <div class="collection-card__content-wrapper text-custom {{ block.settings.text_position }}" style="--text-color: {{ block.settings.text_color.rgb }}">
+                    {%- if block.settings.show_arrow -%}
+                      {%- if block.settings.text_position contains 'place-self-end' -%}
+                      {%- render 'icon' with 'circle-button-right-clipped', width: 40, height: 40 -%}
+                    {%- endif -%}
+                    {%- endif -%}
+                    <div class="collection-card__content prose">
+                      <p class="{{ block.settings.heading_tag }}">{{- 'general.on_boarding.collection_title' | t -}}</p>
+                    </div>
+                    {%- if block.settings.show_arrow -%}
+                    {%- unless block.settings.text_position contains 'place-self-end' -%}
+                      {%- render 'icon' with 'circle-button-right-clipped', width: 40, height: 40 -%}
+                    {%- endunless -%}
+                    {%- endif -%}  
+                  </div>
+                {%- endif -%}
+              </div>
+            </a>
+          {%- endfor -%}
+        {%- if section.settings.col_desing == 'slider' -%}  
+        </collection-list>
+        {% else %}
+        </collection-list>
+        </scroll-carousel>
+      {% endif %}
+      
+      {%- if section.settings.col_desing == 'slider' -%}
+        {%- if section.settings.show_progress_bar -%}
+          {%- assign default_progress = section.settings.collections_per_row | times: 1.0 | divided_by: section.blocks.size -%}
+          <div class="scrollbar">
+            <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                <span class="progressbar"></span>
+            </div>
+            {% comment %}<scroll_bar class="scrollbar__progress" style="--scroll-progress:{{ default_progress }}"><span></span></scroll_bar>{% endcomment %}
+              <div aria-controls="{{ observes }}" class="scrollbar__buttons">
+                <button class="circle-button ring group owl-prev owl_btn">
+                  <span class="sr-only">{{ 'general.accessibility.previous' | t }}</span>
+                  <span class="animated-arrow animated-arrow--reverse"></span>
+                </button>
+          
+                <button class="circle-button ring group owl-next owl_btn">
+                  <span class="sr-only">{{ 'general.accessibility.next' | t }}</span>
+                  <span class="animated-arrow"></span>
+                </button>
+              </div>
+          </div>
+        {%- else -%}
+          <button class="circle-button circle-button--lg circle-button--fill border group owl-prev owl_btn">
+                  <span class="sr-only">{{ 'general.accessibility.previous' | t }}</span>
+                  <span class="animated-arrow animated-arrow--reverse"></span>
+          </button>          
+          <button class="circle-button circle-button--lg circle-button--fill border group owl-next owl_btn">
+                  <span class="sr-only">{{ 'general.accessibility.next' | t }}</span>
+                  <span class="animated-arrow"></span>
+          </button>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Collection list",
+  "class": "shopify-section--collection-list",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "col_desing",
+      "label": "Collection Design",
+      "options": [
+         {
+           "value": "stack",
+           "label": "Stack"
+         },
+         {
+           "value": "slider",
+           "label": "Slider"
+         }
+        ],
+      "default": "slider"
+    },
+    {
+      "type": "checkbox",
+      "id": "custom_font",
+      "label": "Use differnt font for this section",
+      "default": false
+    },
+    {
+        "type": "font_picker",
+        "id": "sec_font",
+        "label": "Font",
+        "info": "Selecting different fonts can affect the speed of your online store. Learn more about [system fonts.](https:\/\/help.shopify.com\/en\/manual\/online-store\/os\/store-speed\/improving-speed#fonts)",
+        "default": "helvetica_n4"
+    },
+    {
+      "type": "range",
+      "id": "collections_per_row",
+      "min": 2,
+      "max": 10,
+      "label": "Collections per row (desktop)",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "mobile_items",
+      "min": 1,
+      "max": 3,
+      "label": "Collections per row (mobile)",
+      "default": 2
+    },    
+    {
+      "type": "range",
+      "id": "collections_gap",
+      "min": 0,
+      "max": 30,
+      "label": "Collections Gap",
+      "info": "Works only for the Stack Type Collection",
+      "default": 0
+    },    
+    {
+      "type": "range",
+      "id": "slider_gap",
+      "min": 0,
+      "max": 30,
+      "label": "Slider Gap",
+      "info": "Works only for the Slider Type Collection",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded_corner",
+      "label": "Rounded Corner of list",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "img_ratio",
+      "label": "Collection Image Ratio",
+      "options": [
+         {
+           "value": "original",
+           "label": "Original"
+         },
+         {
+           "value": "media--tall",
+           "label": "9x16"
+         },
+         {
+           "value": "media--wide",
+           "label": "16x9"
+         },
+         {
+           "value": "media--portrait",
+           "label": "1x1"
+         }
+        ],
+      "default": "original"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Preheading"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collection list"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Heading Alignment",
+      "options": [
+         {
+           "value": "start",
+           "label": "Start"
+         },
+         {
+           "value": "center",
+           "label": "Center"
+         }
+        ],
+      "default": "start"
+    },
+    {
+      "type": "range",
+      "id": "font_size_pre",
+      "label": "Font Size of Pre Heading",
+      "min": 8,
+      "max": 70,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "font_size_title",
+      "label": "Font Size of Heading",
+      "min": 8,
+      "max": 70,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "View all"
+    },
+    {
+      "type": "header",
+      "content": "Carousel Settings",
+      "info": "Carousel Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_progress_bar",
+      "label": "Show Progress Bar",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hover_pause",
+      "label": "Pause on Hover",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "smooth_scroll",
+      "label": "Smooth Scroll",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto rotate between slides",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "cycle_speed",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "unit": "sec",
+      "label": "Change slides every",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Collection List",
+      "info": "Collection List Font Size."
+    },
+    {
+      "type": "range",
+      "id": "c_font_size_pre",
+      "label": "Font Size of Pre Heading",
+      "min": 8,
+      "max": 70,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "c_font_size_title",
+      "label": "Font Size of Heading",
+      "min": 8,
+      "max": 70,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color"
+    },
+    {
+      "type": "color_background",
+      "id": "heading_gradient",
+      "label": "Heading gradient"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "1500 x 1800px .jpg recommended. Default to collection image."
+        },
+        {
+          "type": "text",
+          "id": "preheading",
+          "label": "Preheading"
+        },
+        {
+          "type": "range",
+          "id": "t_font_size_preheading",
+          "label": "Font Size of Preheading",
+          "min": 8,
+          "max": 70,
+          "step": 1,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "mbot_font_size_preheading",
+          "label": "Mobile Font Size of Preheading",
+          "min": 8,
+          "max": 70,
+          "step": 1,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "image_picker",
+          "id": "pre_image",
+          "label": "PreHeading Image",
+          "info": "This image will replace the Text Preheading"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "info": "Default to collection title."
+        },
+        {
+          "type": "range",
+          "id": "t_font_size_title",
+          "label": "Font Size of Heading",
+          "min": 8,
+          "max": 70,
+          "step": 1,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "mbot_font_size_title",
+          "label": "Mobile Font Size of Heading",
+          "min": 8,
+          "max": 70,
+          "step": 1,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "image_picker",
+          "id": "head_image",
+          "label": "Heading Image",
+          "info": "This image will replace the Text Heading"
+        },
+        {
+          "type": "range",
+          "id": "head_image_width",
+          "label": "Heading Image Width",
+          "min": 10,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "type": "image_picker",
+          "id": "sub_image",
+          "label": "Subheading Image",
+          "info": "This image will replace the Text Sub Heading"
+        },
+        {
+          "type": "range",
+          "id": "sub_image_width",
+          "label": "Subheading Image Width",
+          "min": 10,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link",
+          "info": "Default to collection URL."
+        },
+        {
+          "type": "select",
+          "id": "text_position",
+          "label": "Content position",
+          "options": [
+            {
+              "value": "place-self-start text-start",
+              "label": "Top left"
+            },
+            {
+              "value": "place-self-start-center text-center",
+              "label": "Top center"
+            },
+            {
+              "value": "place-self-start-end text-end",
+              "label": "Top right"
+            },
+            {
+              "value": "place-self-center-start text-start",
+              "label": "Middle left"
+            },
+            {
+              "value": "place-self-center text-center",
+              "label": "Middle center"
+            },
+            {
+              "value": "place-self-center-end text-end",
+              "label": "Middle right"
+            },
+            {
+              "value": "place-self-end-start text-start",
+              "label": "Bottom left"
+            },
+            {
+              "value": "place-self-end-center text-center",
+              "label": "Bottom center"
+            },
+            {
+              "value": "place-self-end text-end",
+              "label": "Bottom right"
+            }
+          ],
+          "default": "place-self-center text-center"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_arrow",
+          "label": "Show Arrow On Hover",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "overlay_color",
+          "label": "Overlay",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "label": "Overlay opacity",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 30
+        },
+        {
+          "type": "color_background",
+          "id": "background_gradient",
+          "label": "Background gradient"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection list",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

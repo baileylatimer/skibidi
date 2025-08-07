@@ -1,0 +1,267 @@
+<script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
+
+<script type="module">
+  if (!window.customElements.get('qr-code')) {
+    window.customElements.define('qr-code', class extends HTMLElement {
+      async connectedCallback() {
+        new window.QRCode(this, {
+          text: this.getAttribute('identifier'),
+          width: 200,
+          height: 200
+        });
+      }
+    });
+  }
+</script>
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --gift-card-balance-font-size: 48px;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} {
+      --gift-card-balance-font-size: 64px;
+    }
+  }
+</style>
+{%- if section.settings.allow_transparent_header -%}
+  <style>
+  #shopify-section-{{ section.id }} {
+      margin-block-start: calc(-1 * var(--header-height) * var(--section-is-first));
+  }
+    #shopify-section-{{ section.id }}>.section{
+      padding-block-start: calc(1.1 * var(--header-height) * var(--section-is-first));
+  }
+</style>
+{%- endif -%} 
+<div {% render 'section-properties' %} {% if section.settings.allow_transparent_header %}allow-transparent-header{% endif %}>
+<div class="container">
+  <div class="gift-card">
+    <!-- GIFT CARD IMAGE -->
+    <div class="gift-card__image-wrapper">
+      {%- assign image = section.settings.image | default: gift_card.product.featured_media -%}
+
+      {%- if image != blank -%}
+        {{- image | image_url: width: image.width | image_tag: loading: 'lazy', sizes: '270px', widths: '270,540,810', class: 'gift-card__image' -}}
+      {%- else -%}
+        <img src="{{ 'gift-card/card.svg' | shopify_asset_url }}" alt="" class="gift-card__image" width="270" height="180" loading="lazy">
+      {%- endif -%}
+
+      <h1 class="h2 text-center">{{ 'gift_card.general.title' | t }}</h1>
+
+      {%- if gift_card.expired or gift_card.enabled == false -%}
+        {%- assign banner_error = 'gift_card.issued.expired' | t -%}
+        {%- render 'banner', status: 'error', content: banner_error -%}
+      {%- endif -%}
+    </div>
+
+    <!-- GIFT CARD INFO -->
+    <div class="gift-card__info">
+      <!-- REMAINING BALANCE -->
+      <div {% render 'surface', class: 'gift-card__issued-info rounded' background: section.settings.amount_background, text_color: section.settings.amount_text_color, background_fallback: 'bg-secondary' %}>
+        <p class="bold">{{ 'gift_card.issued.remaining_amount' | t }}</p>
+
+        {% if settings.currency_code_enabled %}
+          {%- assign gift_card_balance = gift_card.balance | money_with_currency -%}
+          {%- assign gift_card_initial_value = gift_card.initial_value | money_with_currency -%}
+        {% else %}
+          {%- assign gift_card_balance = gift_card.balance | money_without_trailing_zeros -%}
+          {%- assign gift_card_initial_value = gift_card.initial_value | money_without_trailing_zeros -%}
+        {% endif %}
+
+        <p class="gift-card__balance bold">{{ gift_card_balance }}</p>
+
+        {%- if gift_card.balance != gift_card.initial_value -%}
+          <p class="bold">{{ 'gift_card.issued.out_of_html' | t: initial_value: gift_card_initial_value }}</p>
+        {%- endif -%}
+      </div>
+
+      <!-- REDEEM INFO -->
+      <div class="gift-card__redeem-info rounded">
+        <div class="gift-card__redeem-box">
+          <p class="text-center">{{ 'gift_card.issued.redeem_instructions' | t }}</p>
+
+          <!-- ACTION BUTTONS -->
+          <div class="v-stack gap-4">
+            <input type="text" value="{{ gift_card.code | format_code }}" readonly aria-label="{{ 'gift_card.issued.code' | t }}" onclick="this.select()" class="gift-card__redeem-code">
+
+            <div class="h-stack wrap justify-center gap-2 print:hidden">
+              <button type="button" class="button button--subdued" is="copy-button" data-text="{{ gift_card.code | escape }}">{{ 'gift_card.general.copy' | t }}</button>
+              <button type="button" class="button" onclick="window.print()">{{ 'gift_card.general.print' | t }}</button>
+            </div>
+          </div>
+
+          {%- if gift_card.expires_on -%}
+            {%- assign expires_on = gift_card.expires_on | date: format: 'date' -%}
+            <p class="text-sm text-subdued text-center">{{ 'gift_card.issued.expires_on' | t: expires_on: expires_on }}</p>
+          {%- endif -%}
+        </div>
+
+        {%- if gift_card.pass_url or section.settings.show_qr_code -%}
+          <!-- QR CODE AND APPLE PAY -->
+          <div class="gift-card__redeem-box bg-secondary">
+            <div class="v-stack gap-6">
+              <p class="h5 text-center">{{ 'gift_card.general.scan' | t }}</p>
+
+              <div class="gift-card__scan">
+                {%- if section.settings.show_qr_code -%}
+                  <qr-code class="gift-card__qr-code" identifier="{{ gift_card.qr_identifier }}"></qr-code>
+                {%- endif -%}
+
+                {%- if gift_card.pass_url -%}
+                  <a href="{{ gift_card.pass_url }}">
+                    <img src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}" width="145" height="45" alt="{{ 'gift_card.issued.add_to_apple_wallet' | t }}" loading="lazy">
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- BACK BUTTON -->
+    <div class="hidden justify-self-center sm:block">
+      {%- assign button_label = 'gift_card.general.back_to_store' | t -%}
+      {% render 'button', content: section.settings.button_text, href: section.settings.button_url, size: section.settings.button_size, style: section.settings.button_style, background: section.settings.button_background, text_color: section.settings.button_text_color, block: block %}
+      {% comment %}{%- render 'button', href: routes.root_url, content: button_label, size: 'xl', secondary: true,  -%}{% endcomment %}
+    </div>
+  </div>
+</div>
+</div>
+{% schema %}
+{
+  "name": "Gift card",
+  "class": "shopify-section--main-gift-card",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_transparent_header",
+      "label": "Allow transparent header",
+      "info": "This setting only applies when this section is the first one.",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Section colors",
+      "info": "Background Image replaces Gradient replaces solid colors when set."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_img",
+      "label": "Section Background Image"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text"
+    },
+    {
+          "type": "select",
+          "id": "button_style",
+          "label": "Style",
+          "options": [
+            {
+              "value": "outline",
+              "label": "Outline"
+            },
+            {
+              "value": "fill",
+              "label": "Fill"
+            }
+          ],
+          "default": "fill"
+        },
+        {
+          "type": "select",
+          "id": "button_size",
+          "label": "Size",
+          "options": [
+            {
+              "value": "sm",
+              "label": "Small"
+            },
+            {
+              "value": "base",
+              "label": "Medium"
+            },
+            {
+              "value": "lg",
+              "label": "Large"
+            },
+            {
+              "value": "xl",
+              "label": "X-Large"
+            }
+          ],
+          "default": "lg"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Text",
+          "default": "Button text"
+        },
+    {
+          "type": "url",
+          "id": "button_url",
+          "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Gift Card Page",
+      "info": "Gift Card Page Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Gift card image",
+      "info": "Default to gift card product image."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_qr_code",
+      "label": "Show QR code",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "amount_background",
+      "label": "Amount box background"
+    },
+    {
+      "type": "color",
+      "id": "amount_text_color",
+      "label": "Amount text"
+    }
+  ]
+}
+{% endschema %}

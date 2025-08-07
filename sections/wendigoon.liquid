@@ -1,0 +1,519 @@
+<style>
+    .wendigoon_product{
+        background-color: {{ section.settings.bg_color }};
+    }
+</style>
+<div class="wendigoon_product" {% if section.settings.bg != blank %} style="background-image:
+        url('{{ section.settings.bg | img_url: "master" }}');"{% endif %}>
+    {% for block in section.blocks %}
+        {%- case block.type -%}
+
+            {%- when 'featured_product' -%}
+                {%- capture product_form_id -%}product-form-{{ block.settings.featured_product_product.id }}-{{ section.id }}{%- endcapture -%}
+                <div class="featured_product" id="block--{{ block.id }}"
+                     {% if block.settings.featured_product_bg != blank %}
+                     style="background-image: url('{{ block.settings.featured_product_bg | img_url: "master" }}');"
+                {% endif %}>
+                    <div class="container">
+                        <div class="row">
+                            <div class="inner d_flex">
+                                <div class="col d_flex">
+                                    <h1>
+                                        {{ block.settings.featured_product_title }}
+                                    </h1>
+                                </div>
+                                <div class="col info">
+                                    {% if block.settings.featured_product_placeholder != blank %}
+                                        <img class="featured_image" src="
+                                            {{ block.settings.featured_product_placeholder | img_url: 'master' }}" alt="placeholder" />
+                                    {% else %}
+                                        <img class="featured_image" src="{{ block.settings.featured_product_product.featured_image | img_url: 'master' }}"
+                                             alt="{{ block.settings.featured_product_product.featured_image.alt }}" />
+                                    {% endif %}
+
+                                    {% if block.settings.featured_product_product != blank %}
+                                        <div class="info_product">
+                                            <h4>
+                                                {{ block.settings.featured_product_product.title }}
+                                            </h4>
+                                            <div class="description">
+                                                {{ block.settings.featured_product_product.description }}
+                                            </div>
+                                            <div class="price">
+                                                {%- render 'price-list',
+                                                        product: block.settings.featured_product_product,
+                                                        use_variant: true,
+                                                        show_badges: true,
+                                                        price_class: 'price--large'
+                                                -%}
+                                            </div>
+                                            <div class="product-info__buy-buttons" {{ block.shopify_attributes }}>
+                                                {%- render 'buy-buttons',
+                                                        product: block.settings.featured_product_product,
+                                                        form_id: product_form_id
+                                                -%}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {%- when 'list' -%}
+            <div class="list" id="block--{{ block.id }}">
+                <div class="container">
+                    <div class="row">
+                        <div class="inner d_flex">
+                            {% for i in (1..4) %}
+                                {% capture icon %}item{{ i }}_icon{% endcapture %}
+                                {%- assign icon = block.settings[icon] -%}
+                                {% capture title %}item{{ i }}_title{% endcapture %}
+                                {%- assign title = block.settings[title] -%}
+                                {% capture text %}item{{ i }}_text{% endcapture %}
+                                {%- assign text = block.settings[text] -%}
+                                <div class="col">
+                                    <div class="col_inner">
+                                        {% if icon != blank %}
+                                            <img src="{{ icon | img_url: 'master' }}" alt=""/>
+                                        {% endif %}
+                                        {% if title != blank %}
+                                            <h4>{{ title }}</h4>
+                                        {% endif %}
+                                        {% if text != blank %}
+                                            <div class="text">{{ text }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {%- when 'image_text' -%}
+            <div class="image_text" id="block--{{ block.id }}">
+                <div class="container">
+                    <div class="row">
+                        <div class="inner d_flex {% if block.settings.image_text_reverse == true %} reverse{% endif %}">
+                            <div class="col">
+                                <img class="image_text_img" src="{{ block.settings.image_text_img | img_url: 'master' }}" alt="" />
+                            </div>
+                            <div class="col d_flex">
+                                <div class="image_text_subtitle">
+                                    {{ block.settings.image_text_subtitle }}
+                                </div>
+                                <h3 class="image_text_title">
+                                    {{ block.settings.image_text_title }}
+                                </h3>
+                                <div class="image_text_text">
+                                    {{ block.settings.image_text_text }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {%- when 'socials' -%}
+            <div class="socials" id="block--{{ block.id }}">
+                <div class="container">
+                    <div class="row">
+                        <div class="inner" {% if block.settings.socials_bg != blank %}style="background-image: url('{{ block.settings.socials_bg | img_url: "master" }}');"{% endif %}>
+                            <h3>
+                                {{ block.settings.socials_title }}
+                            </h3>
+                            <ul>
+                                {%- if block.settings.social_youtube != blank -%}
+                                    <li>
+                                        <a href="{{ block.settings.social_youtube  }}"
+                                           class="tap-area" target="_blank" rel="noopener" aria-label="{{ 'general.social.follow_on' | t: social_media: 'YouTube' }}">
+                                            {% if block.settings.social_youtube_icon != blank %}
+                                                <img src="{{ block.settings.social_youtube_icon | img_url: 'master' }}" alt="youtube" />
+                                            {% else %}
+                                                {%- render 'icon' with 'twitter' -%}
+                                            {% endif %}
+                                        </a>
+                                    </li>
+                                {%- endif -%}
+                                {%- if block.settings.social_twitter != blank -%}
+                                    <li>
+                                        <a href="{{ block.settings.social_twitter }}"
+                                           class="tap-area" target="_blank" rel="noopener" aria-label="{{ 'general.social.follow_on' | t: social_media: 'Twitter' }}">
+                                            {% if block.settings.social_twitter_icon != blank %}
+                                                <img src="{{ block.settings.social_twitter_icon | img_url: 'master' }}" alt="twitter" />
+                                            {% else %}
+                                                {%- render 'icon' with 'twitter' -%}
+                                            {% endif %}
+                                        </a>
+                                    </li>
+                                {%- endif -%}
+                                {%- if block.settings.social_pinterest != blank -%}
+                                    <li>
+                                        <a href="{{ block.settings.social_pinterest }}" class="tap-area" target="_blank" rel="noopener" aria-label="{{ 'general.social.follow_on' | t: social_media: 'Pinterest' }}">
+                                            {% if block.settings.social_pinterest_icon != blank %}
+                                                <img src="{{ block.settings.social_pinterest_icon | img_url: 'master' }}" alt="pinterest" />
+                                            {% else %}
+                                                {%- render 'icon' with 'pinterest' -%}
+                                            {% endif %}
+                                        </a>
+                                    </li>
+                                {%- endif -%}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {%- when 'subscribe' -%}
+            <div class="subscribe"
+                    {% if section.settings.subscribe_bg != blank %}
+                 style="background-image: url('{{ block.settings.subscribe_bg | img_url: "master" }}');"{% endif %}>
+                <div class="container">
+                    <div class="row">
+                        <div class="inner d_flex">
+                            <div class="col">
+                                <div class="img">
+                                    <img src="{{ block.settings.subscribe_img | img_url: 'master' }}" alt="" />
+                                </div>
+                            </div>
+                            <div class="col" style="background-color: {{ block.settings.bg_color }}">
+                                <div class="sign_up d_flex">
+                                    <h3 class="title">
+                                        {{ block.settings.subscribe_title }}
+                                    </h3>
+                                    <div class="subtitle">
+                                        {{ block.settings.subscribe_subtitle }}
+                                    </div>
+                                    {%- form 'customer', id: 'footer-newsletter', class: 'footer__newsletter-form form' -%}
+                                        {%- if form.posted_successfully? -%}
+                                            {%- capture success_message -%}{{ 'general.newsletter.subscribed_successfully' | t }}{%- endcapture -%}
+                                            {%- render 'banner', content: success_message, status: 'success' -%}
+                                        {%- else -%}
+                                            {%- if form.errors -%}
+                                                {%- capture error_message -%}{{ form.errors.translated_fields['email'] }} {{ form.errors.messages['email'] }}{%- endcapture -%}
+                                                {%- render 'banner', content: error_message, status: 'error' -%}
+                                            {%- endif -%}
+
+                                            <input type="hidden" name="contact[tags]" value="newsletter">
+
+                                            {%- capture label -%}{{ 'general.newsletter.email' | t }}{%- endcapture -%}
+                                            {%- render 'input', block: block, name: 'contact[email]', label: label, type: 'email', required: true, autocomplete: 'email', enterkeyhint: 'send', self_submit: true -%}
+                                        {%- endif -%}
+                                    {%- endform -%}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+    {%- endcase -%}
+    {% endfor %}
+</div>
+
+{% schema %}
+    {
+        "name": "Wendigoon",
+        "tag": "section",
+        "settings": [
+            {
+                "type": "color",
+                "id": "bg_color",
+                "label": "Background Color Section",
+                "default": "#090A0A"
+            },
+            {
+                "type": "image_picker",
+                "id": "bg",
+                "label": "Background Section"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Heading",
+                "default": "Heading"
+            },
+            {
+                "type": "text",
+                "id": "subheading",
+                "label": "Subheading"
+            }
+        ],
+        "blocks": [
+            {
+                "name": "Featured Product",
+                "type": "featured_product",
+                "limit": 1,
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "featured_product_bg",
+                        "label": "Background Block"
+                    },
+                    {
+                        "type": "product",
+                        "id": "featured_product_product",
+                        "label": "Choose Product"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "featured_product_placeholder",
+                        "label": "Placeholder Image Product"
+                    },
+                    {
+                        "type": "text",
+                        "id": "featured_product_title",
+                        "label": "Title Block",
+                        "default": "Explore the latest DROP"
+                    }
+                ]
+            },
+            {
+                "name": "List",
+                "type": "list",
+                "settings": [
+                    {
+                        "type": "header",
+                        "content": "Item 1"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "item1_icon",
+                        "label": "Item 1 Icon"
+                    },
+                    {
+                        "type": "text",
+                        "id": "item1_title",
+                        "label": "Item 1 Title",
+                        "default": "FEATURE ONE"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "item1_text",
+                        "label": "Item 1 Text",
+                        "default": "<p>Get free shipping on orders of $100 or more</p>"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Item 2"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "item2_icon",
+                        "label": "Item 2 Icon"
+                    },
+                    {
+                        "type": "text",
+                        "id": "item2_title",
+                        "label": "Item 2 Title",
+                        "default": "FEATURE TWO"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "item2_text",
+                        "label": "Item 2 Text",
+                        "default": "<p>A question? Please contact us at 123-456-\</p>"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Item 3"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "item3_icon",
+                        "label": "Item 3 Icon"
+                    },
+                    {
+                        "type": "text",
+                        "id": "item3_title",
+                        "label": "Item 3 Title",
+                        "default": "FEATURE THREE"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "item3_text",
+                        "label": "Item 3 Text",
+                        "default": "<p>Refer a friend and get 15% off each other</p>"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Item 4"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "item4_icon",
+                        "label": "Item 4 Icon"
+                    },
+                    {
+                        "type": "text",
+                        "id": "item4_title",
+                        "label": "Item 4 Title",
+                        "default": "FEATURE FOUR"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "item4_text",
+                        "label": "Item 4 Text",
+                        "default": "<p>Your payment information is processed securely</p>"
+                    }
+                ]
+            },
+            {
+                "name": "Image Text",
+                "type": "image_text",
+                "settings": [
+                    {
+                        "type": "checkbox",
+                        "id": "image_text_reverse",
+                        "label": "Reverse Image Text"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image_text_img",
+                        "label": "Image"
+                    },
+                    {
+                        "type": "text",
+                        "id": "image_text_title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "image_text_subtitle",
+                        "label": "Subtitle"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "image_text_text",
+                        "label": "Text",
+                        "default": "<p>Lorem Ipsum Dolor ...</p>"
+                    }
+                ]
+            },
+            {
+                "name": "Socials",
+                "type": "socials",
+                "limit": 1,
+                "settings": [
+                    {
+                        "type": "header",
+                        "content": "Socials block settings"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "socials_bg",
+                        "label": "Background Block"
+                    },
+                    {
+                        "type": "text",
+                        "id": "socials_title",
+                        "label": "Title Block",
+                        "default": "Follow us on social Media"
+                    },
+                    {
+                        "type": "header",
+                        "content": "YouTube"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "social_youtube_icon",
+                        "label": "YouTube Icon"
+                    },
+                    {
+                        "type": "url",
+                        "id": "social_youtube",
+                        "label": "YouTube URL"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Twitter"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "social_twitter_icon",
+                        "label": "Twitter Icon"
+                    },
+                    {
+                        "type": "url",
+                        "id": "social_twitter",
+                        "label": "Twitter URL"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Pinterest"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "social_pinterest_icon",
+                        "label": "Pinterest Icon"
+                    },
+                    {
+                        "type": "url",
+                        "id": "social_pinterest",
+                        "label": "Pinterest URL"
+                    }
+                ]
+            },
+            {
+                "name": "Subscribe",
+                "type": "subscribe",
+                "limit": 1,
+                "settings": [
+                    {
+                        "type": "color",
+                        "id": "bg_color",
+                        "label": "Background Block Info",
+                        "default": "#000000"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "subscribe_bg",
+                        "label": "Background Block"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "subscribe_img",
+                        "label": "Image Block"
+                    },
+                    {
+                        "type": "text",
+                        "id": "subscribe_title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "subscribe_subtitle",
+                        "label": "Sub Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "placeholder_email",
+                        "label": "Placeholder EMAIL"
+                    },
+                    {
+                        "type": "text",
+                        "id": "button_submit__label",
+                        "label": "Button Submit Label",
+                        "default": "SUBMIT"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Wendigoon",
+                "blocks": [
+                    {
+                        "type": "featured_product"
+                    },
+                    {
+                        "type": "list"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

@@ -1,0 +1,207 @@
+<style>
+  .shopify-section--main-page, [role="main"] .shopify-section:first-child {
+    display: none !important;
+  }
+  
+  
+
+  @font-face {
+      font-family: "OTNeueMontreal";
+      src: url("{{ 'OTNeueMontreal-SemiBoldSemiSqueezed.otf' | asset_url }}") format("opentype");
+    }
+  body {
+    background: url('https://cdn.shopify.com/s/files/1/0265/4955/1185/files/bg-texture_39c3e3e9-7bdf-4849-8488-fd4009af7cae.jpg?v=1710820110')  50px 50px repeat !important;
+  }
+  
+  .hero-section {
+    background: url('https://cdn.shopify.com/s/files/1/0265/4955/1185/files/bg-texture_39c3e3e9-7bdf-4849-8488-fd4009af7cae.jpg?v=1710820110')  50px 50px repeat !important;
+    border-bottom: 1px solid black;
+  }
+  
+  .hero-section__image {
+    border-right: none;
+    border-top: 1px solid black
+  }
+
+  .hero-section__image img {
+    width: 100%;
+  height: 100%;
+  }
+  
+  @media (min-width: 768px) {
+  .hero-section__image {
+    border-right: 1px solid black;
+    border-top: none
+  }
+  }
+
+  main h1 {
+    text-shadow: 4.237px 4.237px 0px #7D8A78, 6.356px 6.356px 0px #000;
+    -webkit-text-stroke-width: 2.1186439990997314px;
+    -webkit-text-stroke-color: #000;
+    font-family: "PP Fragment";
+    font-size: 103px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 94.1px; /* 91.359% */
+    color: #AD6B45; /* Set the text color to white (or any other color) */
+  
+    /* Temporarily remove the following properties to test */
+    /* background-clip: text; */
+    /* -webkit-background-clip: text; */
+    /* -webkit-text-fill-color: transparent; */
+  }
+
+  @media (max-width: 768px) {
+  main h1 {
+      text-shadow: 2.277px 2.277px 0px #7D8A78, 3.416px 3.416px 0px #000;
+      -webkit-text-stroke-width: 1.1385910511016846;
+      font-size: 54px;
+      line-height: 49.172px; 
+      width: 300px;
+  }
+  }
+  
+  main p {
+    font-family: "OTNeueMontreal" !important
+  }
+
+  @media (max-width: 768px) {
+    main p {
+    font-size: 11px;
+   
+  }}
+  .hero-logo {
+    width: 300px
+  }
+
+  @keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+  .star {
+    width: 219px;
+    height: 219px;
+    animation: rotate 20s linear infinite;
+  }
+
+  @media (max-width: 768px) {
+
+  .star {
+    width: 100px;
+    height: 100px;
+    margin-left: 2em;
+  }
+}
+
+  .apparel-circle {
+    position: absolute;
+    right: -80px;
+    top: -80px;
+    width: 548px;
+    height: 422px;
+  }
+
+  @media (max-width: 768px) {
+    .apparel-circle {
+      display: none !important
+}
+}
+
+.hero-image {
+
+  width: 350px;
+  height: auto;
+
+}
+
+.hero-section__image-container {
+  background: url('{{ section.settings.image  }}');
+  border-top: 1px solid black
+}
+{% if section.settings.mobile_image != blank %}
+@media (max-width: 768px) {
+  .hero-section__image-container {
+  background: url('{{ section.settings.mobile_image }}');
+}
+}
+
+
+@media (min-width: 768px) {
+  .hero-section__image-container {
+    border-right: 1px solid black;
+    border-top: none
+  }
+  }
+{% endif %}
+  
+</style>
+
+  <div class="hero-section flex flex-col-reverse lg:flex-row">
+
+  <div class="hero-section__image-container relative flex items-center justify-center px-12 lg:w-2/5 py-6 lg:py-0" style=" background: url('{{ section.settings.image | img_url: '1024x' }}') no-repeat center center / cover">
+    <img class="hero-image" src="https://cdn.shopify.com/s/files/1/0265/4955/1185/files/jamie-hero_b3a021f6-b532-407c-b349-a98d06910585.png?v=1710970438">
+
+    </div>
+    <div class="hero-section__text  px-8 py-6 flex justify-between items-end">
+      <img src="https://cdn.shopify.com/s/files/1/0265/4955/1185/files/apparal-circle.png?v=1710867009" class="apparel-circle">
+      <div class="flex flex-col justify-between items-between h-full  w-3/5">
+        {% if section.settings.logo != blank %}
+          <img class="hero-logo" src="{{ section.settings.logo | img_url: '300x' }}" alt="{{ section.settings.title | escape }}">
+        {% endif %}
+    
+        <h1 class="my-12">{{ section.settings.title }}</h1>
+        <p class="w-3-5 lg:w-full">
+          {{ section.settings.description }}
+        </p>
+      </div>
+      <img class="star" src="https://cdn.shopify.com/s/files/1/0265/4955/1185/files/star.png?v=1710822787">
+    </div>
+  </div>
+  
+  {% schema %}
+  {
+    "name": "Hero v2",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "The World's Okay-est Merch"
+      },
+      {
+        "type": "text",
+        "id": "description",
+        "label": "Description",
+        "default": "CELEBRATE THE ART OF BEING WONDERFULLY AVERAGE WITH FRENCH ROAST, WHERE THE JOKES ARE JUST ALRIGHT AND THE CLOTHES ARE ALSO FINE."
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Desktop Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_image",
+        "label": "Mobile Image"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero v2",
+        "category": "Image"
+      }
+    ]
+  }
+  {% endschema %}
+  

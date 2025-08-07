@@ -33,7 +33,7 @@
   --spacing-xxl: 4rem;    /* 64px */
   
   /* LAYOUT */
-  --container-max-width: 1200px;
+  --container-max-width: 1440px;
   --grid-gap: var(--spacing-lg);
   
   /* BORDERS & RADIUS */

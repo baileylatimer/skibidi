@@ -1,0 +1,284 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  #shopify-section-{{ section.id }} .universe-video-section {
+    padding: 6em 0;
+    background-color: var(--color-dark);
+    overflow: hidden;
+  }
+
+  .universe-video-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+  }
+
+  .universe-video-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  /* Text Content - First 3 columns */
+  .universe-video-content {
+    grid-column: span 3;
+  }
+
+  .universe-video-content__title {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .universe-video-content__title-row-1 {
+    color: var(--color-light);
+    display: block;
+  }
+
+  .universe-video-content__title-row-2 {
+    color: var(--color-primary);
+    display: block;
+  }
+
+  .universe-video-content__description {
+    font-family: var(--font-body) !important;
+    font-weight: 400 !important;
+    color: var(--color-subtle);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Images Container - Last 2 columns */
+  .universe-video-images {
+    grid-column: span 2;
+    position: relative;
+    height: 500px;
+  }
+
+  .universe-video-image {
+    position: absolute;
+    border-radius: var(--border-radius-md);
+    transition: transform var(--transition-slow);
+  }
+
+  .universe-video-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius-md);
+  }
+
+  /* Floating positioning and animations */
+  .universe-video-image:nth-child(1) {
+    top: 5%;
+    right: 10%;
+    width: 320px;
+    height: 220px;
+    z-index: 3;
+    animation: float1 6s ease-in-out infinite;
+  }
+
+  .universe-video-image:nth-child(2) {
+    top: 30%;
+    left: 0%;
+    width: 280px;
+    height: 200px;
+    z-index: 2;
+    animation: float2 8s ease-in-out infinite;
+  }
+
+  .universe-video-image:nth-child(3) {
+    bottom: 5%;
+    right: 20%;
+    width: 240px;
+    height: 180px;
+    z-index: 1;
+    animation: float3 7s ease-in-out infinite;
+  }
+
+  /* Floating animations */
+  @keyframes float1 {
+    0%, 100% { transform: translateY(0px) rotate(2deg); }
+    50% { transform: translateY(-15px) rotate(-1deg); }
+  }
+
+  @keyframes float2 {
+    0%, 100% { transform: translateY(0px) rotate(-1deg); }
+    50% { transform: translateY(-20px) rotate(2deg); }
+  }
+
+  @keyframes float3 {
+    0%, 100% { transform: translateY(0px) rotate(1deg); }
+    50% { transform: translateY(-10px) rotate(-2deg); }
+  }
+
+  /* Hover effects */
+  .universe-video-image:hover {
+    transform: scale(1.05) !important;
+    z-index: 10;
+  }
+
+  /* Mobile Layout */
+  @media screen and (max-width: 767px) {
+    .universe-video-grid {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: var(--spacing-xl);
+    }
+
+    .universe-video-content {
+      text-align: center;
+    }
+
+    .universe-video-images {
+      height: 400px;
+      margin: 0 auto;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .universe-video-image:nth-child(1) {
+      top: 5%;
+      right: 10%;
+      width: 220px;
+      height: 160px;
+    }
+
+    .universe-video-image:nth-child(2) {
+      top: 40%;
+      left: 5%;
+      width: 200px;
+      height: 145px;
+    }
+
+    .universe-video-image:nth-child(3) {
+      bottom: 5%;
+      right: 15%;
+      width: 180px;
+      height: 130px;
+    }
+  }
+</style>
+
+<div class="universe-video-section">
+  <div class="universe-video-container">
+    <div class="universe-video-grid">
+      
+      <!-- Text Content - First 3 columns -->
+      <div class="universe-video-content">
+        {%- if section.settings.title_row_1 != blank or section.settings.title_row_2 != blank -%}
+          <h1 class="universe-video-content__title">
+            {%- if section.settings.title_row_1 != blank -%}
+              <span class="universe-video-content__title-row-1">{{ section.settings.title_row_1 }}</span>
+            {%- endif -%}
+            {%- if section.settings.title_row_2 != blank -%}
+              <span class="universe-video-content__title-row-2">{{ section.settings.title_row_2 }}</span>
+            {%- endif -%}
+          </h1>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <div class="universe-video-content__description">
+            {{ section.settings.description }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Floating Images - Last 2 columns -->
+      <div class="universe-video-images">
+        {%- if section.settings.image_1 != blank -%}
+          <div class="universe-video-image">
+            <img src="{{ section.settings.image_1 | image_url }}" 
+                 alt="Universe Image 1"
+                 width="200"
+                 height="140">
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.image_2 != blank -%}
+          <div class="universe-video-image">
+            <img src="{{ section.settings.image_2 | image_url }}" 
+                 alt="Universe Image 2"
+                 width="180"
+                 height="130">
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.image_3 != blank -%}
+          <div class="universe-video-image">
+            <img src="{{ section.settings.image_3 | image_url }}" 
+                 alt="Universe Image 3"
+                 width="160"
+                 height="120">
+          </div>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Universe Video Section",
+  "class": "shopify-section--universe-video-section",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Title"
+    },
+    {
+      "type": "text",
+      "id": "title_row_1",
+      "label": "Title - First Row",
+      "default": "A UNIVERSE FAR BIGGER",
+      "info": "This will appear in white"
+    },
+    {
+      "type": "text",
+      "id": "title_row_2",
+      "label": "Title - Second Row",
+      "default": "THAN A SINGLE VIDEO.",
+      "info": "This will appear in red"
+    },
+    {
+      "type": "header",
+      "content": "Description"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>You think this is weird? So was everything you grew up on.</p><p>SpongeBob was a talking sponge. Michelangelo was a crime-fighting turtle. Optimus Prime was a truck that gave speeches. Skibidi Toilet follows in the same footsteps, louder, and born from the internet instead of a network.</p><p>This is the next wave of character storytelling. A digital-native universe with hundreds of evolving characters, fan-built lore, creator-made episodes, Roblox integrations, and a global fandom that spans platforms and generations.</p><p>It's not random—it's the future.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Floating Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Floating Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Floating Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Floating Image 3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Universe Video Section"
+    }
+  ]
+}
+{% endschema %}

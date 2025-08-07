@@ -1,0 +1,258 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  #shopify-section-{{ section.id }} .what-you-unlock-section {
+    padding-top: 2em;
+    padding-bottom: 0;
+  }
+
+  .what-you-unlock-title {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    color: var(--color-light);
+    padding: 0 var(--spacing-lg);
+  }
+
+  .what-you-unlock-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    width: 100%;
+  }
+
+  .what-you-unlock-column {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: flex-end;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .what-you-unlock-column::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  .what-you-unlock-column:nth-child(1)::before {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 34.54%, #9B2900 100%);
+  }
+
+  .what-you-unlock-column:nth-child(2)::before {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 34.54%, #9DFA08 100%);
+  }
+
+  .what-you-unlock-column:nth-child(3)::before {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 34.54%, #220F8D 100%);
+  }
+
+  .what-you-unlock-column__content {
+    position: relative;
+    z-index: 2;
+    padding: 1em;
+    width: 100%;
+    color: var(--color-light);
+  }
+
+  /* Green column (column 2) has black text */
+  .what-you-unlock-column:nth-child(2) .what-you-unlock-column__content {
+    color: var(--color-dark);
+  }
+
+  .what-you-unlock-column:nth-child(2) .what-you-unlock-column__title {
+    color: var(--color-dark);
+  }
+
+  .what-you-unlock-column:nth-child(2) .what-you-unlock-column__description {
+    color: var(--color-dark);
+  }
+
+  .what-you-unlock-column__title {
+    font-family: var(--font-header) !important;
+    font-weight: 800 !important;
+    font-size: 32px;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+  }
+
+  @media screen and (min-width: 768px) {
+    .what-you-unlock-column__title {
+      font-size: 45px;
+    }
+  }
+
+  .what-you-unlock-column__description {
+    font-family: var(--font-body) !important;
+    font-weight: 400 !important;
+    color: var(--color-light);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Mobile Layout */
+  @media screen and (max-width: 767px) {
+    .what-you-unlock-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .what-you-unlock-column {
+      min-height: 400px;
+    }
+  }
+</style>
+
+<div class="what-you-unlock-section">
+  
+  {%- if section.settings.title != blank -%}
+    <h2 class="what-you-unlock-title">{{ section.settings.title }}</h2>
+  {%- endif -%}
+
+  <div class="what-you-unlock-grid">
+    
+    <!-- Column 1 -->
+    <div class="what-you-unlock-column" 
+         {%- if section.settings.column_1_image != blank -%}
+           style="background-image: url('{{ section.settings.column_1_image | image_url }}');"
+         {%- endif -%}>
+      <div class="what-you-unlock-column__content">
+        {%- if section.settings.column_1_title != blank -%}
+          <h3 class="what-you-unlock-column__title">{{ section.settings.column_1_title }}</h3>
+        {%- endif -%}
+        {%- if section.settings.column_1_description != blank -%}
+          <p class="what-you-unlock-column__description">{{ section.settings.column_1_description }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Column 2 -->
+    <div class="what-you-unlock-column"
+         {%- if section.settings.column_2_image != blank -%}
+           style="background-image: url('{{ section.settings.column_2_image | image_url }}');"
+         {%- endif -%}>
+      <div class="what-you-unlock-column__content">
+        {%- if section.settings.column_2_title != blank -%}
+          <h3 class="what-you-unlock-column__title">{{ section.settings.column_2_title }}</h3>
+        {%- endif -%}
+        {%- if section.settings.column_2_description != blank -%}
+          <p class="what-you-unlock-column__description">{{ section.settings.column_2_description }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Column 3 -->
+    <div class="what-you-unlock-column"
+         {%- if section.settings.column_3_image != blank -%}
+           style="background-image: url('{{ section.settings.column_3_image | image_url }}');"
+         {%- endif -%}>
+      <div class="what-you-unlock-column__content">
+        {%- if section.settings.column_3_title != blank -%}
+          <h3 class="what-you-unlock-column__title">{{ section.settings.column_3_title }}</h3>
+        {%- endif -%}
+        {%- if section.settings.column_3_description != blank -%}
+          <p class="what-you-unlock-column__description">{{ section.settings.column_3_description }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "What You Unlock",
+  "class": "shopify-section--what-you-unlock",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Title"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title (H2)",
+      "default": "WHAT YOU UNLOCK"
+    },
+    {
+      "type": "header",
+      "content": "Column 1 (Red Gradient)"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_1_image",
+      "label": "Column 1 Background Image"
+    },
+    {
+      "type": "text",
+      "id": "column_1_title",
+      "label": "Column 1 Title",
+      "default": "FIRST LOOK AT THE SKIBIDI WORLD"
+    },
+    {
+      "type": "textarea",
+      "id": "column_1_description",
+      "label": "Column 1 Description",
+      "default": "Unlock a 10-minute cinematic preview of the Skibidi Universe—live action, CG, and pure chaos."
+    },
+    {
+      "type": "header",
+      "content": "Column 2 (Green Gradient)"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_2_image",
+      "label": "Column 2 Background Image"
+    },
+    {
+      "type": "text",
+      "id": "column_2_title",
+      "label": "Column 2 Title",
+      "default": "BEHIND THE SCENES WITH BAYHEM"
+    },
+    {
+      "type": "textarea",
+      "id": "column_2_description",
+      "label": "Column 2 Description",
+      "default": "Go inside the production with Michael Bay and the VFX team behind this project—and what's coming next."
+    },
+    {
+      "type": "header",
+      "content": "Column 3 (Blue Gradient)"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_3_image",
+      "label": "Column 3 Background Image"
+    },
+    {
+      "type": "text",
+      "id": "column_3_title",
+      "label": "Column 3 Title",
+      "default": "UNIQUE TOWER UNIT FOR TOILET TOWER DEFENSE"
+    },
+    {
+      "type": "textarea",
+      "id": "column_3_description",
+      "label": "Column 3 Description",
+      "default": "Along with your order confirmation, you'll receive a code via email that unlocks an exclusive unit in Toilet Tower Defense."
+    }
+  ],
+  "presets": [
+    {
+      "name": "What You Unlock"
+    }
+  ]
+}
+{% endschema %}

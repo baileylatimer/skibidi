@@ -164,6 +164,22 @@
         "step_3_title_row_2": "NOW OR LATER",
         "step_3_description": "Once your order is confirmed, your private stream unlocks instantly.\u2028This isn’t a rental — you can watch SKIBIDI: CHAPTER ONE as many times as you want during the premiere window.\u2028You’ll also receive an email with access instructions, so you can watch anytime."
       }
+    },
+    "what_you_unlock_iBac6p": {
+      "type": "what-you-unlock",
+      "name": "What You Unlock",
+      "settings": {
+        "title": "WHAT YOU UNLOCK",
+        "column_1_image": "shopify:\/\/shop_images\/what-you-unlock--03.jpg",
+        "column_1_title": "FIRST LOOK AT THE SKIBIDI WORLD",
+        "column_1_description": "Unlock a 10-minute cinematic preview of the Skibidi Universe—live action, CG, and pure chaos.",
+        "column_2_image": "shopify:\/\/shop_images\/what-you-unlock--02.jpg",
+        "column_2_title": "BEHIND THE SCENES WITH BAYHEM",
+        "column_2_description": "Go inside the production with Michael Bay and the VFX team behind this project—and what's coming next.",
+        "column_3_image": "shopify:\/\/shop_images\/what-you-unlock--01.jpg",
+        "column_3_title": "UNIQUE TOWER UNIT FOR TOILET TOWER DEFENSE",
+        "column_3_description": "Along with your order confirmation, you'll receive a code via email that unlocks an exclusive unit in Toilet Tower Defense."
+      }
     }
   },
   "order": [
@@ -171,6 +187,7 @@
     "featured_collection_8MMTQp",
     "skibidi_universe_7Q4JQ9",
     "the_evolution_4kektM",
-    "how_to_watch_YPQwaE"
+    "how_to_watch_YPQwaE",
+    "what_you_unlock_iBac6p"
   ]
 }

@@ -184,3 +184,18 @@ h2 {
 /* ================================
    RESPONSIVE DESIGN
    ================================ */
+
+
+   /* ================================
+   PDP
+   ================================ */
+
+   .product-info__vendor {
+    Display: None !important;
+   }
+
+   .product-info__title {
+    Text-transform: Uppercase;
+    Color: var(--color-primary);
+    Margin-bottom: 16px 
+   }

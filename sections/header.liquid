@@ -103,10 +103,10 @@
             {%- render 'icon' with 'hamburger' -%}
           </button>
 
-          <a href="{{ routes.search_url }}" class="tap-area sm:hidden" aria-controls="search-drawer">
+          {% comment %} <a href="{{ routes.search_url }}" class="tap-area sm:hidden" aria-controls="search-drawer">
             <span class="sr-only">{{ 'header.general.open_search' | t }}</span>
             {%- render 'icon' with 'search' -%}
-          </a>
+          </a> {% endcomment %}
 
           {%- if section.settings.layout != 'drawer' and section.settings.menu.links.size > 0 -%}
             <nav
@@ -341,11 +341,11 @@
               {%- render 'localization-selector', type: 'locale', popover_vertical_position: 'end' -%}
             </div>
           {%- endif -%}
-
+{% comment %} 
           <a href="{{ routes.search_url }}" class="hidden tap-area sm:block" aria-controls="search-drawer">
             <span class="sr-only">{{ 'header.general.open_search' | t }}</span>
             {%- render 'icon' with 'search' -%}
-          </a>
+          </a> {% endcomment %}
 
           {%- if shop.customer_accounts_enabled -%}
             <a href="{{ routes.account_url }}" class="hidden tap-area sm:block">

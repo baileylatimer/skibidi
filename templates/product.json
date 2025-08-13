@@ -1,1 +1,206 @@
-{"sections":{"main":{"type":"main-product","blocks":{"badges":{"type":"badges","settings":{}},"vendor":{"type":"vendor","settings":{}},"title":{"type":"title","settings":{"heading_tag":"h3"}},"price":{"type":"price","settings":{"show_taxes_notice":false}},"payment_terms":{"type":"payment_terms","disabled":true,"settings":{}},"rating":{"type":"rating","disabled":true,"settings":{"show_empty":false}},"separator":{"type":"separator","settings":{}},"variant_picker":{"type":"variant_picker","settings":{"hide_sold_out_variants":false,"stack_blocks":true,"selector_mode":"dropdown","color_mode":"color","size_chart_page":"about"}},"quantity_selector":{"type":"quantity_selector","settings":{}},"buy_buttons":{"type":"buy_buttons","settings":{"show_payment_button":false,"show_gift_card_recipient":true,"atc_button_background":"#eaeaea","atc_button_text_color":"#000000","payment_button_background":"","payment_button_text_color":""}},"description":{"type":"description","settings":{"collapse_content":false}},"a0644653-f3bd-4232-873a-164ac7320980":{"type":"associated_products","settings":{"title":"Buy it with","stack_products":false,"products_count":5,"background":"","text_color":""}},"9a4c7fd1-fc5c-4f4f-a26f-e29715a89e95":{"type":"collapsible_text","settings":{"title":"Size Chart","content":""}},"47892c4f-6950-4f55-b577-838b6d550670":{"type":"collapsible_text","settings":{"title":"Youth Size Chart","content":""}},"fea27106-fad4-4f6e-903e-53143d95eed0":{"type":"pickup_availability","disabled":true,"settings":{}},"0645a6df-cdf2-421d-ab20-3c5aa0d9139d":{"type":"inventory","disabled":true,"settings":{"low_inventory_threshold":0}},"72b67488-a607-4e27-a3ef-d8d0e316e9ea":{"type":"line_item_property","disabled":true,"settings":{"label":"Your label","type":"text","required":false,"allow_long_text":false}},"0d5f25fe-bf4e-48b4-b313-13cdf3c0db5e":{"type":"product_variations","disabled":true,"settings":{"option_name":"","option_value_metafield":"","products":[],"color_mode":"color"}}},"block_order":["badges","vendor","title","price","payment_terms","rating","separator","variant_picker","quantity_selector","buy_buttons","description","a0644653-f3bd-4232-873a-164ac7320980","9a4c7fd1-fc5c-4f4f-a26f-e29715a89e95","47892c4f-6950-4f55-b577-838b6d550670","fea27106-fad4-4f6e-903e-53143d95eed0","0645a6df-cdf2-421d-ab20-3c5aa0d9139d","72b67488-a607-4e27-a3ef-d8d0e316e9ea","0d5f25fe-bf4e-48b4-b313-13cdf3c0db5e"],"custom_css":[".prose {font-size: 0.93em;}","@media screen and (min-width: 768px) {.product-info {padding-top: 7%; }}"],"settings":{"full_width":false,"allow_transparent_header":false,"custom_font":false,"sec_font":"helvetica_n4","sec_width":1600,"show_fixed_add_to_cart":true,"desktop_media_width":60,"desktop_media_layout":"carousel_thumbnails_left","mobile_media_size":"expanded","mobile_carousel_control":"dots","enable_video_autoplay":true,"enable_video_looping":true,"enable_image_zoom":true,"max_image_zoom_level":3,"page_logo_width":100,"head_background":"","head_text_color":"","background":"#ffffff","background_gradient":"","text_color":"#000000","input_background":"rgba(0,0,0,0)","input_text_color":"#000000"}},"related-products":{"type":"related-products","settings":{"recommendations_count":6,"products":"{{ product.metafields[\"shopify--discovery--product_recommendation\"].related_products.value }}","full_width":true,"stack_products":false,"show_progress_bar":true,"products_per_row_mobile":"1","products_per_row_desktop":3,"subheading":"","title":"You May Also Like...","content":"","background":"","background_gradient":"","text_color":"","heading_color":"","heading_gradient":"","product_card_background":"","product_card_text_color":""}}},"order":["main","related-products"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "badges": {
+          "type": "badges",
+          "settings": {}
+        },
+        "vendor": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h3"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "payment_terms": {
+          "type": "payment_terms",
+          "disabled": true,
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "disabled": true,
+          "settings": {
+            "show_empty": false
+          }
+        },
+        "separator": {
+          "type": "separator",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_mode": "dropdown",
+            "color_mode": "color",
+            "size_chart_page": "about"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": false,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "#eaeaea",
+            "atc_button_text_color": "#000000",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "collapse_content": false
+          }
+        },
+        "a0644653-f3bd-4232-873a-164ac7320980": {
+          "type": "associated_products",
+          "settings": {
+            "title": "Buy it with",
+            "stack_products": false,
+            "products_count": 5,
+            "background": "",
+            "text_color": ""
+          }
+        },
+        "9a4c7fd1-fc5c-4f4f-a26f-e29715a89e95": {
+          "type": "collapsible_text",
+          "settings": {
+            "title": "Size Chart",
+            "content": ""
+          }
+        },
+        "47892c4f-6950-4f55-b577-838b6d550670": {
+          "type": "collapsible_text",
+          "settings": {
+            "title": "Youth Size Chart",
+            "content": ""
+          }
+        },
+        "fea27106-fad4-4f6e-903e-53143d95eed0": {
+          "type": "pickup_availability",
+          "disabled": true,
+          "settings": {}
+        },
+        "0645a6df-cdf2-421d-ab20-3c5aa0d9139d": {
+          "type": "inventory",
+          "disabled": true,
+          "settings": {
+            "low_inventory_threshold": 0
+          }
+        },
+        "72b67488-a607-4e27-a3ef-d8d0e316e9ea": {
+          "type": "line_item_property",
+          "disabled": true,
+          "settings": {
+            "label": "Your label",
+            "type": "text",
+            "required": false,
+            "allow_long_text": false
+          }
+        },
+        "0d5f25fe-bf4e-48b4-b313-13cdf3c0db5e": {
+          "type": "product_variations",
+          "disabled": true,
+          "settings": {
+            "option_name": "",
+            "option_value_metafield": "",
+            "products": [],
+            "color_mode": "color"
+          }
+        }
+      },
+      "block_order": [
+        "badges",
+        "vendor",
+        "title",
+        "price",
+        "payment_terms",
+        "rating",
+        "separator",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "a0644653-f3bd-4232-873a-164ac7320980",
+        "9a4c7fd1-fc5c-4f4f-a26f-e29715a89e95",
+        "47892c4f-6950-4f55-b577-838b6d550670",
+        "fea27106-fad4-4f6e-903e-53143d95eed0",
+        "0645a6df-cdf2-421d-ab20-3c5aa0d9139d",
+        "72b67488-a607-4e27-a3ef-d8d0e316e9ea",
+        "0d5f25fe-bf4e-48b4-b313-13cdf3c0db5e"
+      ],
+      "custom_css": [
+        ".prose {font-size: 0.93em;}",
+        "@media screen and (min-width: 768px) {.product-info {padding-top: 7%; }}"
+      ],
+      "settings": {
+        "full_width": true,
+        "allow_transparent_header": false,
+        "custom_font": false,
+        "sec_font": "helvetica_n4",
+        "sec_width": 1600,
+        "show_fixed_add_to_cart": true,
+        "desktop_media_width": 60,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "dots",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "page_logo_width": 100,
+        "head_background": "",
+        "head_text_color": "",
+        "background": "#000000",
+        "background_gradient": "",
+        "text_color": "#ffffff",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": "#ffffff"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "recommendations_count": 6,
+        "products": "{{ product.metafields[\"shopify--discovery--product_recommendation\"].related_products.value }}",
+        "full_width": true,
+        "stack_products": false,
+        "show_progress_bar": true,
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "You May Also Like...",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products"
+  ]
+}

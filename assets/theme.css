@@ -10532,7 +10532,7 @@ ul.mvod_tag li svg {
 .sub_mvod_outer {
     margin-bottom: 25px;
 }
-.middle_con:before, .middle_con:after {
+.middle_con:after {
     content: '';
     background: #818181;
     height: 45px;
@@ -10541,6 +10541,14 @@ ul.mvod_tag li svg {
     left: -30px;
     top: calc(50% - 45px/2);
 }
+
+@media screen and (max-width: 767px) {
+  .middle_con:before, .middle_con:after {
+    display: None;
+}
+}
+
+
 .middle_con:after {
     left: unset;
     right: -15px;
@@ -10642,9 +10650,8 @@ button#readMoreBtn {
     text-align: left;
     width: fit-content;
     font-weight: 400;
-    text-transform: capitalize !important;
+    text-transform: uppercase !important;
     font-size: 13px;
-    letter-spacing: 1px;
     border-bottom: 2px solid;
     border-color: #fff;
 }
@@ -10767,7 +10774,7 @@ button.bmpui-ui-piptogglebutton {
     width: 30vw;
     min-width: 250px;
     height: auto;
-    z-index: 2;
+    z-index: 999;
     transition: 0.3s;
 }
 button[aria-label="Apple AirPlay"], button[aria-label="Google Cast"] {

@@ -89,7 +89,8 @@
     }
     
     #shopify-section-{{ section.id }} {
-      --scroll-speed: {{ section.settings.scroll_speed | times: 1.5 }}s;
+      --scroll-speed: {{ section.settings.scroll_speed | divided_by: 2.5 }}s;
+      --scroll-speed-row2: {{ section.settings.row2_scroll_speed | default: section.settings.scroll_speed | divided_by: 2.5 }}s;
     }
   }
 
@@ -140,8 +141,8 @@
   }
 
   .scroll-card__logo {
-    width: 200px;
-    max-height: 30px;
+    width: 100%;
+    max-height: 35px;
     object-fit: contain;
   }
 
@@ -243,7 +244,7 @@
     }
     
     .scroll-container--row-2 .scroll-content {
-      animation-duration: calc(var(--scroll-speed-row2) * 1.5);
+      animation-duration: calc(var(--scroll-speed-row2) / 2.5);
     }
   }
 </style>
@@ -555,6 +556,13 @@
             }
           ],
           "default": "top-right"
+        },
+        {
+          "type": "checkbox",
+          "id": "large_logo",
+          "label": "Large logo",
+          "info": "Increases logo height from 35px to 55px",
+          "default": false
         },
         {
           "type": "header",

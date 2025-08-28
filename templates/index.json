@@ -214,33 +214,6 @@
         "image_3": "shopify:\/\/shop_images\/video-universe--03.jpg"
       }
     },
-    "need_help_3VJXq6": {
-      "type": "need-help",
-      "name": "Need Help?",
-      "settings": {
-        "title_row_1": "NEED HELP?",
-        "title_row_2": "CALL IN THE ALLIANCE.",
-        "description": "Check out the most common questions from humans, Toilets, and Cameramen alike. Still confused? Reach out to us directly — whether it's a merch issue, a playback glitch, or a missing Toilet Tower code, we're here to help.",
-        "support_text": "Customer Support is available 24\/7",
-        "secondary_description": "Order & Fulfillment Support: orders@skibidi.tv\nTechnical & Streaming Support: technical@skibidi.tv",
-        "faq_1_question": "WHAT EXACTLY AM I BUYING?",
-        "faq_1_answer": "",
-        "faq_2_question": "WHERE DO I WATCH THE FILM?",
-        "faq_2_answer": "",
-        "faq_3_question": "IS THIS APPROPRIATE FOR KIDS?",
-        "faq_3_answer": "",
-        "faq_4_question": "I'M A PARENT. DO I NEED TO UNDERSTAND ANY OF THIS?",
-        "faq_4_answer": "",
-        "faq_5_question": "CAN I BUY JUST FOR THE FILM?",
-        "faq_5_answer": "",
-        "faq_6_question": "WILL THIS MELT MY BRAIN?",
-        "faq_6_answer": "",
-        "faq_7_question": "I AM CONCERNED ABOUT OUR YOUTH",
-        "faq_7_answer": "",
-        "faq_8_question": "CAN I SHARE THIS ON YOUTUBE?",
-        "faq_8_answer": ""
-      }
-    },
     "infinite_scroll_cards_N8wrVe": {
       "type": "infinite-scroll-cards",
       "blocks": {
@@ -251,7 +224,7 @@
             "content_type": "CHARACTERS",
             "subtitle": "",
             "title": "Plungerman Skin Release",
-            "logo": "shopify:\/\/shop_images\/pngimg.com_-_fortnite_PNG25_1.png",
+            "logo": "shopify:\/\/shop_images\/scroll-logo--01_6540a49a-0ca3-4915-8ab1-a2b277cafb50.png",
             "external_link": "",
             "card_size": "large",
             "bottom_gradient_color": "#214d78",
@@ -490,6 +463,33 @@
         "section_background": "#000000",
         "section_background_gradient": ""
       }
+    },
+    "need_help_3VJXq6": {
+      "type": "need-help",
+      "name": "Need Help?",
+      "settings": {
+        "title_row_1": "NEED HELP?",
+        "title_row_2": "CALL IN THE ALLIANCE.",
+        "description": "Check out the most common questions from humans, Toilets, and Cameramen alike. Still confused? Reach out to us directly — whether it's a merch issue, a playback glitch, or a missing Toilet Tower code, we're here to help.",
+        "support_text": "Customer Support is available 24\/7",
+        "secondary_description": "Order & Fulfillment Support: orders@skibidi.tv\nTechnical & Streaming Support: technical@skibidi.tv",
+        "faq_1_question": "WHAT EXACTLY AM I BUYING?",
+        "faq_1_answer": "",
+        "faq_2_question": "WHERE DO I WATCH THE FILM?",
+        "faq_2_answer": "",
+        "faq_3_question": "IS THIS APPROPRIATE FOR KIDS?",
+        "faq_3_answer": "",
+        "faq_4_question": "I'M A PARENT. DO I NEED TO UNDERSTAND ANY OF THIS?",
+        "faq_4_answer": "",
+        "faq_5_question": "CAN I BUY JUST FOR THE FILM?",
+        "faq_5_answer": "",
+        "faq_6_question": "WILL THIS MELT MY BRAIN?",
+        "faq_6_answer": "",
+        "faq_7_question": "I AM CONCERNED ABOUT OUR YOUTH",
+        "faq_7_answer": "",
+        "faq_8_question": "CAN I SHARE THIS ON YOUTUBE?",
+        "faq_8_answer": ""
+      }
     }
   },
   "order": [
@@ -501,7 +501,7 @@
     "what_you_unlock_iBac6p",
     "the_team_zKMbwy",
     "universe_video_section_HDcxEV",
-    "need_help_3VJXq6",
-    "infinite_scroll_cards_N8wrVe"
+    "infinite_scroll_cards_N8wrVe",
+    "need_help_3VJXq6"
   ]
 }

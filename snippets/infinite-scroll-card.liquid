@@ -48,9 +48,9 @@
       {%- if block.settings.logo != blank -%}
         <div class="scroll-card__logo-container scroll-card__logo--{{ block.settings.logo_position | default: 'top-right' }}">
           <img 
-            src="{{ block.settings.logo | image_url: width: 120 }}" 
+            src="{{ block.settings.logo | image_url: width: 420 }}" 
             alt="{{ block.settings.logo.alt | default: block.settings.title }}"
-            class="scroll-card__logo"
+            class="scroll-card__logo{% if block.settings.large_logo %} scroll-card__logo--large{% endif %}"
             width="60"
             height="40"
             loading="lazy"
@@ -131,6 +131,12 @@
   .scroll-card__logo--bottom-right {
     bottom: 80px;
     right: 20px;
+  }
+
+  {%- comment -%} Large logo styling {%- endcomment -%}
+  .scroll-card__logo--large {
+    max-height: 45px !important;
+    padding-left: 16px;
   }
 
   {%- comment -%} Adjust header layout when logo is positioned {%- endcomment -%}

@@ -132,7 +132,7 @@
   .scroll-card__content-type {
     font-family: "Blender Pro", sans-serif;
     font-weight: 700;
-    font-size: 11px;
+    font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 1px;
     opacity: 0.8;
@@ -140,8 +140,8 @@
   }
 
   .scroll-card__logo {
-    max-width: 60px;
-    max-height: 40px;
+    width: 200px;
+    max-height: 30px;
     object-fit: contain;
   }
 
@@ -162,15 +162,13 @@
   .scroll-card__title {
     font-family: "Blender Pro", sans-serif;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 24px;
     line-height: 1.2;
+    text-transform: uppercase;
     margin: 0;
   }
 
-  .scroll-card--medium .scroll-card__title,
-  .scroll-card--large .scroll-card__title {
-    font-size: 22px;
-  }
+
 
   .scroll-card__link {
     position: absolute;
@@ -205,21 +203,28 @@
   }
 
   .scroll-container--row-1 {
+    min-height: 450px;
     display: flex;
     align-items: flex-end;
   }
 
   .scroll-container--row-2 {
+    min-height: 450px;
     display: flex;
     align-items: flex-start;
   }
 
   .scroll-container--row-1 .scroll-content {
     animation: scrollHorizontal var(--scroll-speed) linear infinite;
+    width: 100%;
+    display: flex
+;
+    align-items: flex-end;
   }
 
   .scroll-container--row-2 .scroll-content {
     animation: {% if section.settings.row2_direction == 'opposite' %}scrollHorizontalReverse{% else %}scrollHorizontal{% endif %} var(--scroll-speed-row2) linear infinite;
+    width: 100%;
   }
 
   @keyframes scrollHorizontalReverse {

@@ -230,6 +230,7 @@
             "bottom_gradient_color": "#214d78",
             "text_color": "#ffffff",
             "logo_position": "top-right",
+            "large_logo": false,
             "row_assignment": "1"
           }
         },
@@ -246,6 +247,7 @@
             "bottom_gradient_color": "#814a0f",
             "text_color": "#ffffff",
             "logo_position": "top-right",
+            "large_logo": false,
             "row_assignment": "1"
           }
         },
@@ -261,6 +263,7 @@
             "bottom_gradient_color": "#ff1006",
             "text_color": "#ffffff",
             "logo_position": "top-right",
+            "large_logo": false,
             "row_assignment": "1"
           }
         },
@@ -277,6 +280,7 @@
             "bottom_gradient_color": "#713208",
             "text_color": "#ffffff",
             "logo_position": "top-right",
+            "large_logo": false,
             "row_assignment": "1"
           }
         },
@@ -292,6 +296,7 @@
             "bottom_gradient_color": "#dc0000",
             "text_color": "#ffffff",
             "logo_position": "top-right",
+            "large_logo": false,
             "row_assignment": "1"
           }
         },
@@ -307,6 +312,7 @@
             "bottom_gradient_color": "#ac148e",
             "text_color": "#ffffff",
             "logo_position": "top-right",
+            "large_logo": false,
             "row_assignment": "1"
           }
         },
@@ -323,6 +329,7 @@
             "bottom_gradient_color": "#dc0000",
             "text_color": "#ffffff",
             "logo_position": "top-right",
+            "large_logo": false,
             "row_assignment": "1"
           }
         },
@@ -338,6 +345,7 @@
             "bottom_gradient_color": "#03192f",
             "text_color": "#ffffff",
             "logo_position": "top-right",
+            "large_logo": false,
             "row_assignment": "2"
           }
         },
@@ -353,6 +361,7 @@
             "bottom_gradient_color": "#080019",
             "text_color": "#ffffff",
             "logo_position": "top-right",
+            "large_logo": false,
             "row_assignment": "2"
           }
         },
@@ -369,6 +378,7 @@
             "bottom_gradient_color": "#000000",
             "text_color": "#ffffff",
             "logo_position": "top-right",
+            "large_logo": false,
             "row_assignment": "2"
           }
         },
@@ -384,6 +394,7 @@
             "bottom_gradient_color": "#ae270f",
             "text_color": "#ffffff",
             "logo_position": "top-right",
+            "large_logo": false,
             "row_assignment": "2"
           }
         },
@@ -400,6 +411,7 @@
             "bottom_gradient_color": "#000000",
             "text_color": "#ffffff",
             "logo_position": "top-right",
+            "large_logo": false,
             "row_assignment": "2"
           }
         },
@@ -415,6 +427,7 @@
             "bottom_gradient_color": "#0b5a73",
             "text_color": "#ffffff",
             "logo_position": "top-right",
+            "large_logo": false,
             "row_assignment": "auto"
           }
         },
@@ -431,6 +444,7 @@
             "bottom_gradient_color": "#dc0000",
             "text_color": "#ffffff",
             "logo_position": "top-right",
+            "large_logo": true,
             "row_assignment": "auto"
           }
         }

@@ -1,0 +1,166 @@
+{%- comment -%}
+  ------------------------------------------------------------------------------------------------------------------------
+  INFINITE SCROLL CARD SNIPPET
+  Renders individual cards for the infinite scroll section
+  ------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- comment -%} Build style string for CSS variables only {%- endcomment -%}
+{%- assign card_style = 'min-height: 100%;' -%}
+
+{%- if block.settings.bottom_gradient_color != blank -%}
+  {%- assign card_style = card_style | append: ' --card-gradient-color: ' | append: block.settings.bottom_gradient_color | append: ';' -%}
+{%- endif -%}
+{%- if block.settings.text_color != blank -%}
+  {%- assign card_style = card_style | append: ' --card-text-color: ' | append: block.settings.text_color | append: ';' -%}
+{%- endif -%}
+
+<div 
+  class="scroll-card scroll-card--{{ block.settings.card_size | default: 'small' }}"
+  style="{{ card_style }}"
+  {{ block.shopify_attributes }}
+>
+  {%- comment -%} Background image as actual img element {%- endcomment -%}
+  {%- if block.settings.background_image != blank -%}
+    <img 
+      src="{{ block.settings.background_image | image_url: width: 600 }}" 
+      alt="{{ block.settings.background_image.alt | default: 'Card background' }}"
+      class="scroll-card__bg-image"
+      width="600"
+      height="400"
+      loading="lazy"
+    >
+  {%- endif -%}
+
+  {%- comment -%} Background overlay with gradient {%- endcomment -%}
+  <div class="scroll-card__overlay"></div>
+
+  {%- comment -%} Card content {%- endcomment -%}
+  <div class="scroll-card__content">
+    {%- comment -%} Header section with content type and logo {%- endcomment -%}
+    <div class="scroll-card__header">
+      <div class="scroll-card__header-left">
+        {%- if block.settings.content_type != blank -%}
+          <div class="scroll-card__content-type">{{ block.settings.content_type }}</div>
+        {%- endif -%}
+      </div>
+      
+      {%- if block.settings.logo != blank -%}
+        <div class="scroll-card__logo-container scroll-card__logo--{{ block.settings.logo_position | default: 'top-right' }}">
+          <img 
+            src="{{ block.settings.logo | image_url: width: 120 }}" 
+            alt="{{ block.settings.logo.alt | default: block.settings.title }}"
+            class="scroll-card__logo"
+            width="60"
+            height="40"
+            loading="lazy"
+          >
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Footer section with title and subtitle {%- endcomment -%}
+    <div class="scroll-card__footer">
+      {%- if block.settings.subtitle != blank -%}
+        <div class="scroll-card__subtitle">{{ block.settings.subtitle }}</div>
+      {%- endif -%}
+      
+      {%- if block.settings.title != blank -%}
+        <h3 class="scroll-card__title">{{ block.settings.title }}</h3>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- comment -%} External link wrapper {%- endcomment -%}
+  {%- if block.settings.external_link != blank -%}
+    <a 
+      href="{{ block.settings.external_link }}" 
+      class="scroll-card__link"
+      {% if block.settings.external_link contains 'http' %}target="_blank" rel="noopener noreferrer"{% endif %}
+      aria-label="{% if block.settings.title != blank %}{{ block.settings.title }}{% else %}View content{% endif %}"
+    >
+      <span class="sr-only">
+        {% if block.settings.title != blank %}{{ block.settings.title }}{% else %}View content{% endif %}
+      </span>
+    </a>
+    
+    {%- comment -%} External link icon {%- endcomment -%}
+    {%- if block.settings.external_link contains 'http' -%}
+      <svg class="scroll-card__external-icon" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V10a.5.5 0 0 0-1 0v2.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5H6a.5.5 0 0 0 0-1H3.5z"/>
+        <path d="M15 0H11a.5.5 0 0 0 0 1h3.293L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5a.5.5 0 0 0 1 0V0z"/>
+      </svg>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+<style>
+  {%- comment -%} Background image styling {%- endcomment -%}
+  .scroll-card__bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+  }
+
+  {%- comment -%} Logo positioning styles {%- endcomment -%}
+  .scroll-card__logo-container {
+    position: absolute;
+    z-index: 2;
+  }
+
+  .scroll-card__logo--top-left {
+    top: 20px;
+    left: 20px;
+  }
+
+  .scroll-card__logo--top-right {
+    top: 20px;
+    right: 20px;
+  }
+
+  .scroll-card__logo--bottom-left {
+    bottom: 80px;
+    left: 20px;
+  }
+
+  .scroll-card__logo--bottom-right {
+    bottom: 80px;
+    right: 20px;
+  }
+
+  {%- comment -%} Adjust header layout when logo is positioned {%- endcomment -%}
+  .scroll-card__logo--top-left ~ .scroll-card__content .scroll-card__header {
+    padding-left: 80px;
+  }
+
+  .scroll-card__logo--top-right ~ .scroll-card__content .scroll-card__header {
+    padding-right: 80px;
+  }
+
+  {%- comment -%} Responsive adjustments {%- endcomment -%}
+  @media screen and (max-width: 768px) {
+    .scroll-card__logo-container {
+      position: relative;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+    }
+
+    .scroll-card__logo--top-left ~ .scroll-card__content .scroll-card__header,
+    .scroll-card__logo--top-right ~ .scroll-card__content .scroll-card__header {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .scroll-card__logo {
+      max-width: 50px;
+      max-height: 30px;
+    }
+  }
+</style>

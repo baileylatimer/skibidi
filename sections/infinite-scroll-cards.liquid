@@ -1,0 +1,434 @@
+{%- comment -%}
+  ------------------------------------------------------------------------------------------------------------------------
+  INFINITE SCROLL CARDS SECTION
+  ------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --scroll-speed: {{ section.settings.scroll_speed }}s;
+    --card-gap: {{ section.settings.card_gap }}px;
+    --section-padding: {{ section.settings.section_padding }}px;
+    background: {{ section.settings.section_background }};
+    {% if section.settings.section_background_gradient != blank %}
+      background: {{ section.settings.section_background_gradient }};
+    {% endif %}
+    padding: var(--section-padding) 0;
+    overflow: hidden;
+  }
+
+  .infinite-scroll-section {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .scroll-container {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .scroll-content {
+    display: flex;
+    gap: var(--card-gap);
+    animation: scrollHorizontal var(--scroll-speed) linear infinite;
+    will-change: transform;
+  }
+
+  .scroll-content:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scrollHorizontal {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .scroll-card {
+    flex-shrink: 0;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform var(--transition-medium);
+    background-color: #333; /* Fallback background for cards without images */
+  }
+
+  .scroll-card:hover {
+    transform: scale(1.02);
+    z-index: 10;
+  }
+
+  .scroll-card--small {
+    width: 300px;
+    height: 300px;
+  }
+
+  .scroll-card--medium {
+    width: 300px;
+    height: 450px;
+  }
+
+  .scroll-card--large {
+    width: 450px;
+    height: 450px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .scroll-card--small,
+    .scroll-card--medium,
+    .scroll-card--large {
+      width: 250px;
+      height: 300px;
+    }
+    
+    #shopify-section-{{ section.id }} {
+      --scroll-speed: {{ section.settings.scroll_speed | times: 1.5 }}s;
+    }
+  }
+
+  .scroll-card__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 40%,
+      rgba(0, 0, 0, 0.3) 70%,
+      var(--card-gradient-color, rgba(0, 0, 0, 0.8)) 100%
+    );
+    z-index: 1;
+  }
+
+  .scroll-card__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 2;
+    color: var(--card-text-color, #ffffff);
+  }
+
+  .scroll-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .scroll-card__content-type {
+    font-family: "Blender Pro", sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    margin-bottom: 8px;
+  }
+
+  .scroll-card__logo {
+    max-width: 60px;
+    max-height: 40px;
+    object-fit: contain;
+  }
+
+  .scroll-card__footer {
+    margin-top: auto;
+  }
+
+  .scroll-card__subtitle {
+    font-family: "Blender Pro", sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.9;
+    margin-bottom: 4px;
+  }
+
+  .scroll-card__title {
+    font-family: "Blender Pro", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .scroll-card--medium .scroll-card__title,
+  .scroll-card--large .scroll-card__title {
+    font-size: 22px;
+  }
+
+  .scroll-card__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    text-decoration: none;
+  }
+
+  /* External link icon */
+  .scroll-card__external-icon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
+    transition: opacity var(--transition-fast);
+  }
+
+  .scroll-card:hover .scroll-card__external-icon {
+    opacity: 1;
+  }
+</style>
+
+<div class="infinite-scroll-section">
+  <div class="scroll-container">
+    <div class="scroll-content">
+      {%- comment -%} Original set of cards {%- endcomment -%}
+      {%- for block in section.blocks -%}
+        {%- render 'infinite-scroll-card', block: block -%}
+      {%- endfor -%}
+      
+      {%- comment -%} Duplicate set for seamless loop {%- endcomment -%}
+      {%- for block in section.blocks -%}
+        {%- render 'infinite-scroll-card', block: block -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{%- comment -%} Ensure minimum number of cards for smooth scrolling {%- endcomment -%}
+{%- if section.blocks.size < 5 -%}
+  <script>
+    console.warn('Infinite Scroll Cards: For optimal performance, add at least 5 cards to ensure smooth scrolling.');
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Infinite Scroll Cards",
+  "class": "shopify-section--infinite-scroll-cards",
+  "tag": "section",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Animation Settings"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "s",
+      "label": "Scroll duration",
+      "info": "Higher numbers = slower scrolling",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Gap between cards",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Section Styling"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Section padding (top/bottom)",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color_background",
+      "id": "section_background_gradient",
+      "label": "Section background gradient"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Scroll Card",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Card Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "background_image",
+          "label": "Background image"
+        },
+        {
+          "type": "text",
+          "id": "content_type",
+          "label": "Content type tag",
+          "info": "Small text at top (e.g. 'CHARACTERS', 'COMMUNITY')",
+          "placeholder": "CHARACTERS"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle/Overline",
+          "placeholder": "Optional subtitle"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Card Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo image"
+        },
+        {
+          "type": "url",
+          "id": "external_link",
+          "label": "External link"
+        },
+        {
+          "type": "header",
+          "content": "Card Styling"
+        },
+        {
+          "type": "select",
+          "id": "card_size",
+          "label": "Card size",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small (300x300)"
+            },
+            {
+              "value": "medium",
+              "label": "Medium (300x450)"
+            },
+            {
+              "value": "large",
+              "label": "Large (450x450)"
+            }
+          ],
+          "default": "small"
+        },
+        {
+          "type": "color",
+          "id": "bottom_gradient_color",
+          "label": "Bottom gradient color",
+          "default": "#DC0000"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "select",
+          "id": "logo_position",
+          "label": "Logo position",
+          "options": [
+            {
+              "value": "top-left",
+              "label": "Top Left"
+            },
+            {
+              "value": "top-right",
+              "label": "Top Right"
+            },
+            {
+              "value": "bottom-left",
+              "label": "Bottom Left"
+            },
+            {
+              "value": "bottom-right",
+              "label": "Bottom Right"
+            }
+          ],
+          "default": "top-right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Infinite Scroll Cards",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "title": "Example Card 1",
+            "content_type": "CHARACTERS",
+            "card_size": "small"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Example Card 2",
+            "content_type": "COMMUNITY",
+            "card_size": "medium"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Example Card 3",
+            "content_type": "CREATIONS",
+            "card_size": "large"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Example Card 4",
+            "content_type": "CHARACTERS",
+            "card_size": "small"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Example Card 5",
+            "content_type": "PUBLISHING",
+            "card_size": "medium"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

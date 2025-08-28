@@ -240,6 +240,93 @@
         "faq_8_question": "CAN I SHARE THIS ON YOUTUBE?",
         "faq_8_answer": ""
       }
+    },
+    "infinite_scroll_cards_N8wrVe": {
+      "type": "infinite-scroll-cards",
+      "blocks": {
+        "card_i9Xw9h": {
+          "type": "card",
+          "settings": {
+            "background_image": "shopify:\/\/shop_images\/Rectangle_4499.jpg",
+            "content_type": "CHARACTERS",
+            "subtitle": "",
+            "title": "Plungerman Skin Release",
+            "logo": "shopify:\/\/shop_images\/pngimg.com_-_fortnite_PNG25_1.png",
+            "external_link": "",
+            "card_size": "large",
+            "bottom_gradient_color": "#214d78",
+            "text_color": "#ffffff",
+            "logo_position": "top-right"
+          }
+        },
+        "card_hM6qXA": {
+          "type": "card",
+          "settings": {
+            "content_type": "COMMUNITY",
+            "subtitle": "",
+            "title": "Example Card 2",
+            "external_link": "",
+            "card_size": "medium",
+            "bottom_gradient_color": "#DC0000",
+            "text_color": "#ffffff",
+            "logo_position": "top-right"
+          }
+        },
+        "card_ETFeLJ": {
+          "type": "card",
+          "settings": {
+            "content_type": "CREATIONS",
+            "subtitle": "",
+            "title": "Example Card 3",
+            "external_link": "",
+            "card_size": "large",
+            "bottom_gradient_color": "#DC0000",
+            "text_color": "#ffffff",
+            "logo_position": "top-right"
+          }
+        },
+        "card_NcPnjR": {
+          "type": "card",
+          "settings": {
+            "content_type": "CHARACTERS",
+            "subtitle": "",
+            "title": "Example Card 4",
+            "external_link": "",
+            "card_size": "small",
+            "bottom_gradient_color": "#DC0000",
+            "text_color": "#ffffff",
+            "logo_position": "top-right"
+          }
+        },
+        "card_73ajUM": {
+          "type": "card",
+          "settings": {
+            "content_type": "PUBLISHING",
+            "subtitle": "",
+            "title": "Example Card 5",
+            "external_link": "",
+            "card_size": "medium",
+            "bottom_gradient_color": "#DC0000",
+            "text_color": "#ffffff",
+            "logo_position": "top-right"
+          }
+        }
+      },
+      "block_order": [
+        "card_i9Xw9h",
+        "card_hM6qXA",
+        "card_ETFeLJ",
+        "card_NcPnjR",
+        "card_73ajUM"
+      ],
+      "name": "Infinite Scroll Cards",
+      "settings": {
+        "scroll_speed": 60,
+        "card_gap": 20,
+        "section_padding": 60,
+        "section_background": "#000000",
+        "section_background_gradient": ""
+      }
     }
   },
   "order": [
@@ -251,6 +338,7 @@
     "what_you_unlock_iBac6p",
     "the_team_zKMbwy",
     "universe_video_section_HDcxEV",
-    "need_help_3VJXq6"
+    "need_help_3VJXq6",
+    "infinite_scroll_cards_N8wrVe"
   ]
 }

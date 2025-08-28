@@ -256,59 +256,209 @@
             "card_size": "large",
             "bottom_gradient_color": "#214d78",
             "text_color": "#ffffff",
-            "logo_position": "top-right"
+            "logo_position": "top-right",
+            "row_assignment": "1"
           }
         },
         "card_hM6qXA": {
           "type": "card",
           "settings": {
-            "content_type": "COMMUNITY",
+            "background_image": "shopify:\/\/shop_images\/Rectangle_4482.jpg",
+            "content_type": "",
             "subtitle": "",
-            "title": "Example Card 2",
+            "title": "Official series",
+            "logo": "shopify:\/\/shop_images\/scroll-logo--00.png",
             "external_link": "",
-            "card_size": "medium",
-            "bottom_gradient_color": "#DC0000",
+            "card_size": "small",
+            "bottom_gradient_color": "#814a0f",
             "text_color": "#ffffff",
-            "logo_position": "top-right"
+            "logo_position": "top-right",
+            "row_assignment": "1"
           }
         },
         "card_ETFeLJ": {
           "type": "card",
           "settings": {
-            "content_type": "CREATIONS",
+            "background_image": "shopify:\/\/shop_images\/scroll-img--01.jpg",
+            "content_type": "Characters",
             "subtitle": "",
-            "title": "Example Card 3",
+            "title": "Juggernaut Astro",
             "external_link": "",
-            "card_size": "large",
-            "bottom_gradient_color": "#DC0000",
+            "card_size": "medium",
+            "bottom_gradient_color": "#ff1006",
             "text_color": "#ffffff",
-            "logo_position": "top-right"
+            "logo_position": "top-right",
+            "row_assignment": "1"
           }
         },
         "card_NcPnjR": {
           "type": "card",
           "settings": {
-            "content_type": "CHARACTERS",
+            "background_image": "shopify:\/\/shop_images\/scroll-img--02.jpg",
+            "content_type": "",
             "subtitle": "",
-            "title": "Example Card 4",
+            "title": "Skibidi add-on",
+            "logo": "shopify:\/\/shop_images\/scroll-logo--02.png",
             "external_link": "",
             "card_size": "small",
-            "bottom_gradient_color": "#DC0000",
+            "bottom_gradient_color": "#713208",
             "text_color": "#ffffff",
-            "logo_position": "top-right"
+            "logo_position": "top-right",
+            "row_assignment": "1"
           }
         },
         "card_73ajUM": {
           "type": "card",
           "settings": {
-            "content_type": "PUBLISHING",
+            "background_image": "shopify:\/\/shop_images\/scroll-img--03.jpg",
+            "content_type": "Creators",
             "subtitle": "",
-            "title": "Example Card 5",
+            "title": "Cameraman 3.0",
             "external_link": "",
             "card_size": "medium",
-            "bottom_gradient_color": "#DC0000",
+            "bottom_gradient_color": "#dc0000",
             "text_color": "#ffffff",
-            "logo_position": "top-right"
+            "logo_position": "top-right",
+            "row_assignment": "1"
+          }
+        },
+        "card_YtxDJU": {
+          "type": "card",
+          "settings": {
+            "background_image": "shopify:\/\/shop_images\/scroll-img--05.jpg",
+            "content_type": "Creators",
+            "subtitle": "",
+            "title": "Skibidi Toilet Creator Alliance",
+            "external_link": "",
+            "card_size": "small",
+            "bottom_gradient_color": "#ac148e",
+            "text_color": "#ffffff",
+            "logo_position": "top-right",
+            "row_assignment": "1"
+          }
+        },
+        "card_dJUUyr": {
+          "type": "card",
+          "settings": {
+            "background_image": "shopify:\/\/shop_images\/scroll-img--04.jpg",
+            "content_type": "",
+            "subtitle": "",
+            "title": "Publishing",
+            "logo": "shopify:\/\/shop_images\/scroll-logo--03.png",
+            "external_link": "",
+            "card_size": "small",
+            "bottom_gradient_color": "#dc0000",
+            "text_color": "#ffffff",
+            "logo_position": "top-right",
+            "row_assignment": "1"
+          }
+        },
+        "card_JMXKwE": {
+          "type": "card",
+          "settings": {
+            "background_image": "shopify:\/\/shop_images\/scroll-img--06.jpg",
+            "content_type": "",
+            "subtitle": "",
+            "title": "Toilet Tower Defense",
+            "external_link": "",
+            "card_size": "medium",
+            "bottom_gradient_color": "#03192f",
+            "text_color": "#ffffff",
+            "logo_position": "top-right",
+            "row_assignment": "2"
+          }
+        },
+        "card_YQRze3": {
+          "type": "card",
+          "settings": {
+            "background_image": "shopify:\/\/shop_images\/scroll-img--07.jpg",
+            "content_type": "Characters",
+            "subtitle": "",
+            "title": "Titan TV man",
+            "external_link": "",
+            "card_size": "medium",
+            "bottom_gradient_color": "#080019",
+            "text_color": "#ffffff",
+            "logo_position": "top-right",
+            "row_assignment": "2"
+          }
+        },
+        "card_pCbYCr": {
+          "type": "card",
+          "settings": {
+            "background_image": "shopify:\/\/shop_images\/scroll-img--08.jpg",
+            "content_type": "",
+            "subtitle": "",
+            "title": "One of the most valuable franchises in Hollywood",
+            "logo": "shopify:\/\/shop_images\/slide-logo-07.png",
+            "external_link": "",
+            "card_size": "small",
+            "bottom_gradient_color": "#000000",
+            "text_color": "#ffffff",
+            "logo_position": "top-right",
+            "row_assignment": "2"
+          }
+        },
+        "card_aaKPzP": {
+          "type": "card",
+          "settings": {
+            "background_image": "shopify:\/\/shop_images\/scroll-img--09.jpg",
+            "content_type": "Characters",
+            "subtitle": "",
+            "title": "Speakermen sledgehammers",
+            "external_link": "",
+            "card_size": "large",
+            "bottom_gradient_color": "#ae270f",
+            "text_color": "#ffffff",
+            "logo_position": "top-right",
+            "row_assignment": "2"
+          }
+        },
+        "card_yQfKRd": {
+          "type": "card",
+          "settings": {
+            "background_image": "shopify:\/\/shop_images\/scroll-img--10.jpg",
+            "content_type": "",
+            "subtitle": "",
+            "title": "The word: Skibidi",
+            "logo": "shopify:\/\/shop_images\/scroll-logo--04.png",
+            "external_link": "",
+            "card_size": "small",
+            "bottom_gradient_color": "#000000",
+            "text_color": "#ffffff",
+            "logo_position": "top-right",
+            "row_assignment": "2"
+          }
+        },
+        "card_DJgYhG": {
+          "type": "card",
+          "settings": {
+            "background_image": "shopify:\/\/shop_images\/scroll-img--11.jpg",
+            "content_type": "Community",
+            "subtitle": "",
+            "title": "Fan expanded worldbuilding",
+            "external_link": "",
+            "card_size": "medium",
+            "bottom_gradient_color": "#0b5a73",
+            "text_color": "#ffffff",
+            "logo_position": "top-right",
+            "row_assignment": "auto"
+          }
+        },
+        "card_i3XXGc": {
+          "type": "card",
+          "settings": {
+            "background_image": "shopify:\/\/shop_images\/scroll-img--12.jpg",
+            "content_type": "",
+            "subtitle": "",
+            "title": "Toys available worldwide",
+            "logo": "shopify:\/\/shop_images\/Frame_85.png",
+            "external_link": "",
+            "card_size": "small",
+            "bottom_gradient_color": "#dc0000",
+            "text_color": "#ffffff",
+            "logo_position": "top-right",
+            "row_assignment": "auto"
           }
         }
       },
@@ -317,11 +467,24 @@
         "card_hM6qXA",
         "card_ETFeLJ",
         "card_NcPnjR",
-        "card_73ajUM"
+        "card_73ajUM",
+        "card_YtxDJU",
+        "card_dJUUyr",
+        "card_JMXKwE",
+        "card_YQRze3",
+        "card_pCbYCr",
+        "card_aaKPzP",
+        "card_yQfKRd",
+        "card_DJgYhG",
+        "card_i3XXGc"
       ],
       "name": "Infinite Scroll Cards",
       "settings": {
+        "number_of_rows": "2",
+        "row_gap": 20,
         "scroll_speed": 60,
+        "row2_scroll_speed": 80,
+        "row2_direction": "opposite",
         "card_gap": 20,
         "section_padding": 60,
         "section_background": "#000000",

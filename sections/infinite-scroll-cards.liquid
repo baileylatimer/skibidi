@@ -7,7 +7,9 @@
 <style>
   #shopify-section-{{ section.id }} {
     --scroll-speed: {{ section.settings.scroll_speed }}s;
+    --scroll-speed-row2: {{ section.settings.row2_scroll_speed | default: section.settings.scroll_speed }}s;
     --card-gap: {{ section.settings.card_gap }}px;
+    --row-gap: {{ section.settings.row_gap | default: 20 }}px;
     --section-padding: {{ section.settings.section_padding }}px;
     background: {{ section.settings.section_background }};
     {% if section.settings.section_background_gradient != blank %}
@@ -194,22 +196,132 @@
   .scroll-card:hover .scroll-card__external-icon {
     opacity: 1;
   }
+
+  /* Two-row specific styles */
+  .infinite-scroll-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--row-gap);
+  }
+
+  .scroll-container--row-1 {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .scroll-container--row-2 {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .scroll-container--row-1 .scroll-content {
+    animation: scrollHorizontal var(--scroll-speed) linear infinite;
+  }
+
+  .scroll-container--row-2 .scroll-content {
+    animation: {% if section.settings.row2_direction == 'opposite' %}scrollHorizontalReverse{% else %}scrollHorizontal{% endif %} var(--scroll-speed-row2) linear infinite;
+  }
+
+  @keyframes scrollHorizontalReverse {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  /* Mobile adjustments for two rows */
+  @media screen and (max-width: 768px) {
+    .infinite-scroll-section {
+      gap: calc(var(--row-gap) / 2);
+    }
+    
+    .scroll-container--row-2 .scroll-content {
+      animation-duration: calc(var(--scroll-speed-row2) * 1.5);
+    }
+  }
 </style>
 
 <div class="infinite-scroll-section">
-  <div class="scroll-container">
-    <div class="scroll-content">
-      {%- comment -%} Original set of cards {%- endcomment -%}
-      {%- for block in section.blocks -%}
-        {%- render 'infinite-scroll-card', block: block -%}
-      {%- endfor -%}
-      
-      {%- comment -%} Duplicate set for seamless loop {%- endcomment -%}
-      {%- for block in section.blocks -%}
-        {%- render 'infinite-scroll-card', block: block -%}
-      {%- endfor -%}
+  {%- if section.settings.number_of_rows == "2" -%}
+    {%- comment -%} Two Row Layout {%- endcomment -%}
+    
+    {%- comment -%} Row 1 {%- endcomment -%}
+    <div class="scroll-container scroll-container--row-1">
+      <div class="scroll-content scroll-content--row-1">
+        {%- comment -%} Original set {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.row_assignment == '1' -%}
+            {%- render 'infinite-scroll-card', block: block -%}
+          {%- elsif block.settings.row_assignment == 'auto' -%}
+            {%- assign index = forloop.index0 -%}
+            {%- assign remainder = index | modulo: 2 -%}
+            {%- if remainder == 0 -%}
+              {%- render 'infinite-scroll-card', block: block -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- comment -%} Duplicate set {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.row_assignment == '1' -%}
+            {%- render 'infinite-scroll-card', block: block -%}
+          {%- elsif block.settings.row_assignment == 'auto' -%}
+            {%- assign index = forloop.index0 -%}
+            {%- assign remainder = index | modulo: 2 -%}
+            {%- if remainder == 0 -%}
+              {%- render 'infinite-scroll-card', block: block -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
     </div>
-  </div>
+
+    {%- comment -%} Row 2 {%- endcomment -%}
+    <div class="scroll-container scroll-container--row-2">
+      <div class="scroll-content scroll-content--row-2">
+        {%- comment -%} Original set {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.row_assignment == '2' -%}
+            {%- render 'infinite-scroll-card', block: block -%}
+          {%- elsif block.settings.row_assignment == 'auto' -%}
+            {%- assign index = forloop.index0 -%}
+            {%- assign remainder = index | modulo: 2 -%}
+            {%- if remainder == 1 -%}
+              {%- render 'infinite-scroll-card', block: block -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- comment -%} Duplicate set {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.row_assignment == '2' -%}
+            {%- render 'infinite-scroll-card', block: block -%}
+          {%- elsif block.settings.row_assignment == 'auto' -%}
+            {%- assign index = forloop.index0 -%}
+            {%- assign remainder = index | modulo: 2 -%}
+            {%- if remainder == 1 -%}
+              {%- render 'infinite-scroll-card', block: block -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- else -%}
+    {%- comment -%} Single Row Layout {%- endcomment -%}
+    <div class="scroll-container">
+      <div class="scroll-content">
+        {%- comment -%} Original set of cards {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- render 'infinite-scroll-card', block: block -%}
+        {%- endfor -%}
+        
+        {%- comment -%} Duplicate set for seamless loop {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- render 'infinite-scroll-card', block: block -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
 </div>
 
 {%- comment -%} Ensure minimum number of cards for smooth scrolling {%- endcomment -%}
@@ -228,6 +340,37 @@
   "settings": [
     {
       "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "select",
+      "id": "number_of_rows",
+      "label": "Number of rows",
+      "options": [
+        {
+          "value": "1",
+          "label": "Single row"
+        },
+        {
+          "value": "2",
+          "label": "Two rows"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "row_gap",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Gap between rows",
+      "info": "Only applies when using two rows",
+      "default": 20
+    },
+    {
+      "type": "header",
       "content": "Animation Settings"
     },
     {
@@ -237,9 +380,37 @@
       "max": 100,
       "step": 5,
       "unit": "s",
-      "label": "Scroll duration",
+      "label": "Row 1 scroll duration",
       "info": "Higher numbers = slower scrolling",
       "default": 60
+    },
+    {
+      "type": "range",
+      "id": "row2_scroll_speed",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "s",
+      "label": "Row 2 scroll duration",
+      "info": "Only applies when using two rows",
+      "default": 80
+    },
+    {
+      "type": "select",
+      "id": "row2_direction",
+      "label": "Row 2 direction",
+      "info": "Only applies when using two rows",
+      "options": [
+        {
+          "value": "same",
+          "label": "Same direction as row 1"
+        },
+        {
+          "value": "opposite",
+          "label": "Opposite direction"
+        }
+      ],
+      "default": "opposite"
     },
     {
       "type": "range",
@@ -379,6 +550,31 @@
             }
           ],
           "default": "top-right"
+        },
+        {
+          "type": "header",
+          "content": "Row Assignment"
+        },
+        {
+          "type": "select",
+          "id": "row_assignment",
+          "label": "Row assignment",
+          "info": "Choose which row this card appears in (only applies when using two rows)",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Automatic (alternating)"
+            },
+            {
+              "value": "1",
+              "label": "Row 1 (top)"
+            },
+            {
+              "value": "2",
+              "label": "Row 2 (bottom)"
+            }
+          ],
+          "default": "auto"
         }
       ]
     }
